@@ -1,5 +1,9 @@
+import {NavBar} from "./components/navBar/navBar"
+
 function App() {
-  return <h1>Holaa</h1>;
+  return <>
+    <NavBar/>
+  </>;
 }
 
 export default App;
