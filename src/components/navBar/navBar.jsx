@@ -1,8 +1,12 @@
 import "./navBar.css";
-import { Logo } from "../logo/Logo";
-import {SubjectMenu} from "./subjectMenu/SubjectMenu"
+
+import { SubjectMenu } from "./subjectMenu/SubjectMenu";
+import{MainMenu} from "./mainMenu/MainMenu"
+
+
 import LocalPrintshopIcon from '@mui/icons-material/LocalPrintshop';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
+import Tooltip from '@mui/material/Tooltip';
 
 export function NavBar() {
 
@@ -13,13 +17,15 @@ export function NavBar() {
 
     return <div id="NavBar">
         <div id="navBarContainer">
-            <div id="logoContainer">
-                <Logo />
-            </div>
+            <MainMenu/>
             <div id="iconsContainer">
-                <LocalPrintshopIcon className="NavBarIcon" sx={iconsStyle} />
-                <SaveOutlinedIcon className="NavBarIcon" sx={iconsStyle} />
-                <SubjectMenu/>
+                <Tooltip title="Imprimir Nomina" arrow>
+                    <LocalPrintshopIcon className="NavBarIcon" sx={iconsStyle} />
+                </Tooltip>
+                <Tooltip title="Guardar Cambios" arrow>
+                    <SaveOutlinedIcon className="NavBarIcon" sx={iconsStyle} />
+                </Tooltip>
+                <SubjectMenu sx={iconsStyle} />
             </div>
         </div>
     </div>

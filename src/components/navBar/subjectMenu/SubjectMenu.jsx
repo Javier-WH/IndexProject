@@ -1,9 +1,10 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import SchoolIcon from '@mui/icons-material/School';
+import Tooltip from '@mui/material/Tooltip';
 
-export function SubjectMenu() {
+export function SubjectMenu({ sx }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
@@ -17,17 +18,9 @@ export function SubjectMenu() {
 
   return (
     <div>
-      <Button
-        id="basic-button"
-        aria-controls={open ? 'basic-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-        onClick={handleClick}
-        style={{color:"white"}}
-        className="NavBarIcon"
-      >
-        Materias
-      </Button>
+      <Tooltip title="Materias Asignadas" arrow>
+        <SchoolIcon sx={sx} className="NavBarIcon" onClick={handleClick} />
+      </Tooltip>
       <Menu
         id="basic-menu"
         anchorEl={anchorEl}
