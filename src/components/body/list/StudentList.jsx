@@ -12,14 +12,14 @@ export function StudentList() {
 
     function handleClick(e){
        let index = e.target.parentElement.id.replace("index-", "");
-        if(index ==""){
+        if(index === ""){
             return
         }
        setSlectedStudent(index);
     }
 
     useEffect(()=>{
-
+        setSlectedStudent(1);//selecciona el primer estudiante al cargar este elemento
         window.addEventListener("keydown", e=>{
 
 

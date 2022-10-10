@@ -1,10 +1,13 @@
-import {NavBar} from "./components/navBar/navBar";
-import {Body} from "./components/body/Body"
+import { NavBar } from "./components/navBar/navBar";
+import { Body } from "./components/body/Body"
+import { MainContextProvider } from "./context/MainContext"
 
 function App() {
   return <>
-    <NavBar/>
-    <Body/>
+    <MainContextProvider>
+      <NavBar />
+      <Body />
+    </MainContextProvider>
   </>;
 }
 

@@ -14,6 +14,11 @@ export function fakeStudent() {
                     "lap2": "19",
                     "lap3": "20",
                     "def": "19",
+                },"Física":{
+                    "lap1": "12",
+                    "lap2": "16",
+                    "lap3": "14",
+                    "def": "13",
                 }
             }
         },
@@ -26,10 +31,10 @@ export function fakeStudent() {
             "photo": "default",
             "subjects":{
                 "Matemática":{
-                    "lap1": "18",
-                    "lap2": "19",
-                    "lap3": "20",
-                    "def": "19",
+                    "lap1": "11",
+                    "lap2": "10",
+                    "lap3": "15",
+                    "def": "12",
                 }
             }
         },
@@ -42,10 +47,10 @@ export function fakeStudent() {
             "photo": "default",
             "subjects":{
                 "Matemática":{
-                    "lap1": "18",
-                    "lap2": "19",
-                    "lap3": "20",
-                    "def": "19",
+                    "lap1": "17",
+                    "lap2": "16",
+                    "lap3": "15",
+                    "def": "16",
                 }
             }
         },
