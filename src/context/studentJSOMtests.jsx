@@ -19,7 +19,7 @@ export function fakeStudent() {
         },
         {
             "number": "1",
-            "ci": "6894562",
+            "ci": "6894599",
             "names": "Nombre de PruebaXnmnmnmnmnm",
             "lastNames": "Apellido de PruebaXnmnmnmnmnmnm",
             "id": 2,

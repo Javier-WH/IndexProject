@@ -30,7 +30,7 @@ export function StudentList() {
                             <th>Def</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tableList">
                         {
                             studentList.map(student => <Student data = {student} key={key++} number={key}/> )
                         }

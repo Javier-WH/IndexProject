@@ -4,6 +4,8 @@ import { DataName } from "./dataName/DataName";
 import {MainContextProvider} from "../../context/MainContext"
 
 export function Body() {
+   
+
     return <>
         <div id="body">
         <MainContextProvider>

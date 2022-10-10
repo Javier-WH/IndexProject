@@ -22,6 +22,9 @@
     height: calc(100% - 60px);
 }
 
+.selected{
+  background-color: var(--secondaryColor);
+}
 
 /**/
 
