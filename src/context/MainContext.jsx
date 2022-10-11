@@ -6,6 +6,8 @@ export const MainContext = createContext();
 
 export function MainContextProvider({ children }) {
     //
+
+    //
     const [seccionList, setSeccionList] = useState(fakeSeccion);
     const [activeSeccion, setActiveSeccion] = useState();
     //
