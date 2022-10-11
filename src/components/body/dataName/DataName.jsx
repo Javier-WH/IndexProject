@@ -10,7 +10,7 @@ import { OpenModal } from "../../modal/Modal"
 
 export function DataName() {
 
-    const { selectedStudent, activeSeccion, getSchoolPeriod, pushNewData } = useContext(MainContext)
+    const { selectedStudent, activeSeccion, getSchoolPeriod, pushNewData} = useContext(MainContext)
 
     const [studentName, setStudentName] = useState("");
     const [studentCI, setStudentCI] = useState("");
@@ -27,7 +27,22 @@ export function DataName() {
         setStudentCI(event.target.value);
     };
 
+    function handleDef(){
+        let lap1Input = document.getElementById("lap1").value;
+        let lap2Input = document.getElementById("lap2").value;
+        let lap3Input = document.getElementById("lap3").value;
+        let defInput = document.getElementById("studentDef");
+
+        let final = (( Number.parseFloat(lap1Input)+Number.parseFloat(lap2Input)+Number.parseFloat(lap3Input))/3).toFixed(2)
+        if(isNaN(final)){
+            final = ""
+      
+        }
+        defInput.innerText = final;
+    }
+
     function handleLap1Change(event) {
+        event.target.classList.remove("error")
         let value = event.target.value;
         if (value <= 20 && value >= 0) {
             setLap1(value);
@@ -41,10 +56,13 @@ export function DataName() {
                 }
             }
             pushNewData(dataToSave);
+            handleDef();
+         
         }
     };
 
     function handleLap2Change(event) {
+        event.target.classList.remove("error")
         let value = event.target.value;
         if (value <= 20 && value >= 0) {
             setLap2(value);
@@ -58,10 +76,12 @@ export function DataName() {
                 }
             }
             pushNewData(dataToSave);
+            handleDef();
         }
     };
 
     function handleLap3Change(event) {
+        event.target.classList.remove("error")
         let value = event.target.value;
         if (value <= 20 && value >= 0) {
             setLap3(value);
@@ -75,7 +95,7 @@ export function DataName() {
                 }
             }
             pushNewData(dataToSave);
-
+            handleDef();
         }
     };
 
@@ -85,18 +105,29 @@ export function DataName() {
 
     function lapLostFocus(event) {
         let value = event.target.value;
+      
         if (value === "") {
+            event.target.classList.add("error")
+            setModal({
+                state: true,
+                button: "1",
+                type: "warning",
+                title: "UPS",
+                message: "La nota que ha ingresado no es valida"
+            })
+
             if (event.target.id === "lap1") {
-                setLap1(0);
+                setLap1("");
             }
             if (event.target.id === "lap2") {
-                setLap2(0);
+                setLap2("");
             }
             if (event.target.id === "lap3") {
-                setLap3(0);
+                setLap3("");
             }
         }
-        if (value < 10 && value.length < 2) {
+        
+        if (value < 10 && value.length < 2 && value !== "") {
             if (event.target.id === "lap1") {
                 setLap1("0" + value);
             }
@@ -108,6 +139,8 @@ export function DataName() {
             }
         }
 
+       
+          
 
     }
 
@@ -135,6 +168,31 @@ export function DataName() {
         }
 
     }, [selectedStudent, activeSeccion])
+
+
+    ///esto actualiza la lista de alumnos con las notas itroduicidas
+    useEffect(()=>{
+        if(selectedStudent === undefined){
+            return;
+        }
+        let lap1Input = document.getElementById("lap1");
+        let lap2Input = document.getElementById("lap2");
+        let lap3Input = document.getElementById("lap3");
+        let defInput = document.getElementById("studentDef");
+
+        try {
+            let index = selectedStudent.index;
+            document.getElementById(`${index}-l1`).innerText = lap1Input.value;
+            document.getElementById(`${index}-l2`).innerText = lap2Input.value;
+            document.getElementById(`${index}-l3`).innerText = lap3Input.value;
+            document.getElementById(`${index}-def`).innerText = defInput.innerText;
+        } catch (error) {
+            
+        }
+    },[lap1, lap2, lap3, selectedStudent])
+
+
+
 
     if ((activeSeccion === undefined)) {
         return <div id="dataName"> Debe seleccionar una sección para iniciar</div>

@@ -42,6 +42,9 @@ export function SubjectMenu({ sx }) {
         handleAccept,
         handleCancel
       })
+      document.getElementById("lap1").classList.remove("error");
+      document.getElementById("lap2").classList.remove("error");
+      document.getElementById("lap3").classList.remove("error");
     }
 
 

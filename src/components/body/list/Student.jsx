@@ -14,10 +14,10 @@ export function Student({ data, number, seccion }) {
                 <td>{data.ci}</td>
                 <td>{data.names}</td>
                 <td>{data.lastNames}</td>
-                <td>{grades.lap1}</td>
-                <td>{grades.lap2}</td>
-                <td>{grades.lap3}</td>
-                <td>{grades.def}</td>
+                <td id={`index-${number}-l1`}>{grades.lap1}</td>
+                <td id={`index-${number}-l2`}>{grades.lap2}</td>
+                <td id={`index-${number}-l3`}>{grades.lap3}</td>
+                <td id={`index-${number}-def`}>{grades.def}</td>
             </tr>
         </>
     } else {

@@ -99,3 +99,7 @@ input::-webkit-inner-spin-button {
     color: var(--mainColor);
     font-size: 40px;
 }
+.error{
+    background-color: yellow;
+    border-color: red;
+}

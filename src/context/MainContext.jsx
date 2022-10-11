@@ -28,6 +28,7 @@ export function MainContextProvider({ children }) {
             newData[name] = changes[name]
         }
 
+
         if( changes[name].l1){
             newData[name].l1 = changes[name].l1
         }
@@ -40,14 +41,17 @@ export function MainContextProvider({ children }) {
         }
 
         setDataToSave(newData)
+     
 
-       // console.log(dataToSave)
     }
 
 
     function setSlectedStudent(index) {
         try {
             _setSlectedStudent(studentList[index - 1]);
+            studentList[index - 1].index = `index-${index}`; //agrega el indice
+ 
+
             //elimina todas las clases "selected"
             for (let i = 1; i < studentList.length + 1; i++) {
                 document.getElementById(`index-${i}`).classList.remove("selected");
