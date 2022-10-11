@@ -10,7 +10,7 @@ import { OpenModal } from "../../modal/Modal"
 
 export function DataName() {
 
-    const { selectedStudent, activeSeccion, getSchoolPeriod } = useContext(MainContext)
+    const { selectedStudent, activeSeccion, getSchoolPeriod, pushNewData } = useContext(MainContext)
 
     const [studentName, setStudentName] = useState("");
     const [studentCI, setStudentCI] = useState("");
@@ -26,11 +26,90 @@ export function DataName() {
     function handlePassChange(event) {
         setStudentCI(event.target.value);
     };
+
     function handleLap1Change(event) {
-        setLap1(event.target.value);
+        let value = event.target.value;
+        if (value <= 20 && value >= 0) {
+            setLap1(value);
+            let objectName = `id-${selectedStudent.id}`;
+            let dataToSave = {
+                name: objectName,
+                [objectName]: {
+                    id: selectedStudent.id,
+                    session: activeSeccion,
+                    l1: value
+                }
+            }
+            pushNewData(dataToSave);
+        }
+    };
+
+    function handleLap2Change(event) {
+        let value = event.target.value;
+        if (value <= 20 && value >= 0) {
+            setLap2(value);
+            let objectName = `id-${selectedStudent.name}`;
+            let dataToSave = {
+                name: objectName,
+                [objectName]: {
+                    id: selectedStudent.id,
+                    session: activeSeccion,
+                    l2: value
+                }
+            }
+            pushNewData(dataToSave);
+        }
+    };
+
+    function handleLap3Change(event) {
+        let value = event.target.value;
+        if (value <= 20 && value >= 0) {
+            setLap3(value);
+            let objectName = `id-${selectedStudent.id}`;
+            let dataToSave = {
+                name: objectName,
+                [objectName]: {
+                    id: selectedStudent.id,
+                    session: activeSeccion,
+                    l3: value
+                }
+            }
+            pushNewData(dataToSave);
+
+        }
     };
 
 
+
+
+
+    function lapLostFocus(event) {
+        let value = event.target.value;
+        if (value === "") {
+            if (event.target.id === "lap1") {
+                setLap1(0);
+            }
+            if (event.target.id === "lap2") {
+                setLap2(0);
+            }
+            if (event.target.id === "lap3") {
+                setLap3(0);
+            }
+        }
+        if (value < 10 && value.length < 2) {
+            if (event.target.id === "lap1") {
+                setLap1("0" + value);
+            }
+            if (event.target.id === "lap2") {
+                setLap2("0" + value);
+            }
+            if (event.target.id === "lap3") {
+                setLap3("0" + value);
+            }
+        }
+
+
+    }
 
     useEffect(() => {
         try {
@@ -65,10 +144,10 @@ export function DataName() {
     }, [selectedStudent, activeSeccion])
 
     if ((activeSeccion === undefined)) {
-        return   <div id="dataName"> Debe seleccionar una sección para iniciar</div>
-    }else if(document.getElementById(`index-1`) === null){
-        return   <div id="dataName">No se han encontrado estudiantes en inscritos en esta sección</div>
-    }else {
+        return <div id="dataName"> Debe seleccionar una sección para iniciar</div>
+    } else if (document.getElementById(`index-1`) === null) {
+        return <div id="dataName">No se han encontrado estudiantes en inscritos en esta sección</div>
+    } else {
         return <>
             <OpenModal modal={modal} setModal={setModal} />
             <div id="dataName">
@@ -86,15 +165,15 @@ export function DataName() {
                 <div id="studenGradesContainer">
                     <div className="studenLapse">
                         <div className="lblLapse">Primer Lapso</div>
-                        <input type="number" id="lap1" className="lapInput" value={lap1} onChange={handleLap1Change} spellCheck="false" />
+                        <input type="number" id="lap1" className="lapInput" value={lap1} onChange={handleLap1Change} onBlur={lapLostFocus} spellCheck="false" />
                     </div>
                     <div className="studenLapse">
                         <div className="lblLapse">Segundo Lapso</div>
-                        <input type="number" id="lap2" className="lapInput" value={lap2} onChange={handleLap1Change} spellCheck="false" />
+                        <input type="number" id="lap2" className="lapInput" value={lap2} onChange={handleLap2Change} onBlur={lapLostFocus} spellCheck="false" />
                     </div>
                     <div className="studenLapse">
                         <div className="lblLapse">Tercer Lapso</div>
-                        <input type="number" id="lap3" className="lapInput" value={lap3} onChange={handleLap1Change} spellCheck="false" />
+                        <input type="number" id="lap3" className="lapInput" value={lap3} onChange={handleLap3Change} onBlur={lapLostFocus} spellCheck="false" />
                     </div>
                 </div>
                 <div id="studentDefContainer">

@@ -5,11 +5,11 @@ export function Student({ data, number, seccion }) {
     let seccionArray = seccion.split(" ");
     let seccionName = seccionArray[0];
     let grades = data.subjects[seccionName];
-
+   
 
     if (grades !== undefined) {
         return <>
-            <tr id={`index-${number}`}>
+            <tr id={`index-${number}`} name={data.id}>
                 <td>{number}</td>
                 <td>{data.ci}</td>
                 <td>{data.names}</td>
