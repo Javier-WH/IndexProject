@@ -39,7 +39,7 @@ export function MainContextProvider({ children }) {
 
         setDataToSave(newData)
 
-        console.log(dataToSave)
+       // console.log(dataToSave)
     }
 
 
@@ -96,7 +96,9 @@ export function MainContextProvider({ children }) {
         changeActiveSeccion,
         setActiveShoolYear,
         getSchoolPeriod,
-        pushNewData
+        pushNewData,
+        dataToSave, 
+        setDataToSave
     }
 
 

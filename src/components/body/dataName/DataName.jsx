@@ -48,7 +48,7 @@ export function DataName() {
         let value = event.target.value;
         if (value <= 20 && value >= 0) {
             setLap2(value);
-            let objectName = `id-${selectedStudent.name}`;
+            let objectName = `id-${selectedStudent.id}`;
             let dataToSave = {
                 name: objectName,
                 [objectName]: {
@@ -121,13 +121,6 @@ export function DataName() {
             setLap3(grades.lap3);
             setDef(grades.def);
         } catch (error) {
-            /* setModal({
-                 state:true, 
-                 title:"Ha ocurrido un error", 
-                 message:"El estudiante no tiene notas asignadas a esta materia", 
-                 type: "warning", 
-                 buttons: 1
-             })*/
             setLap1(0);
             setLap2(0);
             setLap3(0);

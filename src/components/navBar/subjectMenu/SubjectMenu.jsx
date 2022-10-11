@@ -6,19 +6,46 @@ import SchoolIcon from '@mui/icons-material/School';
 import Tooltip from '@mui/material/Tooltip';
 import { useContext } from 'react';
 
+import {OpenModal} from '../../modal/Modal'
 
 export function SubjectMenu({ sx }) {
-  const { getSeccionList, changeActiveSeccion } = useContext(MainContext);
+  const { getSeccionList, changeActiveSeccion, dataToSave, setDataToSave } = useContext(MainContext);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [modal, setModal] = React.useState({state:false});
+
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
+    
   };
 
+  function handleAccept(){ /// aqui va la funcion de los cambios a guardar
+    console.log("Casmbios guardados");
+    setModal({ state: false });
+    setDataToSave({})
+  }
+  function handleCancel(){
+    setDataToSave({})
+    setModal({ state: false });
+  }
+
   const handleClose = (e) => {
+    //revisa si existen cambios sin guardar
+    if(Object.keys(dataToSave).length > 0){
+      setModal({
+        state: true,
+        title: "Advertencia",
+        message: "Tiene datos sin guardar",
+        buttons: 3,
+        type: "warning",
+        handleAccept,
+        handleCancel
+      })
+    }
+
+
     changeActiveSeccion(e.target.id)
- 
     setAnchorEl(null);
   };
 
@@ -37,6 +64,7 @@ export function SubjectMenu({ sx }) {
 
   return (
     <div>
+      <OpenModal modal={modal} setModal={setModal}/>
       <Tooltip title="Materias Asignadas" arrow>
         <SchoolIcon sx={sx} className="NavBarIcon" onClick={handleClick} />
       </Tooltip>
