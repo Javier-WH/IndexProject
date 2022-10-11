@@ -1,44 +1,54 @@
 import { createContext, useState } from "react";
-import { fakeStudent } from "./studentJSOMtests";
 import {fakeSeccion} from "./seccionsJSONtest";
+import {getStudent} from "../fetch/fetchStudents"
 
 export const MainContext = createContext();
 
 export function MainContextProvider({ children }) {
     //
     const [seccionList, setSeccionList] = useState(fakeSeccion);
-    const [activeSeccion, setActiveSeccion] = useState(getSeccionList()[0]);
+    const [activeSeccion, setActiveSeccion] = useState();
     //
-    const [studentList, setStudentList] = useState(fakeStudent());
-    const [selectedStudent, _setSlectedStudent] = useState(studentList[0]);
+    const [studentList, setStudentList] = useState([]);
+    const [selectedStudent, _setSlectedStudent] = useState();
     //
     const [activeShoolYear, setActiveShoolYear] = useState(2022);
 
     function setSlectedStudent(index) {
-
-        _setSlectedStudent(studentList[index - 1]);
-        //elimina todas las clases "selected"
-        for (let i = 1; i < studentList.length + 1; i++) {
-            document.getElementById(`index-${i}`).classList.remove("selected");
+        try {
+            _setSlectedStudent(studentList[index - 1]);
+            //elimina todas las clases "selected"
+            for (let i = 1; i < studentList.length + 1; i++) {
+                document.getElementById(`index-${i}`).classList.remove("selected");
+            }
+            //agrega selected a la lista
+            document.getElementById(`index-${index}`).classList.add("selected");
+        } catch (error) {
+         
         }
-        //agrega selected a la lista
-        document.getElementById(`index-${index}`).classList.add("selected");
     }
    
     function getSeccionList(){
+        if(seccionList.length === 0){
+            return [];
+        }
        const subjects = Object.keys(seccionList[0]);
         let seccions = subjects.map(subjec =>{
             return  seccionList[0][subjec].map(sec=>{
                 return `${subjec} ${sec}`;
             })
         })
-       return seccions.flat();
+       let list =  seccions.flat();
+   
+      
+       return list;
     }
 
-    function changeActiveSeccion(seccion){
+   async function changeActiveSeccion(seccion){
         if(getSeccionList().includes(seccion)){
             ////Aqui se debe hacer el fecth de las secciones y asignarlas usando setActiveSeccion
-            setActiveSeccion(seccion)
+            setActiveSeccion(seccion)    
+            setStudentList(await getStudent());
         }
     }
 

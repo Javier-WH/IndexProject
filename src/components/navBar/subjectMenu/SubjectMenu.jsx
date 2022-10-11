@@ -1,4 +1,4 @@
-import{MainContext} from "../../../context/MainContext"
+import { MainContext } from "../../../context/MainContext"
 import * as React from 'react';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -8,7 +8,7 @@ import { useContext } from 'react';
 
 
 export function SubjectMenu({ sx }) {
-  const {getSeccionList, changeActiveSeccion} = useContext(MainContext);
+  const { getSeccionList, changeActiveSeccion } = useContext(MainContext);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
@@ -18,11 +18,23 @@ export function SubjectMenu({ sx }) {
 
   const handleClose = (e) => {
     changeActiveSeccion(e.target.id)
+ 
     setAnchorEl(null);
   };
 
- 
-  let key = 1;
+  function setSeccionLists(){
+    let secctions = getSeccionList();
+    if(secctions.length >0){
+      let key = 1;
+      return secctions.map(seccion => {
+        return <MenuItem key={key++} id={seccion} onClick={handleClose}>{seccion}</MenuItem>
+      })
+
+    }else{
+      return <MenuItem onClick={handleClose}>No hay secciones disponibles</MenuItem>
+    }
+  }
+
   return (
     <div>
       <Tooltip title="Materias Asignadas" arrow>
@@ -37,12 +49,10 @@ export function SubjectMenu({ sx }) {
           'aria-labelledby': 'basic-button',
         }}
       >
-      { 
-        getSeccionList().map(seccion =>{
-          return  <MenuItem key={key++} id={seccion} onClick={handleClose}>{seccion}</MenuItem>
-      })
-      }
-     
+        {
+          setSeccionLists()
+        }
+
       </Menu>
     </div>
   );
