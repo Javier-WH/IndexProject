@@ -1,0 +1,29 @@
+#loginContainer {
+  background-color: white;
+  border: 5px solid var(--mainColor);
+  width: 500px;
+  height: 500px;
+  border-radius: 20px;
+  position: relative;
+}
+
+#indexLogo {
+  width: 200px;
+  height: 200px;
+  border: 5px solid var(--mainColor);
+  border-radius: 50%;
+  background-color: var(--mainColor);
+  position: absolute;
+  left: calc(50% - 100px);
+  top: -50px;
+
+}
+@media (max-width: 460px) {
+
+  #loginContainer {
+
+    width: 95%;
+    height: 500px;
+
+  }
+}

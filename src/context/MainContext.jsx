@@ -20,7 +20,13 @@ export function MainContextProvider({ children }) {
 
 
     function pushNewData(changes) {
+
         let name = changes.name;
+        //
+        let id = changes[name].id - 1;
+        let sec = changes[name].session.split(" ")[0];
+        let newStudentList = studentList;
+        //
 
         let newData = dataToSave;
 
@@ -28,20 +34,43 @@ export function MainContextProvider({ children }) {
             newData[name] = changes[name]
         }
 
+ 
 
-        if( changes[name].l1){
-            newData[name].l1 = changes[name].l1
+        if (changes[name].l1) {
+            newData[name].l1 = changes[name].l1;
+            //esto corrige la lista de estudiantes para que las notas se puedan mostrar correctamente
+            newStudentList[id].subjects[sec].lap1 = changes[name].l1;
+            setStudentList(newStudentList)
+
         }
-        if(changes[name].l2){
+        if (changes[name].l2) {
             newData[name].l2 = changes[name].l2
+            //esto corrige la lista de estudiantes para que las notas se puedan mostrar correctamente
+            newStudentList[id].subjects[sec].lap2 = changes[name].l2;
+            setStudentList(newStudentList)
         }
 
-        if(changes[name].l3){
+        if (changes[name].l3) {
             newData[name].l3 = changes[name].l3
+            //esto corrige la lista de estudiantes para que las notas se puedan mostrar correctamente
+            newStudentList[id].subjects[sec].lap3 = changes[name].l3;
+            setStudentList(newStudentList)
+        }
+        
+        if (changes[name].def) {
+            newData[name].def = changes[name].def
+            //esto corrige la lista de estudiantes para que las notas se puedan mostrar correctamente
+            newStudentList[id].subjects[sec].def = changes[name].def;
+            setStudentList(newStudentList)
         }
 
         setDataToSave(newData)
-     
+
+        //
+
+
+
+
 
     }
 
@@ -50,7 +79,7 @@ export function MainContextProvider({ children }) {
         try {
             _setSlectedStudent(studentList[index - 1]);
             studentList[index - 1].index = `index-${index}`; //agrega el indice
- 
+
 
             //elimina todas las clases "selected"
             for (let i = 1; i < studentList.length + 1; i++) {
@@ -103,7 +132,7 @@ export function MainContextProvider({ children }) {
         setActiveShoolYear,
         getSchoolPeriod,
         pushNewData,
-        dataToSave, 
+        dataToSave,
         setDataToSave
     }
 

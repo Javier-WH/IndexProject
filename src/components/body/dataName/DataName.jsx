@@ -10,7 +10,7 @@ import { OpenModal } from "../../modal/Modal"
 
 export function DataName() {
 
-    const { selectedStudent, activeSeccion, getSchoolPeriod, pushNewData} = useContext(MainContext)
+    const { selectedStudent, activeSeccion, getSchoolPeriod, pushNewData, studentList} = useContext(MainContext)
 
     const [studentName, setStudentName] = useState("");
     const [studentCI, setStudentCI] = useState("");
@@ -31,32 +31,45 @@ export function DataName() {
         let lap1Input = document.getElementById("lap1").value;
         let lap2Input = document.getElementById("lap2").value;
         let lap3Input = document.getElementById("lap3").value;
-        let defInput = document.getElementById("studentDef");
 
         let final = (( Number.parseFloat(lap1Input)+Number.parseFloat(lap2Input)+Number.parseFloat(lap3Input))/3).toFixed(2)
+       // final = Number.parseFloat(final).toFixed(2)
+        
         if(isNaN(final)){
             final = ""
       
         }
-        defInput.innerText = final;
+   
+        
+        setDef(final)
+        return final;
     }
 
+ 
+   
     function handleLap1Change(event) {
+       
         event.target.classList.remove("error")
         let value = event.target.value;
         if (value <= 20 && value >= 0) {
             setLap1(value);
+
+            let decimals = value.split(".")[1];
+            if(decimals !== undefined){
+                value = Number.parseFloat(value).toFixed(2);
+            }
+
             let objectName = `id-${selectedStudent.id}`;
             let dataToSave = {
                 name: objectName,
                 [objectName]: {
                     id: selectedStudent.id,
                     session: activeSeccion,
-                    l1: value
+                    l1: value,
+                    def:  handleDef()
                 }
             }
             pushNewData(dataToSave);
-            handleDef();
          
         }
     };
@@ -66,17 +79,24 @@ export function DataName() {
         let value = event.target.value;
         if (value <= 20 && value >= 0) {
             setLap2(value);
+
+            let decimals = value.split(".")[1];
+            if(decimals !== undefined){
+                value = Number.parseFloat(value).toFixed(2);
+            }
+
+
             let objectName = `id-${selectedStudent.id}`;
             let dataToSave = {
                 name: objectName,
                 [objectName]: {
                     id: selectedStudent.id,
                     session: activeSeccion,
-                    l2: value
+                    l2: value,
+                    def:  handleDef()
                 }
             }
             pushNewData(dataToSave);
-            handleDef();
         }
     };
 
@@ -85,26 +105,39 @@ export function DataName() {
         let value = event.target.value;
         if (value <= 20 && value >= 0) {
             setLap3(value);
+
+            let decimals = value.split(".")[1];
+            if(decimals !== undefined){
+                value = Number.parseFloat(value).toFixed(2);
+            }
+
+
             let objectName = `id-${selectedStudent.id}`;
             let dataToSave = {
                 name: objectName,
                 [objectName]: {
                     id: selectedStudent.id,
                     session: activeSeccion,
-                    l3: value
+                    l3: value,
+                    def:  handleDef()
                 }
             }
             pushNewData(dataToSave);
-            handleDef();
         }
     };
 
+    function handleInputKeyUpDown(event) {
 
+        if(event.key === "ArrowDown" || event.key === "ArrowUp"){
+            event.preventDefault();
+        }
+    }
 
 
 
     function lapLostFocus(event) {
         let value = event.target.value;
+    
       
         if (value === "") {
             event.target.classList.add("error")
@@ -139,7 +172,20 @@ export function DataName() {
             }
         }
 
-       
+        let decimals = value.split(".")[1];
+       if(decimals !== undefined){
+           if(decimals.length > 2){
+               if (event.target.id === "lap1") {
+                   setLap1(Number.parseFloat(value).toFixed(2));
+               }
+               if (event.target.id === "lap2") {
+                   setLap2(Number.parseFloat(value).toFixed(2));
+               }
+               if (event.target.id === "lap3") {
+                   setLap3(Number.parseFloat(value).toFixed(2));
+               }
+           }
+       }
           
 
     }
@@ -196,7 +242,7 @@ export function DataName() {
 
     if ((activeSeccion === undefined)) {
         return <div id="dataName"> Debe seleccionar una sección para iniciar</div>
-    } else if (document.getElementById(`index-1`) === null) {
+    } else if (studentList.length <= 0){
         return <div id="dataName">No se han encontrado estudiantes en inscritos en esta sección</div>
     } else {
         return <>
@@ -216,15 +262,15 @@ export function DataName() {
                 <div id="studenGradesContainer">
                     <div className="studenLapse">
                         <div className="lblLapse">Primer Lapso</div>
-                        <input type="number" id="lap1" className="lapInput" value={lap1} onChange={handleLap1Change} onBlur={lapLostFocus} spellCheck="false" />
+                        <input type="number" id="lap1" className="lapInput" value={lap1} onChange={handleLap1Change} onBlur={lapLostFocus} onKeyDown={handleInputKeyUpDown} spellCheck="false" />
                     </div>
                     <div className="studenLapse">
                         <div className="lblLapse">Segundo Lapso</div>
-                        <input type="number" id="lap2" className="lapInput" value={lap2} onChange={handleLap2Change} onBlur={lapLostFocus} spellCheck="false" />
+                        <input type="number" id="lap2" className="lapInput" value={lap2} onChange={handleLap2Change} onBlur={lapLostFocus} onKeyDown={handleInputKeyUpDown} spellCheck="false" />
                     </div>
                     <div className="studenLapse">
                         <div className="lblLapse">Tercer Lapso</div>
-                        <input type="number" id="lap3" className="lapInput" value={lap3} onChange={handleLap3Change} onBlur={lapLostFocus} spellCheck="false" />
+                        <input type="number" id="lap3" className="lapInput" value={lap3} onChange={handleLap3Change} onBlur={lapLostFocus} onKeyDown={handleInputKeyUpDown} spellCheck="false" />
                     </div>
                 </div>
                 <div id="studentDefContainer">

@@ -1,0 +1,48 @@
+#dataContainer{
+    margin-top: 160px;
+    width: 100%;
+    height: calc(100% - 160px);
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    align-items: center;
+}
+#tabsNav{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#inputContainer{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 20px;
+}
+.input{
+    width: 100%;
+}
+#footer{
+    color: var(--secondaryColor);
+    font-size: small;
+}
+
+.swal2-confirm{
+    background-color: white !important;
+    color: var(--mainColor) !important;
+}
+.swal2-popup{
+    background-color: var(--mainColor) !important;
+    color: white !important;
+}
+
+
+@media (max-width: 460px) {
+    .tabItem{
+        font-size: 10px !important;
+    }
+    #tabsNav{
+        width: 99%;
+    }
+}
