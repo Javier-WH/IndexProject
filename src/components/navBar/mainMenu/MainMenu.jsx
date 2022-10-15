@@ -35,6 +35,11 @@ export function MainMenu() {
         setState({ ...state, [anchor]: open });
     };
 
+    function handleLogOut(){
+        fetch("/logout");
+        window.location.reload(true);
+    }
+
     const list = (anchor) => (
         <Box
             sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
@@ -64,7 +69,7 @@ export function MainMenu() {
                         <ListItemIcon>
                             <LogoutIcon />
                         </ListItemIcon>
-                        <ListItemText primary="Salir" />
+                        <ListItemText primary="Salir" onClick={handleLogOut}/>
                     </ListItemButton>
                 </ListItem>
             </List>

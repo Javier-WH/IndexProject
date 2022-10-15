@@ -243,7 +243,7 @@ export function DataName() {
     if ((activeSeccion === undefined)) {
         return <div id="dataName"> Debe seleccionar una sección para iniciar</div>
     } else if (studentList.length <= 0){
-        return <div id="dataName">No se han encontrado estudiantes en inscritos en esta sección</div>
+        return <div id="dataName">{`No se han encontado estudiantes inscritos en la seccion ${activeSeccion}`}</div>
     } else {
         return <>
             <OpenModal modal={modal} setModal={setModal} />

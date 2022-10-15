@@ -93,7 +93,7 @@ export function MainContextProvider({ children }) {
       
             ////Aqui se debe hacer el fecth de las secciones y asignarlas usando setActiveSeccion
             setActiveSeccion(seccion)
-            setStudentList(await getStudent());
+            setStudentList(await getStudent(seccion));
         
     }
 

@@ -68,6 +68,7 @@ export function SubjectMenu({ sx }) {
           })
           let _list = seccions.flat();
           setTlist(_list)
+          changeActiveSeccion(_list[0])
         }
       })
       .catch(error=>{

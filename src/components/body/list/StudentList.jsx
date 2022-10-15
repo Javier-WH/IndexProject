@@ -21,6 +21,7 @@ export function StudentList() {
     }
 
 
+
   
     useEffect(() => {
         let selected = document.getElementsByClassName("selected");
@@ -60,7 +61,11 @@ export function StudentList() {
 
 
     let key = 1;
-    if (studentList.length > 0) {
+
+    if(activeSeccion === undefined){
+        <div id="listContainer"></div>
+
+    }else if (studentList.length > 0) {
         return <>
             <div id="listContainer">
                 <div id="StudenListTitle">Lista de estudiantes de la sección</div>
@@ -91,7 +96,7 @@ export function StudentList() {
     } else {
         return <>
             <div id="listContainer">
-                <div id="StudenListTitle">No se ha seleccionado una sección</div>
+                <div id="StudenListTitle">No se han encontado estudiantes en esta sección</div>
                 <div id="studentListContaner">
 
                     <table>
@@ -111,7 +116,7 @@ export function StudentList() {
                             <tr>
                                 <td colSpan="8">
                                     <h4>
-                                        Debe Seleccionar una sección para iniciar
+                                        No hay estudiantes inscritos en esa sección
                                     </h4>
                                 </td>
                             </tr>
