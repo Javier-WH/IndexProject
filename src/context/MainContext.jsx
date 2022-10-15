@@ -1,6 +1,7 @@
 import { createContext, useState } from "react";
-import { fakeSeccion } from "./seccionsJSONtest";
-import { getStudent } from "../fetch/fetchStudents"
+//import { fakeSeccion } from "./seccionsJSONtest";
+import { getStudent } from "../fetch/fetchStudents";
+
 
 export const MainContext = createContext();
 
@@ -8,7 +9,7 @@ export function MainContextProvider({ children }) {
     //
 
     //
-    const [seccionList, setSeccionList] = useState(fakeSeccion);
+
     const [activeSeccion, setActiveSeccion] = useState();
     //
     const [studentList, setStudentList] = useState([]);
@@ -19,8 +20,9 @@ export function MainContextProvider({ children }) {
     const [dataToSave, setDataToSave] = useState({});
 
 
-    function pushNewData(changes) {
+  
 
+    function pushNewData(changes) {
         let name = changes.name;
         //
         let id = changes[name].id - 1;
@@ -34,7 +36,7 @@ export function MainContextProvider({ children }) {
             newData[name] = changes[name]
         }
 
- 
+
 
         if (changes[name].l1) {
             newData[name].l1 = changes[name].l1;
@@ -56,7 +58,7 @@ export function MainContextProvider({ children }) {
             newStudentList[id].subjects[sec].lap3 = changes[name].l3;
             setStudentList(newStudentList)
         }
-        
+
         if (changes[name].def) {
             newData[name].def = changes[name].def
             //esto corrige la lista de estudiantes para que las notas se puedan mostrar correctamente
@@ -67,11 +69,6 @@ export function MainContextProvider({ children }) {
         setDataToSave(newData)
 
         //
-
-
-
-
-
     }
 
 
@@ -79,7 +76,6 @@ export function MainContextProvider({ children }) {
         try {
             _setSlectedStudent(studentList[index - 1]);
             studentList[index - 1].index = `index-${index}`; //agrega el indice
-
 
             //elimina todas las clases "selected"
             for (let i = 1; i < studentList.length + 1; i++) {
@@ -92,28 +88,13 @@ export function MainContextProvider({ children }) {
         }
     }
 
-    function getSeccionList() {
-        if (seccionList.length === 0) {
-            return [];
-        }
-        const subjects = Object.keys(seccionList[0]);
-        let seccions = subjects.map(subjec => {
-            return seccionList[0][subjec].map(sec => {
-                return `${subjec} ${sec}`;
-            })
-        })
-        let list = seccions.flat();
-
-
-        return list;
-    }
-
+ 
     async function changeActiveSeccion(seccion) {
-        if (getSeccionList().includes(seccion)) {
+      
             ////Aqui se debe hacer el fecth de las secciones y asignarlas usando setActiveSeccion
             setActiveSeccion(seccion)
             setStudentList(await getStudent());
-        }
+        
     }
 
     function getSchoolPeriod() {
@@ -125,8 +106,6 @@ export function MainContextProvider({ children }) {
         setStudentList,
         selectedStudent,
         setSlectedStudent,
-        getSeccionList,
-        setSeccionList,
         activeSeccion,
         changeActiveSeccion,
         setActiveShoolYear,

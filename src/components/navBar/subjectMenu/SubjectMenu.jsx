@@ -4,35 +4,39 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import SchoolIcon from '@mui/icons-material/School';
 import Tooltip from '@mui/material/Tooltip';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { OpenModal } from '../../modal/Modal'
 
-import {OpenModal} from '../../modal/Modal'
+import { getTeacherSeccions } from "../../../fetch/fetchSeccions";
+//import {fakeSeccion} from "../../../context/seccionsJSONtest"
+
 
 export function SubjectMenu({ sx }) {
-  const { getSeccionList, changeActiveSeccion, dataToSave, setDataToSave } = useContext(MainContext);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [modal, setModal] = React.useState({state:false});
+  const { changeActiveSeccion, dataToSave, setDataToSave } = useContext(MainContext);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [modal, setModal] = useState({ state: false });
+  const [list, setTlist] = useState(["No se encontraron secciones asignadas"])
 
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
-    
+
   };
 
-  function handleAccept(){ /// aqui va la funcion de los cambios a guardar
+  function handleAccept() { /// aqui va la funcion de los cambios a guardar
     console.log("Casmbios guardados");
     setModal({ state: false });
     setDataToSave({})
   }
-  function handleCancel(){
+  function handleCancel() {
     setDataToSave({})
     setModal({ state: false });
   }
 
   const handleClose = (e) => {
     //revisa si existen cambios sin guardar
-    if(Object.keys(dataToSave).length > 0){
+    if (Object.keys(dataToSave).length > 0) {
       setModal({
         state: true,
         title: "Advertencia",
@@ -47,27 +51,36 @@ export function SubjectMenu({ sx }) {
       document.getElementById("lap3").classList.remove("error");
     }
 
-
+    //console.log(e.target.id)
     changeActiveSeccion(e.target.id)
     setAnchorEl(null);
   };
 
-  function setSeccionLists(){
-    let secctions = getSeccionList();
-    if(secctions.length >0){
-      let key = 1;
-      return secctions.map(seccion => {
-        return <MenuItem key={key++} id={seccion} onClick={handleClose}>{seccion}</MenuItem>
+  useEffect(() => {
+    getTeacherSeccions().then(response => response.json())
+      .then(teacherSeccions => {
+        if (teacherSeccions.length > 0) {
+          const subjects = Object.keys(teacherSeccions[0]);
+          let seccions = subjects.map(subjec => {
+            return teacherSeccions[0][subjec].map(sec => {
+              return `${subjec} ${sec}`;
+            })
+          })
+          let _list = seccions.flat();
+          setTlist(_list)
+        }
       })
+      .catch(error=>{
+        setTlist([]);
+        console.log("Ocurrió un error")
+      })
+  }, [])
 
-    }else{
-      return <MenuItem onClick={handleClose}>No hay secciones disponibles</MenuItem>
-    }
-  }
 
+  let key = 1;
   return (
     <div>
-      <OpenModal modal={modal} setModal={setModal}/>
+      <OpenModal modal={modal} setModal={setModal} />
       <Tooltip title="Materias Asignadas" arrow>
         <SchoolIcon sx={sx} className="NavBarIcon" onClick={handleClick} />
       </Tooltip>
@@ -81,7 +94,10 @@ export function SubjectMenu({ sx }) {
         }}
       >
         {
-          setSeccionLists()
+
+          list.map(seccion => {
+            return <MenuItem key={key++} id={seccion} onClick={handleClose}>{seccion}</MenuItem>
+          })
         }
 
       </Menu>

@@ -45,7 +45,7 @@ export function DataContainer({log}) {
                     text: response.error
                 })
             }else{
-                console.log(response)
+              
                 log(response.code)
             }
         }
@@ -59,8 +59,8 @@ export function DataContainer({log}) {
             <Tabs value={value} setValue={setValue} />
 
             <div id="inputContainer">
-                <TextField id="outlined-basic" label={getLabel()} variant="outlined" className="input" onChange={handleUser} />
-                <TextField id="outlined-basic" label="Contraseña" variant="outlined" type="password" className="input" onChange={handlePass} />
+                <TextField id="outlined-basic" label={getLabel()} variant="outlined" className="input" onChange={handleUser}  autoComplete='off'/>
+                <TextField id="outlined-basic" label="Contraseña" variant="outlined" type="password" className="input" onChange={handlePass}  autoComplete='off'/>
                 <Button variant="contained" onClick={handleSend}>Ingresar</Button>
             </div>
 
