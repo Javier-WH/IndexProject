@@ -67,8 +67,23 @@ export function MainContextProvider({ children }) {
         }
 
         setDataToSave(newData)
-
         //
+    }
+
+    function SaveData(){
+        fetch("/saveGrades", {
+            method: "POST",
+            headers:{
+                "Content-Type": "application/json",
+                "Accept": "*/*"
+            },
+            body: JSON.stringify(dataToSave)
+        })
+        .then(data=> data.json())
+        .then(response => {
+            console.log(response)
+        })
+        .catch(error => console.log(error))
     }
 
 
@@ -112,7 +127,8 @@ export function MainContextProvider({ children }) {
         getSchoolPeriod,
         pushNewData,
         dataToSave,
-        setDataToSave
+        setDataToSave,
+        SaveData
     }
 
 

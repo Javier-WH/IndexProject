@@ -68,12 +68,13 @@ export function SubjectMenu({ sx }) {
           })
           let _list = seccions.flat();
           setTlist(_list)
+           /*eslint-disable*/
           changeActiveSeccion(_list[0])
         }
       })
       .catch(error=>{
         setTlist([]);
-        console.log("Ocurrió un error")
+      
       })
   }, [])
 
