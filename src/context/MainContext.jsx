@@ -7,9 +7,8 @@ export const MainContext = createContext();
 
 export function MainContextProvider({ children }) {
     //
-
+    
     //
-
     const [activeSeccion, setActiveSeccion] = useState();
     //
     const [studentList, setStudentList] = useState([]);
@@ -18,7 +17,8 @@ export function MainContextProvider({ children }) {
     const [activeShoolYear, setActiveShoolYear] = useState(2022);
     //
     const [dataToSave, setDataToSave] = useState({});
-
+    //
+    const [message, setMessage] = useState({state: false, type: "success", message:""})
 
   
 
@@ -81,7 +81,13 @@ export function MainContextProvider({ children }) {
         })
         .then(data=> data.json())
         .then(response => {
-            console.log(response)
+            if(response.error){
+                setMessage({state: true, type: "error", message:response.error})
+            }
+            if(response.message === "OK"){
+                setDataToSave({})
+                setMessage({state: true, type: "success", message:"Las notas han sido guardadas"})
+            }
         })
         .catch(error => console.log(error))
     }
@@ -128,7 +134,9 @@ export function MainContextProvider({ children }) {
         pushNewData,
         dataToSave,
         setDataToSave,
-        SaveData
+        SaveData,
+        message, 
+        setMessage
     }
 
 

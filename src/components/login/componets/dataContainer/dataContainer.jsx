@@ -9,6 +9,7 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 const MySwal = withReactContent(Swal)
 
+
 export function DataContainer({log}) {
 
     const [value, setValue] = useState(0);
@@ -56,6 +57,7 @@ export function DataContainer({log}) {
 
     return <>
         <div id="dataContainer">
+
             <Tabs value={value} setValue={setValue} />
 
             <div id="inputContainer">

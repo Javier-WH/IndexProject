@@ -12,16 +12,19 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { Logo } from "../../logo/Logo";
 
 import "./mainMenu.css";
+import { useEffect, useState } from 'react';
 
 
 
 export function MainMenu() {
-    const [state, setState] = React.useState({
+    const [state, setState] = useState({
         top: false,
         left: false,
         bottom: false,
         right: false,
     });
+
+    const [user, setUser] = useState("Esperando...");
 
     const toggleDrawer = (anchor, open) => (event) => {
         if (
@@ -40,6 +43,13 @@ export function MainMenu() {
         window.location.reload(true);
     }
 
+    useEffect(()=>{
+        fetch("/getUserName").then(e=> e.text())
+        .then(userName=> setUser(userName))
+        .catch(error => setUser("error"))
+    },[])
+    
+
     const list = (anchor) => (
         <Box
             sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
@@ -53,7 +63,7 @@ export function MainMenu() {
                         <ListItemIcon>
                             <PersonIcon/>
                         </ListItemIcon>
-                        <ListItemText primary="Usuario" />
+                        <ListItemText primary={user} />
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>

@@ -1,17 +1,23 @@
 import "./navBar.css";
-import {MainContext} from "../../context/MainContext"
+import { MainContext } from "../../context/MainContext"
 import { SubjectMenu } from "./subjectMenu/SubjectMenu";
-import{MainMenu} from "./mainMenu/MainMenu"
+import { MainMenu } from "./mainMenu/MainMenu"
 
 
 import LocalPrintshopIcon from '@mui/icons-material/LocalPrintshop';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import Tooltip from '@mui/material/Tooltip';
-import { useContext } from "react";
+import { useContext, useRef } from "react";
+
+
+import ReactToPrint from "react-to-print";
+
 
 export function NavBar() {
 
-const {SaveData} = useContext(MainContext)
+    const { SaveData } = useContext(MainContext)
+
+    const componentRef = useRef();
 
     let iconsStyle = {
         fontSize: 50,
@@ -19,18 +25,23 @@ const {SaveData} = useContext(MainContext)
     }
 
 
-    return <div id="NavBar">
-        <div id="navBarContainer">
-            <MainMenu/>
+    return <div id="NavBar" ref={componentRef}>
+        <div id="navBarContainer" >
+            <MainMenu />
             <div id="iconsContainer">
-                <Tooltip title="Imprimir Nomina" arrow>
-                    <LocalPrintshopIcon className="NavBarIcon" sx={iconsStyle} />
-                </Tooltip>
+                <ReactToPrint
+                    trigger={() => <Tooltip title="Imprimir Nomina" arrow>
+                                        <LocalPrintshopIcon className="NavBarIcon" sx={iconsStyle} />
+                                    </Tooltip>}
+                    content={() => componentRef.current}
+                />
+
                 <Tooltip title="Guardar Cambios" arrow>
-                    <SaveOutlinedIcon className="NavBarIcon" sx={iconsStyle} onClick={SaveData}/>
+                    <SaveOutlinedIcon className="NavBarIcon" sx={iconsStyle} onClick={SaveData} />
                 </Tooltip>
                 <SubjectMenu sx={iconsStyle} />
             </div>
         </div>
+
     </div>
 }

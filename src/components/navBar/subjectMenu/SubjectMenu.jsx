@@ -8,11 +8,11 @@ import { useContext, useEffect, useState } from 'react';
 import { OpenModal } from '../../modal/Modal'
 
 import { getTeacherSeccions } from "../../../fetch/fetchSeccions";
-//import {fakeSeccion} from "../../../context/seccionsJSONtest"
+import Message from "../../message/Message"
 
 
 export function SubjectMenu({ sx }) {
-  const { changeActiveSeccion, dataToSave, setDataToSave } = useContext(MainContext);
+  const { changeActiveSeccion, dataToSave, setDataToSave, SaveData } = useContext(MainContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const [modal, setModal] = useState({ state: false });
   const [list, setTlist] = useState(["No se encontraron secciones asignadas"])
@@ -25,9 +25,9 @@ export function SubjectMenu({ sx }) {
   };
 
   function handleAccept() { /// aqui va la funcion de los cambios a guardar
-    console.log("Casmbios guardados");
+    let status = SaveData()
     setModal({ state: false });
-    setDataToSave({})
+    console.log(status)
   }
   function handleCancel() {
     setDataToSave({})
@@ -82,6 +82,7 @@ export function SubjectMenu({ sx }) {
   let key = 1;
   return (
     <div>
+      <Message/>
       <OpenModal modal={modal} setModal={setModal} />
       <Tooltip title="Materias Asignadas" arrow>
         <SchoolIcon sx={sx} className="NavBarIcon" onClick={handleClick} />
