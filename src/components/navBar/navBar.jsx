@@ -62,7 +62,6 @@ export function NavBar() {
                     <SubjectMenu sx={iconsStyle} />
                 </div>
             </div>
-        </div>
         <div id="print" ref={componentRef}>
             <div id="printTitleContainer">
                 <img src={Logo} alt="" id="printLogo" />
@@ -100,7 +99,9 @@ export function NavBar() {
                     }
                 </tbody>
             </table>
+        </div>
 
         </div>
+
     </>
 }

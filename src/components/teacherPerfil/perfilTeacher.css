@@ -1,0 +1,25 @@
+#perfilContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    row-gap: 20px;
+}
+
+#perfilTitle{
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    padding-bottom: 20px;
+}
+#subjectBox{
+    border: 2px solid var(--mainColor);
+    height: 100px;
+    width: 90%;
+    margin-left: 20px;
+    overflow-y: auto;
+}
+#perfilPasswordContainer{
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+}
