@@ -10,10 +10,13 @@ import HelpIcon from '@mui/icons-material/Help';
 import PersonIcon from '@mui/icons-material/Person';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Logo } from "../../logo/Logo";
-import PerfilTeacher from "../../teacherPerfil/perfilTeacher"
+
+import PerfilTeacher from "../../teacherPerfil/perfilTeacher";
+import Info from "../../info/Info"
 
 import "./mainMenu.css";
 import { useEffect, useState } from 'react';
+
 
 
 
@@ -28,6 +31,8 @@ export function MainMenu() {
     const [user, setUser] = useState("Esperando...");
     const [userid, setUserid] = useState();
     const [openPerfil, setOpenPerfil] = useState(false);
+    const [openInfo, setOpenInfo] = useState(false);
+
 
     const toggleDrawer = (anchor, open) => (event) => {
         if (
@@ -45,6 +50,7 @@ export function MainMenu() {
         fetch("/logout");
         window.location.reload(true);
     }
+    
 
     useEffect(()=>{
         fetch("/getUserName").then(e=> e.json())
@@ -77,7 +83,7 @@ export function MainMenu() {
                         <ListItemIcon>
                             <HelpIcon/>
                         </ListItemIcon>
-                        <ListItemText primary="Ayuda" />
+                        <ListItemText primary="Información" onClick={()=>{setOpenInfo(true)}} />
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding >
@@ -93,6 +99,8 @@ export function MainMenu() {
     );
     return <>
         <PerfilTeacher open={openPerfil} setOpen = {setOpenPerfil} userID={1}/>
+        <Info open={openInfo} setOpen={setOpenInfo}/>
+
         <React.Fragment key={"left"}>
             <label id="logoContainer" onClick={toggleDrawer("left", true)}>
                 <Logo />

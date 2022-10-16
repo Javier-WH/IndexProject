@@ -23,3 +23,25 @@
     align-items: center;
     column-gap: 20px;
 }
+#ciGenContainer{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
+}
+#perfilXcontainer{
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+#perfilX{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    color: var(--mainColor);
+    cursor: pointer;
+}
+
+@media (max-width: 560px) {
+    #perfilBOX{
+        width: 97% !important;
+    }
+}
