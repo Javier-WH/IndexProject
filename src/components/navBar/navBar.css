@@ -43,3 +43,35 @@
 .NavBarIcon:hover{
     filter: drop-shadow(0 0 3px white);
 }
+
+/**/
+#print{
+    position: absolute;
+    z-index: -10000;
+    width: 21.59cm;
+    height: 27.94cm;
+    background-color: white;
+}
+#printTitleContainer{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    align-items: center;
+    margin-top: 3mm;
+}
+#printLogo{
+    width: 5cm;
+}
+.printTitle{
+    font-size: 18px;
+}
+#printThead{
+    background-color: transparent;
+    border: 1px solid black;
+}
+#printTable{
+    width: 19cm;
+    max-height: 19cm;
+    margin-left: 1cm;
+    margin-top: 1cm;
+}
