@@ -46,7 +46,6 @@ export function DataContainer({log}) {
                     text: response.error
                 })
             }else{
-              
                 log(response.code)
             }
         }
