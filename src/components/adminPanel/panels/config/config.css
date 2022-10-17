@@ -1,0 +1,12 @@
+#periodContainer{
+    margin-top: 20px;
+    display: flex;
+    column-gap: 20px;
+    align-items: stretch;
+}
+.input{
+    margin-top: 20px;
+    display: flex;
+    column-gap: 20px;
+    align-items: stretch;
+}

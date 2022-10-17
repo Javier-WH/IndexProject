@@ -6,6 +6,10 @@ import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 
+import Config from "./panels/config/config"
+import Inscription from './panels/studentsInscription/Student';
+
+
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
 ))(({ theme }) => ({
@@ -56,6 +60,25 @@ export default function CustomizedAccordions() {
           <Typography>Configuración</Typography>
         </AccordionSummary>
         <AccordionDetails>
+              <Config/>
+        </AccordionDetails>
+      </Accordion>
+
+
+      <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
+        <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
+          <Typography>Inscribir Estudiante</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+            <Inscription/>
+        </AccordionDetails>
+      </Accordion>
+
+      <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
+        <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
+          <Typography>Inscribir Representante</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
           <Typography>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
             malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor
@@ -65,10 +88,9 @@ export default function CustomizedAccordions() {
         </AccordionDetails>
       </Accordion>
 
-
-      <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
-        <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
-          <Typography>Inscripciones</Typography>
+      <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
+        <AccordionSummary aria-controls="panel4d-content" id="panel4d-header">
+          <Typography>Inscribir docente</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
@@ -81,8 +103,8 @@ export default function CustomizedAccordions() {
       </Accordion>
 
 
-      <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
-        <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
+      <Accordion expanded={expanded === 'panel5'} onChange={handleChange('panel5')}>
+        <AccordionSummary aria-controls="panel5d-content" id="panel5d-header">
           <Typography>Reportes</Typography>
         </AccordionSummary>
         <AccordionDetails>
