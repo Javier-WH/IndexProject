@@ -98,7 +98,7 @@ export function MainMenu() {
         </Box>
     );
     return <>
-        <PerfilTeacher open={openPerfil} setOpen = {setOpenPerfil} userID={1}/>
+        <PerfilTeacher open={openPerfil} setOpen = {setOpenPerfil} setName = {setUser} userID={1}/>
         <Info open={openInfo} setOpen={setOpenInfo}/>
 
         <React.Fragment key={"left"}>

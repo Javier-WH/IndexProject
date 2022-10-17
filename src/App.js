@@ -7,7 +7,7 @@ import "./login.css";
 
 function App() {
 
-  const [logType, setLogType] = useState(1);
+  const [logType, setLogType] = useState(0);
 
   if (logType === 1) {
     return <>
