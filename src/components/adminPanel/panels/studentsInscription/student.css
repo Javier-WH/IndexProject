@@ -1,12 +1,14 @@
+/*#InscriptionContainer{
+    height: 400px;
+    overflow-y: auto;
+}*/
 #divCi{
     display: flex;
     column-gap: 20px;
 }
-#auxContainer{
+.auxContainer{
     display: flex;
-    flex-direction: column;
-    row-gap: 20px;
-    width: 500px;
+    column-gap: 20px;
     margin-top: 20px
 }
 #studentDataContainer{
@@ -14,4 +16,75 @@
     flex-direction: column;
     column-gap: 20px;
     row-gap: 20px;
+}
+.list{
+    position: relative;
+    border: 1px solid var(--secondaryColor);
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 10px;
+}
+.list::after{
+    position: absolute;
+    content: "";
+    left: 20px;
+    top: -10px;
+    background-color: white;
+    color:var(--secondaryColor);
+}
+#requisites::after{
+    content: "Documentos";
+}
+#socialNetworking::after{
+    content: "Redes Sociales";
+}
+#adress,
+#familly{
+    flex-direction: column;
+    row-gap: 10px;
+}
+#familly::after{
+    content: "Datos Familiares";
+}
+#adress::after{
+    content: "Datos Domiciliarios";
+}
+#studentBody::after{
+    content: "Datos Antropométricos";
+}
+
+#medicalData::after{
+    content: "Datos Médicos";
+}
+#houseData{
+    flex-direction: column;
+}
+#houseData::after{
+    content: "Vivienda";
+}
+#emergency{
+    flex-direction: column;
+    row-gap: 20px;
+}
+#emergency::after{
+    content: "Contacto de emergencia";
+}
+#resourses::after{
+    content: "Recursos Tecnológicos";
+}
+#documents{
+    flex-direction: column;
+    row-gap: 20px;
+}
+#documents::after{
+    content: "Documentos";
+}
+#tutor{
+    flex-direction: column;
+    row-gap: 20px;
+}
+#tutor::after{
+    content: "Representante legal del estudiante";
 }
