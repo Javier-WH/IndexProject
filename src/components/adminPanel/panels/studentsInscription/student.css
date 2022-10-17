@@ -2,3 +2,16 @@
     display: flex;
     column-gap: 20px;
 }
+#auxContainer{
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    width: 500px;
+    margin-top: 20px
+}
+#studentDataContainer{
+    display: flex;
+    flex-direction: column;
+    column-gap: 20px;
+    row-gap: 20px;
+}
