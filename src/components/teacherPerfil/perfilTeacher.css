@@ -17,6 +17,8 @@
     width: 90%;
     margin-left: 20px;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
 }
 #perfilPasswordContainer{
     display: flex;
@@ -38,6 +40,16 @@
     font-weight: 500;
     color: var(--mainColor);
     cursor: pointer;
+}
+.teacheSubject{
+    color: var(--mainColor);
+    padding: 5px 0;
+    border: 1px solid var(--secondaryColor);
+}
+.teacheSubject:hover{
+    color: white;
+    background-color: var(--mainColor);
+
 }
 
 @media (max-width: 560px) {
