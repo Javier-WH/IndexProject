@@ -4,11 +4,15 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import {updateTeacherData} from "../../fetch/updateTeacherData"
+import {MainContext} from "../../context/MainContext"
 
+export default function BasicModal({ open, setOpen, userID, setName }) {
 
+  const { setMessage } = useContext(MainContext);
+  const [subjects, setSubjects] = useState([]); 
 
-export default function BasicModal({ open, setOpen, userID }) {
   const [names, setNames] = useState();
   const [lastNames, setLastNames] = useState();
   const [ci, setCi] = useState();
@@ -43,10 +47,25 @@ export default function BasicModal({ open, setOpen, userID }) {
   }
   
   function handleSave(){
-    
-    console.log("Datos guardados");
+    let data = {
+      id: userID,
+      names,
+      lastNames,
+      ci,
+      gender,
+      email,
+      phone
+    }
+    updateTeacherData(data)
+    .then(response =>{
+      if(response.error){
+        setMessage({state: true, type: "error", message: response.error})
+      }else{
+        setName(`${names} ${lastNames}`);
+        setMessage({state: true, type: "success", message:"Los datos se han actualizado con exito"})
+      }
+    })
     setOpen(false);
-    
   }
   
   const style = {
@@ -75,6 +94,21 @@ export default function BasicModal({ open, setOpen, userID }) {
       setEmail(data.email);
       setPhone(data.phone);
     })
+
+    fetch("/teacherSubjects").then(response => response.json())
+    .then(teacherData => {
+      let data = teacherData[0]
+      let keys = Object.keys(data);
+      
+
+      let cleanSubjects = keys.map(sub=>{
+         let obj = data[sub].map(sec=>{
+              return `${sub} ${sec}`
+          })
+          return obj
+      })
+      setSubjects(cleanSubjects.flat())
+    });
 
   },[])
 
@@ -106,7 +140,14 @@ export default function BasicModal({ open, setOpen, userID }) {
             </div>
             <div id="perfilSubjectContainer">
               <label id='perfilSubjectTitle'>Materias asignadas</label>
-              <div id="subjectBox"></div>
+              <div id="subjectBox">
+                  {
+                    subjects.map(subject=>{
+                        return <div className="teacheSubject"> {subject}</div>
+                    })
+                  }
+
+              </div>
             </div>
             <Button variant="outlined" onClick={handleSave}>Aceptar</Button>
           </div>
