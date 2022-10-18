@@ -13,8 +13,18 @@ import SendIcon from '@mui/icons-material/Send';
 import Tooltip from '@mui/material/Tooltip';
 import "./student.css"
 import { useState } from 'react';
+import Message from "../../message/Message"
+
 
 export default function Inscription() {
+
+  
+
+    const [openMessage, setOpenMessage] = useState(false);
+    const [messageParams, setMessageParams] = useState({
+        type:"success",
+        message:"Wololooo"
+    })
     const [ci, setCi] = useState("");
     const [haveCi, setHaveCi] = useState(true);
     const [grade, setGrade] = useState("1");
@@ -87,6 +97,7 @@ export default function Inscription() {
     const [smarthPhone, setSmarthPhone] = useState(false);
     const [pc, setPC] = useState(false);
     const [becas, setBecas] = useState(false);
+    const [becaName, setBecaName]= useState("")
     const [studentPatriaCode, setStudentPatriaCode] = useState("");
     const [studentPatriaSerial, setStudentPatriaSerial] = useState("");
     const [tutorName, setTutorName] = useState("");
@@ -103,7 +114,10 @@ export default function Inscription() {
     const [tutorBankAux, setTutorBankAux] = useState("");
     const [tutorBankAccounType, setTutorBankAccounType] = useState("corriente");
     const [tutorBankAccoun, setTutorBankAccoun] = useState("");
-
+   
+    const handleBecaName = (event) => {
+        setBecaName(event.target.value)
+    }
 
     const handleTutorBankAccoun = (event)=>{
         setTutorBankAccoun(event.target.value);
@@ -337,7 +351,7 @@ export default function Inscription() {
         setNames(event.target.value)
     }
     const handlePeriod = (event) => {
-        setPeriodo(event.target.value);
+       setPeriodo(event.target.value);
     }
     const handleHaveCi = (event) => {
         setHaveCi(!event.target.checked);
@@ -378,8 +392,276 @@ export default function Inscription() {
         setTutorNation(event.target.value);
     };
 
+    function checkMissingData(){
+
+        if(ci === ""){
+            return "Cédula"
+        }
+        if(period === ""){
+            return "Peíodo escolar"
+        }
+        if(names === ""){
+            return "Nombres del estudiante"
+        }
+        if(lastNames === ""){
+            return "Apellidos del estudiante"
+        }
+        if(studentPhone === ""){
+            return "Teléfono del estudiante"
+        }
+        if(studenEmail === ""){
+            return "Email del estudiante"
+        }
+        if(previusSchool === ""){
+            return "Escuela anterior del estudiante"
+        }
+        if(birthPlace === ""){
+            return "Lugar de nacimiento del estudiante"
+        }
+        if(facebook === ""){
+            return "Facebook"
+        }
+        if(twitter === ""){
+            return "Twitter"
+        }
+        if(whatsapp === ""){
+            return "Whatsapp"
+        }
+        if(tikTok === ""){
+            return "TikTok"
+        }
+        if(instagram === ""){
+            return "Instagram"
+        }
+        if(motherName === ""){
+            return "Nombre de la Madre"
+        }
+        if(motherLastName === ""){
+            return "Apellido de la Madre"
+        }
+        if(motherCi === ""){
+            return "Cédula de la Madre"
+        }
+        if(motherPhone === ""){
+            return "Teléfono de la Madre"
+        }
+        if(fatherName === ""){
+            return "Nombre del Padre"
+        }
+        if(fatherLastName === ""){
+            return "Apellido del Padre"
+        }
+        if(fatherCi === ""){
+            return "Cédula del Padre"
+        }
+        if(fatherPhone === ""){
+            return "Teléfono del Padre"
+        }
+        if(siblinsNumber === ""){
+            return "Número de hermanos"
+        }
+        if(municipio === ""){
+            return "Municipio"
+        }
+        if(parroquia === ""){
+            return "Parroquia"
+        }
+        if(town === ""){
+            return "Población"
+        }
+        if(urbanizacion === ""){
+            return "Urbanización"
+        }
+        if(stdAddres === ""){
+            return "Dirección del Estudiante"
+        }
+        if(whoLive === ""){
+            return "¿Con quien vives?"
+        }
+        if(weight === ""){
+            return "Peso"
+        }
+        if(height === ""){
+            return "Estatura"
+        }
+        if(chessSize === ""){
+            return "Talla de la Camisa"
+        }
+        if(pantsSize === ""){
+            return "Talla del Pantalón"
+        }
+        if(feetSize === ""){
+            return "Talla de los Zapatos"
+        }
+        if(gravidez === "y" && pregnancyTime === ""){
+            return "Tiempo de embarazo"
+        }
+        if(drugAllegies === ""){
+            return "Alergia a algun medicamento"
+        }
+        if(foodAllegies === ""){
+            return "Alergia a algun alimento"
+        }
+        if(emergencyName === ""){
+            return "Nombre de contacto de emergencias"
+        }
+        if(emergencyPhone === ""){
+            return "Teléfono de contacto de emergencias"
+        }
+        if(emergencyRelation ===""){
+            return "Relación con el contacto de emergencias"
+        }
+        if(becas && becaName === ""){
+            return "Nombre de la beca"
+        }
+        if(studentPatriaCode === ""){
+            return "Código del carnet de la patria del estudiante"
+        }
+        if(studentPatriaSerial === ""){
+            return "Serial del carnet de la patria del estudiante"
+        }
+        if(tutorName === ""){
+            return "Nombre del Tutor"
+        }
+        if(tutorLastName ===""){
+            return "Apellido del Tutor"
+        }
+        if(tutorCi === ""){
+            return "Cédula del tutor"
+        }
+        if(tutorPhone === ""){
+            return "Teléfono del tutor"
+        }
+        if(tutorEmail === ""){
+            return "Email del tutor"
+        }
+        if(tutorAddress === ""){
+            return "Dirección del tutor"
+        }
+        if(tutorPatriaCode === ""){
+            return "Código del carnet de la patria del tutor"
+        }
+        if(tutorPatriaSrial === ""){
+            return "Serial del carnet de la patria del tutor"
+        }
+        if(tutorBank === "Otro" && tutorBankAux === ""){
+            return "Banco del tutor"
+        }
+        if(tutorBankAccoun === ""){
+            return "Cuenta bancaria del tutor"
+        }
+        return "none";
+    }
+
+    function getData(){
+        return {
+            ci,
+            names,
+            lastNames,
+            birthdate :date,
+            studentPhone,
+            studenEmail,
+            grade,
+            seccion,
+            period,
+            previusSchool,
+            birthCountry: nation,
+            birthState,
+            birthPlace,
+            nationality,
+            married,
+            gender,
+            birthAct,
+            birthActCopy,
+            _ci,
+            photos,
+            gradesCertificate,
+            gradesCertificateCopy,
+            canainaRecipe,
+            sixGrade,
+            facebook,
+            twitter,
+            tikTok,
+            instagram,
+            motherName,
+            motherLastName,
+            motherCi,
+            motherPhone,
+            fatherName,
+            fatherLastName,
+            fatherCi,
+            fatherPhone,
+            siblinsNumber,
+            parroquia,
+            town,
+            urbanizacion,
+            stdAddres,
+            whoLive,
+            weight,
+            height,
+            chessSize,
+            pantsSize,
+            feetSize,
+            gravidez,
+            pregnancyTime,
+            influenza,
+            asma,
+            diabetes,
+            epilepsia,
+            tension,
+            harth,
+            drugAllegies,
+            foodAllegies,
+            houseType,
+            houseCondition,
+            emergencyName,
+            emergencyPhone,
+            emergencyRelation,
+            canaima,
+            tablet,
+            smarthPhone,
+            pc,
+            becas,
+            becaName,
+            studentPatriaCode,
+            studentPatriaSerial,
+            tutorName,
+            tutorLastName,
+            tutorCi,
+            tutorNationality,
+            tutorInstruction,
+            tutorPhone,
+            tutorEmail,
+            tutorAddress,
+            tutorPatriaCode,
+            tutorPatriaSrial,
+            tutorBank,
+            tutorBankAux,
+            tutorBankAccounType,
+            tutorBankAccoun
+        }
+    }
+
+
+    function handleSendData(){
+        let missingData = checkMissingData();
+        if(missingData !== "none"){
+            setMessageParams({type:"error", message: `No ha suministrado el campo: ${missingData}`})
+            setOpenMessage(true)
+        }else{
+            let data = getData();
+
+
+            setMessageParams({type:"success", message: `Se ha inscrito satisfactoriamente al estudiante`})
+            setOpenMessage(true)
+        }
+    }
+
+
+
     let countryKey = 0;
     return <div id="InscriptionContainer">
+        <Message open={openMessage} setOpen={setOpenMessage} data ={messageParams}/>
         <div id="divCi">
             <div id='ciContainer'>
                 <TextField id="outlined-basic" label={haveCi ? "Cédula" : "Cédula provicional"} variant="outlined" type="number" autoComplete='off' value={ci} onChange={handleCi} />
@@ -453,8 +735,8 @@ export default function Inscription() {
                     </Select>
                 </FormControl>
 
-                <TextField id="outlined-basic" className='period' label="Inicio perido escolar" variant="outlined" autoComplete='off' type="number" value={period} onChange={handlePeriod} />
-                <TextField id="outlined-basic" className='period' label="Fin perido escolar" variant="outlined" autoComplete='off' value={Number.parseInt(period) + 1}/>
+                <TextField id="outlined-basic" className='period' label="Inicio perído escolar" variant="outlined" autoComplete='off' type="number" value={period} onChange={handlePeriod} />
+                <TextField id="outlined-basic" className='period' label="Fin período escolar" variant="outlined" autoComplete='off' value={isNaN(Number.parseInt(period)) ? " " : Number.parseInt(period) + 1}/>
 
             </div>
             <TextField id="outlined-basic" label="Institución Anterior" variant="outlined" autoComplete='off' value={previusSchool} onChange = {handlePreviusSchool}/>
@@ -710,7 +992,7 @@ export default function Inscription() {
 
             <div id="documents" className='list'>
                 <FormControlLabel control={<Checkbox checked={becas} onChange={handleBecas} />} label="Tiene becas" />
-                <TextField id="outlined-basic" className={becas ? "" : "invisible"} label="Nombre de la beca" variant="outlined" autoComplete='off' />
+                <TextField id="outlined-basic" value={becaName} onChange={handleBecaName} className={becas ? "" : "invisible"} label="Nombre de la beca" variant="outlined" autoComplete='off' />
                 <TextField id="outlined-basic" value={studentPatriaCode} onChange={handleStudentPatriaCode} label="Código del carnet de la patria" variant="outlined" type="number" autoComplete='off' />
                 <TextField id="outlined-basic" value={studentPatriaSerial} onChange={handleStudentPatriaSerial} label="Serial del carnet de la patria" variant="outlined" type="number" autoComplete='off' />
             </div>
@@ -812,7 +1094,7 @@ export default function Inscription() {
                 <TextField id="outlined-basic" value={tutorBankAccoun} onChange={handleTutorBankAccoun} label="Cuenta Bancaría del Representante" type="number" variant="outlined" autoComplete='off' />
 
             </div>
-            <Button variant="contained" endIcon={<SendIcon />}>Inscribir</Button>
+            <Button variant="contained" endIcon={<SendIcon />} onClick = {handleSendData}>Inscribir</Button>
             <br />
 
         </div>
