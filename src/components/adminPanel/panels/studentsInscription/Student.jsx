@@ -37,11 +37,272 @@ export default function Inscription() {
     const [gender, setGender] = useState("f");
     const [birthAct, setBirthAct] = useState(false);
     const [birthActCopy, setBirthActCopy] = useState(false);
+    const [_ci, _setCi ] = useState(false);
+    const [photos, setPhotos ] = useState(false);
+    const [gradesCertificate, setGradesCertificate] = useState(false);
+    const [gradesCertificateCopy, setGradesCertificateCopy] = useState(false);
+    const [canainaRecipe, setCanainaRecipe] = useState(false);
+    const [sixGrade, setSixGrade] = useState(false);
+    const [facebook, setFacebook] = useState("");
+    const [twitter, setTwitter] = useState("");
+    const [whatsapp, setWhatsapp] = useState("");
+    const [tikTok, setTikTok] = useState("");
+    const [instagram, setInstagram] = useState("");
+    const [motherName, setMotherName] = useState("");
+    const [motherLastName, setMotherLastName] = useState("");
+    const [motherCi, setMotherCi] = useState("");
+    const [motherPhone, setMotherPhone] = useState("");
+    const [fatherName, setFatherName] = useState("");
+    const [fatherLastName, setFatherLastName] = useState("");
+    const [fatherCi, setFatherCi] = useState("");
+    const [fatherPhone, setFatherPhone] = useState("");
+    const [siblinsNumber, setSiblinsNumer] = useState("");
+    const [parroquia, setParroquia] = useState("");
+    const [town, setTown] = useState("");
+    const [urbanizacion, setUrbanizacion] = useState("");
+    const [stdAddres, setStdAddress] = useState("");
+    const [whoLive, setWhoLive] = useState("");
+    const [weight, setWeight] = useState("");
+    const [height, setheight] = useState("");
+    const [chessSize, setChessSize] = useState("");
+    const [pantsSize, setPantsSize] = useState("");
+    const [feetSize, setFeetSize] = useState("");
+    const [gravidez, setGravidez] = useState("n");
+    const [pregnancyTime, setPregnancyTime] = useState("");
+    const [influenza, setInflueza] = useState(false);
+    const [asma, setAsma] = useState(false);
+    const [diabetes, setDiabetes] = useState(false);
+    const [epilepsia, setEpilepsia] = useState(false);
+    const [tension, setTension] = useState(false);
+    const [harth, setHarth] = useState(false);
+    const [drugAllegies, setDrugAllergies] = useState("");
+    const [foodAllegies, setFoodAllergies] = useState("");
+    const [houseType, setHouseType] = useState("CasaFamiliar");
+    const [houseCondition, setHouseCondition] = useState("Media");
+    const [emergencyName, setEmergencyName] = useState("");
+    const [emergencyPhone, setEmergencyPhone] = useState("");
+    const [emergencyRelation, setEmergencyRelation] = useState("");
+    const [canaima, setCanaima] = useState(false);
+    const [tablet, setTablet] = useState(false);
+    const [smarthPhone, setSmarthPhone] = useState(false);
+    const [pc, setPC] = useState(false);
+    const [becas, setBecas] = useState(false);
+    const [studentPatriaCode, setStudentPatriaCode] = useState("");
+    const [studentPatriaSerial, setStudentPatriaSerial] = useState("");
+    const [tutorName, setTutorName] = useState("");
+    const [tutorLastName, setTutorLastName] = useState("");
+    const [tutorCi, setTutorCi] = useState("");
+    const [tutorNationality, setTutorNationality] = useState("v");
+    const [tutorInstruction, setTutorInstruction] = useState("3");
+    const [tutorPhone, setTutorPhone] = useState("");
+    const [tutorEmail, setTutorEmail] = useState("");
+    const [tutorAddress, setTutorAddress] = useState("");
+    const [tutorPatriaCode, setTutorPatriaCode] = useState("");
+    const [tutorPatriaSrial, setTutorPatriaSrial] = useState("");
+    const [tutorBank, setTutorBank] = useState("BANCO DE VENEZUELA, S.A. BANCO UNIVERSAL.");
+    const [tutorBankAux, setTutorBankAux] = useState("");
+    const [tutorBankAccounType, setTutorBankAccounType] = useState("corriente");
+    const [tutorBankAccoun, setTutorBankAccoun] = useState("");
 
 
-
-
-
+    const handleTutorBankAccoun = (event)=>{
+        setTutorBankAccoun(event.target.value);
+    }
+    const handleTutorBankAccounType = (event)=>{
+        setTutorBankAccounType(event.target.value);
+    }
+    const handleTutorBankAux = (event)=>{
+        setTutorBankAux(event.target.value);
+    }
+    const handleTutorBank = (event)=>{
+        setTutorBank(event.target.value);
+    }
+    const handleTutorPatriaSrial = (event)=>{
+        setTutorPatriaSrial(event.target.value);
+    }
+    const handleTutorPatriaCode = (event)=>{
+        setTutorPatriaCode(event.target.value);
+    }
+    const handleTutorAddress = (event)=>{
+        setTutorAddress(event.target.value);
+    }
+    const handleTutorEmail = (event)=>{
+        setTutorEmail(event.target.value);
+    }
+    const handleTutorPhone = (event)=>{
+        setTutorPhone(event.target.value);
+    }
+    const handleTutorInstruction = (event)=>{
+        setTutorInstruction(event.target.value);
+    }
+    const handleTutorNationality = (event)=>{
+        setTutorNationality(event.target.value);
+    }
+    const handleTutorCi = (event)=>{
+        setTutorCi(event.target.value);
+    }
+    const handleTutorLastName = (event)=>{
+        setTutorLastName(event.target.value);
+    }
+    const handleTutorName = (event)=>{
+        setTutorName(event.target.value);
+    }
+    const handleStudentPatriaSerial = (event)=>{
+        setStudentPatriaSerial(event.target.value);
+    }
+    const handleStudentPatriaCode = (event)=>{
+        setStudentPatriaCode(event.target.value);
+    }
+    const handleBecas = (event)=>{
+        setBecas(event.target.checked);
+    }
+    const handlePC = (event)=>{
+        setPC(event.target.checked);
+    }
+    const handleSmarthPhone = (event)=>{
+        setSmarthPhone(event.target.checked);
+    }
+    const handleTablet = (event)=>{
+        setTablet(event.target.checked);
+    }
+    const handleCanaima = (event)=>{
+        setCanaima(event.target.checked);
+    }
+    const handleEmergencyRelation = (event)=>{
+        setEmergencyRelation(event.target.value);
+    }
+    const handleEmergencyPhone = (event)=>{
+        setEmergencyPhone(event.target.value);
+    }
+    const handleEmergencyName = (event)=>{
+        setEmergencyName(event.target.value);
+    }
+    const handleHouseCondition = (event)=>{
+        setHouseCondition(event.target.value);
+    }
+    const handleHouseType = (event)=>{
+        setHouseType(event.target.value);
+    }
+    const handleFoodAllergies = (event)=>{
+        setFoodAllergies(event.target.value);
+    }
+    const handleDrugAllergies = (event)=>{
+        setDrugAllergies(event.target.value);
+    }
+    const handleHarth = (event)=>{
+        setHarth(event.target.checked);
+    }
+    const handleTension = (event)=>{
+        setTension(event.target.checked);
+    }
+    const handleEpilepsia = (event)=>{
+        setEpilepsia(event.target.checked);
+    }
+    const handleDiabetes = (event)=>{
+        setDiabetes(event.target.checked);
+    }
+    const handleAsma = (event)=>{
+        setAsma(event.target.checked);
+    }
+    const handleInflueza = (event)=>{
+        setInflueza(event.target.checked);
+    }
+    const handlePregnancyTime = (event)=>{
+        setPregnancyTime(event.target.value);
+    }
+    const handleGravidez = (event)=>{
+        setGravidez(event.target.value);
+    }
+    const handleFeetSize = (event)=>{
+        setFeetSize(event.target.value);
+    }
+    const handlePantsSize = (event)=>{
+        setPantsSize(event.target.value);
+    }
+    const handleChessSize = (event)=>{
+        setChessSize(event.target.value);
+    }
+    const handleHeight = (event)=>{
+        setheight(event.target.value);
+    }
+    const handleWeight = (event)=>{
+        setWeight(event.target.value);
+    }
+    const handleWhoLive = (event)=>{
+        setWhoLive(event.target.value);
+    }
+    const handleStdAddress = (event)=>{
+        setStdAddress(event.target.value);
+    }
+    const handleUrbanizacion = (event)=>{
+        setUrbanizacion(event.target.value);
+    }
+    const handleTown = (event)=>{
+        setTown(event.target.value);
+    }
+    const handleParroquia = (event)=>{
+        setParroquia(event.target.value);
+    }
+    const handleSiblinsNumer = (event)=>{
+        setSiblinsNumer(event.target.value);
+    }
+    const handleFatherPhone = (event)=>{
+        setFatherPhone(event.target.value);
+    }
+    const handleFatherCi = (event)=>{
+        setFatherCi(event.target.value);
+    }
+    const handleFatherLastName = (event)=>{
+        setFatherLastName(event.target.value);
+    }
+    const handleFatherName = (event)=>{
+        setFatherName(event.target.value);
+    }
+    const handleMotherPhone = (event)=>{
+        setMotherPhone(event.target.value);
+    }
+    const handleMotherCi = (event)=>{
+        setMotherCi(event.target.value);
+    }
+    const handleLastMotherName = (event)=>{
+        setMotherLastName(event.target.value);
+    }
+    const handleMotherName = (event)=>{
+        setMotherName(event.target.value);
+    }
+    const handleInstagram = (event)=>{
+        setInstagram(event.target.value);
+    }
+    const handleTikTok = (event)=>{
+        setTikTok(event.target.value);
+    }
+    const handleWhatsapp = (event)=>{
+        setWhatsapp(event.target.value);
+    }
+    const handleTwitter = (event)=>{
+        setTwitter(event.target.value);
+    }
+    const handleFacebook = (event)=>{
+        setFacebook(event.target.value);
+    }
+    const handleSixGrade = (event)=>{
+        setSixGrade(event.target.checked);
+    }
+    const handleCanainaRecipe = (event)=>{
+        setCanainaRecipe(event.target.checked);
+    }
+    const handleGradesCertificateCopy = (event)=>{
+        setGradesCertificateCopy(event.target.checked);
+    }
+    const handleGradesCertificate = (event)=>{
+        setGradesCertificate(event.target.checked);
+    }
+    const handlePhotos = (event)=>{
+        setPhotos(event.target.checked);
+    }
+    const handle_ci = (event)=>{
+        _setCi(event.target.checked);
+    }
     const handleBirthActCopy = (event)=>{
         setBirthActCopy(event.target.checked);
     }
@@ -63,26 +324,21 @@ export default function Inscription() {
     const handleStudentEmail = (event)=>{
         setStudenEmail(event.target.value);
     }
-
     const handleStudentPhone = (event) =>{
         setStudentPhone(event.target.value);
     }
-
     const handleDate = (event)=>{
         setDate(event.target.value);
     }
-
     const handleLastNames = (event)=>{
         setLastNames(event.target.value)
     }
     const handleNames = (event)=>{
         setNames(event.target.value)
     }
-
     const handlePeriod = (event) => {
         setPeriodo(event.target.value);
     }
-
     const handleHaveCi = (event) => {
         setHaveCi(!event.target.checked);
         if (event.target.checked) {
@@ -303,28 +559,30 @@ export default function Inscription() {
             <div id="requisites" className='list'>
                 <FormControlLabel control={<Checkbox checked={birthAct} onChange={handleBirthAct} />} label="Partida de nacimiento original" />
                 <FormControlLabel control={<Checkbox checked={birthActCopy} onChange={handleBirthActCopy}/>} label="Partida de nacimiento copia" />
-                <FormControlLabel control={<Checkbox />} label="Cédula de identidad" />
-                <FormControlLabel control={<Checkbox />} label="Fotos tipo carnet" />
-                <FormControlLabel control={<Checkbox />} label="Certificado de calificaciones original" />
-                <FormControlLabel control={<Checkbox />} label="Certificado de calificaciones copia" />
-                <FormControlLabel control={<Checkbox />} label="Constancia de no poseer canaima" />
-                <FormControlLabel control={<Checkbox />} label="Boleta de promocion de 6to grado" />
+                <FormControlLabel control={<Checkbox checked={_ci} onChange={handle_ci} />} label="Cédula de identidad" />
+                <FormControlLabel control={<Checkbox checked={photos} onChange={handlePhotos}/>} label="Fotos tipo carnet" />
+                <FormControlLabel control={<Checkbox checked={gradesCertificate} onChange={handleGradesCertificate}/>} label="Certificado de calificaciones original" />
+                <FormControlLabel control={<Checkbox checked={gradesCertificateCopy} onChange={handleGradesCertificateCopy}/>} label="Certificado de calificaciones copia" />
+                <FormControlLabel control={<Checkbox checked={canainaRecipe} onChange={handleCanainaRecipe}/>} label="Constancia de no poseer canaima" />
+                <FormControlLabel control={<Checkbox />} checked={sixGrade} onChange={handleSixGrade} label="Boleta de promocion de 6to grado" />
             </div>
             <div id="socialNetworking" className='list'>
-                <TextField id="outlined-basic" label="Facebook" variant="outlined" autoComplete='off' />
-                <TextField id="outlined-basic" label="Twitter" variant="outlined" autoComplete='off' />
-                <TextField id="outlined-basic" label="Whatsapp" variant="outlined" autoComplete='off' />
-                <TextField id="outlined-basic" label="TikTok" variant="outlined" autoComplete='off' />
-                <TextField id="outlined-basic" label="Instagram" variant="outlined" autoComplete='off' />
+                <TextField id="outlined-basic" label="Facebook" value={facebook} onChange={handleFacebook} variant="outlined" autoComplete='off' />
+                <TextField id="outlined-basic" label="Twitter" value={twitter} onChange={handleTwitter} variant="outlined" autoComplete='off' />
+                <TextField id="outlined-basic" label="Whatsapp" value={whatsapp} onChange={handleWhatsapp} variant="outlined" autoComplete='off' />
+                <TextField id="outlined-basic" label="TikTok" value={tikTok} onChange={handleTikTok} variant="outlined" autoComplete='off' />
+                <TextField id="outlined-basic" label="Instagram" value={instagram} onChange={handleInstagram} variant="outlined" autoComplete='off' />
             </div>
             <div id="familly" className='list'>
-                <TextField id="outlined-basic" label="Nombres de la Madre" variant="outlined" autoComplete='off' />
-                <TextField id="outlined-basic" label="Cédula de la Madre" variant="outlined" type="number" autoComplete='off' />
-                <TextField id="outlined-basic" label="Télefono de la Madre" variant="outlined" type="number" autoComplete='off' />
-                <TextField id="outlined-basic" label="Nombres de el Padre" variant="outlined" autoComplete='off' />
-                <TextField id="outlined-basic" label="Cédula de el Padre" variant="outlined" type="number" autoComplete='off' />
-                <TextField id="outlined-basic" label="Télefono de el Padre" variant="outlined" type="number" autoComplete='off' />
-                <TextField id="outlined-basic" label="Numero de hermanos" variant="outlined" type="number" autoComplete='off' />
+                <TextField id="outlined-basic" label="Nombres de la Madre" value={motherName} onChange={handleMotherName} variant="outlined" autoComplete='off' />
+                <TextField id="outlined-basic" label="Apellidos de la Madre" value={motherLastName} onChange={handleLastMotherName} variant="outlined" autoComplete='off' />
+                <TextField id="outlined-basic" label="Cédula de la Madre" value={motherCi} onChange={handleMotherCi} variant="outlined" type="number" autoComplete='off' />
+                <TextField id="outlined-basic" label="Télefono de la Madre" value={motherPhone} onChange={handleMotherPhone} variant="outlined" type="number" autoComplete='off' />
+                <TextField id="outlined-basic" label="Nombres de el Padre" value={fatherName} onChange={handleFatherName} variant="outlined" autoComplete='off' />
+                <TextField id="outlined-basic" label="Apellidos de el Padre" value={fatherLastName} onChange={handleFatherLastName} variant="outlined" autoComplete='off' />
+                <TextField id="outlined-basic" label="Cédula de el Padre" value={fatherCi} onChange={handleFatherCi} variant="outlined" type="number" autoComplete='off' />
+                <TextField id="outlined-basic" label="Télefono de el Padre" value={fatherPhone} onChange={handleFatherPhone} variant="outlined" type="number" autoComplete='off' />
+                <TextField id="outlined-basic" label="Numero de hermanos" value={siblinsNumber} onChange={handleSiblinsNumer} variant="outlined" type="number" autoComplete='off' />
             </div>
             <div id="adress" className='list'>
                 <FormControl fullWidth>
@@ -360,18 +618,18 @@ export default function Inscription() {
                     </Select>
                 </FormControl>
 
-                <TextField id="outlined-basic" label="Parroquia" variant="outlined" autoComplete='off' />
-                <TextField id="outlined-basic" label="Poblacíon" variant="outlined" autoComplete='off' />
-                <TextField id="outlined-basic" label="Urbanización" variant="outlined" autoComplete='off' />
-                <TextField id="outlined-basic" label="Dirección" variant="outlined" type="number" autoComplete='off' />
-                <TextField id="outlined-basic" label="¿Con quien vives?" variant="outlined" autoComplete='off' />
+                <TextField id="outlined-basic" label="Parroquia" value={parroquia} onChange ={handleParroquia} variant="outlined" autoComplete='off' />
+                <TextField id="outlined-basic" label="Poblacíon" value={town} onChange ={handleTown} variant="outlined" autoComplete='off' />
+                <TextField id="outlined-basic" label="Urbanización" value={urbanizacion} onChange ={handleUrbanizacion} variant="outlined" autoComplete='off' />
+                <TextField id="outlined-basic" label="Dirección" value={stdAddres} onChange ={handleStdAddress} variant="outlined" autoComplete='off' />
+                <TextField id="outlined-basic" label="¿Con quien vives?" value={whoLive} onChange ={handleWhoLive} variant="outlined" autoComplete='off' />
             </div>
             <div id="studentBody" className='list'>
-                <TextField id="outlined-basic" label="Peso" variant="outlined" autoComplete='off' type="number" />
-                <TextField id="outlined-basic" label="Estatura" variant="outlined" autoComplete='off' type="number" />
-                <TextField id="outlined-basic" label="Talla de la camisa" variant="outlined" autoComplete='off' type="number" />
-                <TextField id="outlined-basic" label="Talla del pantalon" variant="outlined" autoComplete='off' type="number" />
-                <TextField id="outlined-basic" label="Talla de los zapatos" variant="outlined" autoComplete='off' type="number" />
+                <TextField id="outlined-basic" label="Peso" value={weight} onChange ={handleWeight} variant="outlined" autoComplete='off' type="number" />
+                <TextField id="outlined-basic" label="Estatura" value={height} onChange ={handleHeight} variant="outlined" autoComplete='off' type="number" />
+                <TextField id="outlined-basic" label="Talla de la camisa" value={chessSize} onChange ={handleChessSize} variant="outlined" autoComplete='off' type="number" />
+                <TextField id="outlined-basic" label="Talla del pantalon" value={pantsSize} onChange ={handlePantsSize} variant="outlined" autoComplete='off' type="number" />
+                <TextField id="outlined-basic" label="Talla de los zapatos" value={feetSize} onChange ={handleFeetSize} variant="outlined" autoComplete='off' type="number" />
             </div>
             <div id="gravidez" className='list'>
                 <FormControl>
@@ -379,25 +637,26 @@ export default function Inscription() {
                     <RadioGroup
                         row
                         aria-labelledby="demo-radio-buttons-group-label"
-                        defaultValue="n"
+                        value={gravidez}
+                        onChange ={handleGravidez}
                         name="gravidez"
                     >
                         <FormControlLabel value="y" control={<Radio />} label="Si" />
                         <FormControlLabel value="n" control={<Radio />} label="No" />
                     </RadioGroup>
                 </FormControl>
-                <TextField id="outlined-basic" label="Tiempo de embarazo" variant="outlined" autoComplete='off' type="number" />
+                <TextField id="outlined-basic" className={gravidez === "y"? "":"invisible"} label="Tiempo de embarazo (meses)" value={pregnancyTime} onChange={handlePregnancyTime} variant="outlined" autoComplete='off' type="number" />
             </div>
 
             <div id="medicalData" className='list'>
-                <FormControlLabel control={<Checkbox />} label="¿Se vacuna contra la gripe anualmente?" />
-                <FormControlLabel control={<Checkbox />} label="Asma" />
-                <FormControlLabel control={<Checkbox />} label="Diabetes" />
-                <FormControlLabel control={<Checkbox />} label="Epilepcias" />
-                <FormControlLabel control={<Checkbox />} label="Hipertenso" />
-                <FormControlLabel control={<Checkbox />} label="Problemas con el corazón" />
-                <TextField id="outlined-basic" label="Alergias a Medicamentos" variant="outlined" autoComplete='off' />
-                <TextField id="outlined-basic" label="Alergias a Alimentos" variant="outlined" autoComplete='off' />
+                <FormControlLabel control={<Checkbox checked={influenza} onChange={handleInflueza} />} label="¿Se vacuna contra la gripe anualmente?" />
+                <FormControlLabel control={<Checkbox checked={asma} onChange={handleAsma}/>} label="Asma" />
+                <FormControlLabel control={<Checkbox checked={diabetes} onChange={handleDiabetes}/>} label="Diabetes" />
+                <FormControlLabel control={<Checkbox checked={epilepsia} onChange={handleEpilepsia}/>} label="Epilepcias" />
+                <FormControlLabel control={<Checkbox checked={tension} onChange={handleTension}/>} label="Hipertenso" />
+                <FormControlLabel control={<Checkbox checked={harth} onChange={handleHarth}/>} label="Problemas con el corazón" />
+                <TextField id="outlined-basic" value={drugAllegies} onChange={handleDrugAllergies} label="Alergias a Medicamentos" variant="outlined" autoComplete='off' />
+                <TextField id="outlined-basic" value={foodAllegies} onChange={handleFoodAllergies} label="Alergias a Alimentos" variant="outlined" autoComplete='off' />
             </div>
 
             <div id="houseData" className='list'>
@@ -406,7 +665,8 @@ export default function Inscription() {
                     <RadioGroup
                         row
                         aria-labelledby="demo-radio-buttons-group-label"
-                        defaultValue="CasaFamiliar"
+                        value={houseType}
+                        onChange ={handleHouseType}
                         name="house"
                     >
                         <FormControlLabel value="CasaFamiliar" control={<Radio />} label="Casa Familiar" />
@@ -423,7 +683,8 @@ export default function Inscription() {
                     <RadioGroup
                         row
                         aria-labelledby="demo-radio-buttons-group-label"
-                        defaultValue="CasaFamiliar"
+                        value={houseCondition}
+                        onChange={handleHouseCondition}
                         name="Media"
                     >
                         <FormControlLabel value="Mala" control={<Radio />} label="Mala" />
@@ -432,44 +693,40 @@ export default function Inscription() {
 
                     </RadioGroup>
                 </FormControl>
-
-                <FormControlLabel control={<Checkbox />} label="Servicio Telefónico" />
-                <FormControlLabel control={<Checkbox />} label="Servicio de Internet" />
-                <FormControlLabel control={<Checkbox />} label="Servicio de Eléctrico" />
-                <FormControlLabel control={<Checkbox />} label="Servicio de Agua" />
             </div>
 
             <div id="emergency" className='list'>
-                <TextField id="outlined-basic" label="Nombre del contacto" variant="outlined" autoComplete='off' />
-                <TextField id="outlined-basic" label="Numero de Teléfono" variant="outlined" type="number" autoComplete='off' />
-                <TextField id="outlined-basic" label="Relación con el estudiante" variant="outlined" autoComplete='off' />
+                <TextField id="outlined-basic" value={emergencyName} onChange={handleEmergencyName} label="Nombre del contacto" variant="outlined" autoComplete='off' />
+                <TextField id="outlined-basic" value={emergencyPhone} onChange={handleEmergencyPhone} label="Numero de Teléfono" variant="outlined" type="number" autoComplete='off' />
+                <TextField id="outlined-basic" value={emergencyRelation} onChange={handleEmergencyRelation} label="Relación con el estudiante" variant="outlined" autoComplete='off' />
             </div>
 
             <div id="resourses" className='list'>
-                <FormControlLabel control={<Checkbox />} label="Canaima" />
-                <FormControlLabel control={<Checkbox />} label="Tablet" />
-                <FormControlLabel control={<Checkbox />} label="Teléfono inteligente" />
-                <FormControlLabel control={<Checkbox />} label="Computador de escritorio" />
+                <FormControlLabel control={<Checkbox checked={canaima} onChange={handleCanaima}/>} label="Canaima" />
+                <FormControlLabel control={<Checkbox checked={tablet} onChange={handleTablet}/>} label="Tablet" />
+                <FormControlLabel control={<Checkbox checked={smarthPhone} onChange={handleSmarthPhone}/>} label="Teléfono inteligente" />
+                <FormControlLabel control={<Checkbox checked={pc} onChange={handlePC}/>} label="Computador de escritorio" />
             </div>
 
             <div id="documents" className='list'>
-                <FormControlLabel control={<Checkbox />} label="Tiene becas" />
-                <TextField id="outlined-basic" label="Nombre de la beca" variant="outlined" autoComplete='off' />
-                <TextField id="outlined-basic" label="Código del carnet de la patria" variant="outlined" type="number" autoComplete='off' />
-                <TextField id="outlined-basic" label="Serial del carnet de la patria" variant="outlined" type="number" autoComplete='off' />
+                <FormControlLabel control={<Checkbox checked={becas} onChange={handleBecas} />} label="Tiene becas" />
+                <TextField id="outlined-basic" className={becas ? "" : "invisible"} label="Nombre de la beca" variant="outlined" autoComplete='off' />
+                <TextField id="outlined-basic" value={studentPatriaCode} onChange={handleStudentPatriaCode} label="Código del carnet de la patria" variant="outlined" type="number" autoComplete='off' />
+                <TextField id="outlined-basic" value={studentPatriaSerial} onChange={handleStudentPatriaSerial} label="Serial del carnet de la patria" variant="outlined" type="number" autoComplete='off' />
             </div>
 
             <div id="tutor" className='list'>
-                <TextField id="outlined-basic" label="Nombres del tutor" variant="outlined" autoComplete='off' />
-                <TextField id="outlined-basic" label="Apellidos del tutor" variant="outlined" autoComplete='off' />
-                <TextField id="outlined-basic" label="Cédula del tutor" variant="outlined" type="number" autoComplete='off' />
+                <TextField id="outlined-basic" value={tutorName} onChange={handleTutorName} label="Nombres del tutor" variant="outlined" autoComplete='off' />
+                <TextField id="outlined-basic" value={tutorLastName} onChange={handleTutorLastName} label="Apellidos del tutor" variant="outlined" autoComplete='off' />
+                <TextField id="outlined-basic" value={tutorCi} onChange={handleTutorCi} label="Cédula del tutor" variant="outlined" type="number" autoComplete='off' />
 
                 <FormControl>
                     <FormLabel id="demo-radio-buttons-group-label">Nacionalidad del tutor</FormLabel>
                     <RadioGroup
                         row
                         aria-labelledby="demo-radio-buttons-group-label"
-                        defaultValue="v"
+                        value={tutorNationality}
+                        onChange = {handleTutorNationality}
                         name="tutorNationality"
                     >
                         <FormControlLabel value="v" control={<Radio />} label="Venezolano" />
@@ -499,7 +756,8 @@ export default function Inscription() {
                     <RadioGroup
                         row
                         aria-labelledby="demo-radio-buttons-group-label"
-                        defaultValue="v"
+                        value={tutorInstruction}
+                        onChange={handleTutorInstruction}
                         name="instructionLevel"
                     >
                         <FormControlLabel value="1" control={<Radio />} label="Escuela Basica" />
@@ -511,15 +769,47 @@ export default function Inscription() {
                     </RadioGroup>
                 </FormControl>
 
-                <TextField id="outlined-basic" label="Télefono" variant="outlined" type="number" autoComplete='off' />
-                <TextField id="outlined-basic" label="Email" variant="outlined" autoComplete='off' />
-                <TextField id="outlined-basic" label="Dirección" variant="outlined" autoComplete='off' />
-                <TextField id="outlined-basic" label="Código del carnet de la patría" type="number" variant="outlined" autoComplete='off' />
-                <TextField id="outlined-basic" label="Serial del carnet de la patría" type="number" variant="outlined" autoComplete='off' />
+                <TextField id="outlined-basic" value={tutorPhone} onChange={handleTutorPhone} label="Télefono" variant="outlined" type="number" autoComplete='off' />
+                <TextField id="outlined-basic" value={tutorEmail} onChange={handleTutorEmail} label="Email" variant="outlined" autoComplete='off' />
+                <TextField id="outlined-basic" value={tutorAddress} onChange={handleTutorAddress} label="Dirección" variant="outlined" autoComplete='off' />
+                <TextField id="outlined-basic" value={tutorPatriaCode} onChange={handleTutorPatriaCode} label="Código del carnet de la patría" type="number" variant="outlined" autoComplete='off' />
+                <TextField id="outlined-basic" value={tutorPatriaSrial} onChange={handleTutorPatriaSrial} label="Serial del carnet de la patría" type="number" variant="outlined" autoComplete='off' />
+                
+                <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label">Banco del representante</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label-banck"
+                        id="demo-simple-select-banck"
+                        value={tutorBank}
+                        label="Banco del representante"
+                        onChange={handleTutorBank}
+                    >
+                        {
+                            getBanks().map(bank => {
+                                return <MenuItem key={countryKey++} value={bank}>{bank}</MenuItem>
+                            })
+                        }
 
-                <TextField id="outlined-basic" label="Banco del representante" type="number" variant="outlined" autoComplete='off' />
-                <TextField id="outlined-basic" label="Tipo de cuenta" variant="outlined" autoComplete='off' />
-                <TextField id="outlined-basic" label="Cuenta Bancaría del Representante" type="number" variant="outlined" autoComplete='off' />
+                    </Select>
+                </FormControl>
+                
+                <TextField id="outlined-basic" className={tutorBank === "Otro" ? "" : "invisible"} value={tutorBankAux} onChange={handleTutorBankAux} label="Banco" type="number" variant="outlined" autoComplete='off' />
+                
+                
+                <FormControl>
+                    <FormLabel id="demo-radio-buttons-group-label">Tipo de cuenta</FormLabel>
+                    <RadioGroup
+                        row
+                        aria-labelledby="demo-radio-buttons-group-label"
+                        value={tutorBankAccounType}
+                        onChange={handleTutorBankAccounType}
+                        name="instructionLevel"
+                    >
+                        <FormControlLabel value="corriente" control={<Radio />} label="Corriente" />
+                        <FormControlLabel value="ahorros" control={<Radio />} label="Ahorros" />
+                    </RadioGroup>
+                </FormControl>
+                <TextField id="outlined-basic" value={tutorBankAccoun} onChange={handleTutorBankAccoun} label="Cuenta Bancaría del Representante" type="number" variant="outlined" autoComplete='off' />
 
             </div>
             <Button variant="contained" endIcon={<SendIcon />}>Inscribir</Button>
@@ -850,4 +1140,10 @@ function getMunicipio(state) {
             "Municipio Jesús María Semprún (Casigua El Cubo)"]
     }
     return list[state];
+}
+
+function getBanks(){
+    let raw = "BANCO NACIONAL DE CRÉDITO, C.A. BANCO UNIVERSAL.|BANCO PLAZA, C.A., BANCO UNIVERSAL.|BANCO DEL CARIBE C.A., BANCO UNIVERSAL (BANCARIBE).|BANCO SOFITASA BANCO UNIVERSAL, C.A.|DEL SUR BANCO UNIVERSAL, C.A.|BANCO DEL TESORO, C.A., BANCO UNIVERSAL.|BANCO EXTERIOR, C.A., BANCO UNIVERSAL.|BANCO INTERNACIONAL DE DESARROLLO, C.A BANCO UNIVERSAL.|BANCO DE LA FUERZA ARMADA NACIONAL BOLIVARIANA, BANCO UNIVERSAL, C.A. (BANFANB).|BFC BANCO FONDO COMUN, C.A. BANCO UNIVERSAL.|BANPLUS BANCO UNIVERSAL, C.A.|100% BANCO, BANCO UNIVERSAL, C.A.|BANCO PROVINCIAL, S.A. BANCO UNIVERSAL.|BANCO BICENTENARIO, DEL PUEBLO, DE LA CLASE OBRERA, MUJER Y COMUNAS, BANCO UNIVERSAL, C.A.|BANCO DE VENEZUELA, S.A. BANCO UNIVERSAL.|BANCO AGRÍCOLA DE VENEZUELA, C.A.|BANESCO BANCO UNIVERSAL, C.A.|BANCO CARONÍ, C.A., BANCO UNIVERSAL.|MERCANTIL, C.A., BANCO UNIVERSAL.|BANCO ACTIVO C.A., BANCO UNIVERSAL.|VENEZOLANO DE CRÉDITO, S.A., BANCO UNIVERSAL.|BANCAMIGA BANCO UNIVERSAL, C.A.|BANCO NACIONAL DE VIVIENDA Y HABITAT (BANAVIH).|INSTITUTO MUNICIPAL DE CRÉDITO POPULAR (I.M.C.P.).|BANCO INDUSTRIAL DE VENEZUELA C.A.|BANCO DE LA GENTE EMPRENDEDORA (BANGENTE) C.A.|BANCO DE DESARROLLO ECONÓMICO Y SOCIAL DE VENEZUELA (BANDES).|BANCO DE COMERCIO EXTERIOR, C.A. (BANCOEX).|MI BANCO, BANCO MICROFINANCIERO, C.A.|BANCRECER, S.A. BANCO MICROFINANCIERO.|Otro";
+    let banks = raw.split("|");
+    return banks;
 }
