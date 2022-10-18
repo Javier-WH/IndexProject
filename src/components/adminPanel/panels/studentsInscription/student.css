@@ -1,7 +1,7 @@
-/*#InscriptionContainer{
-    height: 400px;
-    overflow-y: auto;
-}*/
+#ciContainer{
+    display: flex;
+    flex-direction: column;
+}
 #divCi{
     display: flex;
     column-gap: 20px;
@@ -87,4 +87,11 @@
 }
 #tutor::after{
     content: "Representante legal del estudiante";
+}
+.period{
+    width: 400px;
+}
+
+.invisible{
+    visibility: hidden;
 }
