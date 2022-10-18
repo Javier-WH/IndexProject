@@ -18,18 +18,18 @@ import Message from "../../message/Message"
 
 export default function Inscription() {
 
-  
+
 
     const [openMessage, setOpenMessage] = useState(false);
     const [messageParams, setMessageParams] = useState({
-        type:"success",
-        message:"Wololooo"
+        type: "success",
+        message: "Wololooo"
     })
     const [ci, setCi] = useState("");
     const [haveCi, setHaveCi] = useState(true);
     const [grade, setGrade] = useState("1");
     const [seccion, setSeccion] = useState("A");
-    const [period, setPeriodo]= useState("2022");
+    const [period, setPeriodo] = useState("2022");
     const [nation, setNation] = useState("Venezuela");
     const [tutorNation, setTutorNation] = useState("Venezuela");
     const [birthState, setbirthState] = useState("Distrito Capital");
@@ -47,8 +47,8 @@ export default function Inscription() {
     const [gender, setGender] = useState("f");
     const [birthAct, setBirthAct] = useState(false);
     const [birthActCopy, setBirthActCopy] = useState(false);
-    const [_ci, _setCi ] = useState(false);
-    const [photos, setPhotos ] = useState(false);
+    const [_ci, _setCi] = useState(false);
+    const [photos, setPhotos] = useState(false);
     const [gradesCertificate, setGradesCertificate] = useState(false);
     const [gradesCertificateCopy, setGradesCertificateCopy] = useState(false);
     const [canainaRecipe, setCanainaRecipe] = useState(false);
@@ -97,7 +97,7 @@ export default function Inscription() {
     const [smarthPhone, setSmarthPhone] = useState(false);
     const [pc, setPC] = useState(false);
     const [becas, setBecas] = useState(false);
-    const [becaName, setBecaName]= useState("")
+    const [becaName, setBecaName] = useState("")
     const [studentPatriaCode, setStudentPatriaCode] = useState("");
     const [studentPatriaSerial, setStudentPatriaSerial] = useState("");
     const [tutorName, setTutorName] = useState("");
@@ -114,244 +114,244 @@ export default function Inscription() {
     const [tutorBankAux, setTutorBankAux] = useState("");
     const [tutorBankAccounType, setTutorBankAccounType] = useState("corriente");
     const [tutorBankAccoun, setTutorBankAccoun] = useState("");
-   
+
     const handleBecaName = (event) => {
         setBecaName(event.target.value)
     }
 
-    const handleTutorBankAccoun = (event)=>{
+    const handleTutorBankAccoun = (event) => {
         setTutorBankAccoun(event.target.value);
     }
-    const handleTutorBankAccounType = (event)=>{
+    const handleTutorBankAccounType = (event) => {
         setTutorBankAccounType(event.target.value);
     }
-    const handleTutorBankAux = (event)=>{
+    const handleTutorBankAux = (event) => {
         setTutorBankAux(event.target.value);
     }
-    const handleTutorBank = (event)=>{
+    const handleTutorBank = (event) => {
         setTutorBank(event.target.value);
     }
-    const handleTutorPatriaSrial = (event)=>{
+    const handleTutorPatriaSrial = (event) => {
         setTutorPatriaSrial(event.target.value);
     }
-    const handleTutorPatriaCode = (event)=>{
+    const handleTutorPatriaCode = (event) => {
         setTutorPatriaCode(event.target.value);
     }
-    const handleTutorAddress = (event)=>{
+    const handleTutorAddress = (event) => {
         setTutorAddress(event.target.value);
     }
-    const handleTutorEmail = (event)=>{
+    const handleTutorEmail = (event) => {
         setTutorEmail(event.target.value);
     }
-    const handleTutorPhone = (event)=>{
+    const handleTutorPhone = (event) => {
         setTutorPhone(event.target.value);
     }
-    const handleTutorInstruction = (event)=>{
+    const handleTutorInstruction = (event) => {
         setTutorInstruction(event.target.value);
     }
-    const handleTutorNationality = (event)=>{
+    const handleTutorNationality = (event) => {
         setTutorNationality(event.target.value);
     }
-    const handleTutorCi = (event)=>{
+    const handleTutorCi = (event) => {
         setTutorCi(event.target.value);
     }
-    const handleTutorLastName = (event)=>{
+    const handleTutorLastName = (event) => {
         setTutorLastName(event.target.value);
     }
-    const handleTutorName = (event)=>{
+    const handleTutorName = (event) => {
         setTutorName(event.target.value);
     }
-    const handleStudentPatriaSerial = (event)=>{
+    const handleStudentPatriaSerial = (event) => {
         setStudentPatriaSerial(event.target.value);
     }
-    const handleStudentPatriaCode = (event)=>{
+    const handleStudentPatriaCode = (event) => {
         setStudentPatriaCode(event.target.value);
     }
-    const handleBecas = (event)=>{
+    const handleBecas = (event) => {
         setBecas(event.target.checked);
     }
-    const handlePC = (event)=>{
+    const handlePC = (event) => {
         setPC(event.target.checked);
     }
-    const handleSmarthPhone = (event)=>{
+    const handleSmarthPhone = (event) => {
         setSmarthPhone(event.target.checked);
     }
-    const handleTablet = (event)=>{
+    const handleTablet = (event) => {
         setTablet(event.target.checked);
     }
-    const handleCanaima = (event)=>{
+    const handleCanaima = (event) => {
         setCanaima(event.target.checked);
     }
-    const handleEmergencyRelation = (event)=>{
+    const handleEmergencyRelation = (event) => {
         setEmergencyRelation(event.target.value);
     }
-    const handleEmergencyPhone = (event)=>{
+    const handleEmergencyPhone = (event) => {
         setEmergencyPhone(event.target.value);
     }
-    const handleEmergencyName = (event)=>{
+    const handleEmergencyName = (event) => {
         setEmergencyName(event.target.value);
     }
-    const handleHouseCondition = (event)=>{
+    const handleHouseCondition = (event) => {
         setHouseCondition(event.target.value);
     }
-    const handleHouseType = (event)=>{
+    const handleHouseType = (event) => {
         setHouseType(event.target.value);
     }
-    const handleFoodAllergies = (event)=>{
+    const handleFoodAllergies = (event) => {
         setFoodAllergies(event.target.value);
     }
-    const handleDrugAllergies = (event)=>{
+    const handleDrugAllergies = (event) => {
         setDrugAllergies(event.target.value);
     }
-    const handleHarth = (event)=>{
+    const handleHarth = (event) => {
         setHarth(event.target.checked);
     }
-    const handleTension = (event)=>{
+    const handleTension = (event) => {
         setTension(event.target.checked);
     }
-    const handleEpilepsia = (event)=>{
+    const handleEpilepsia = (event) => {
         setEpilepsia(event.target.checked);
     }
-    const handleDiabetes = (event)=>{
+    const handleDiabetes = (event) => {
         setDiabetes(event.target.checked);
     }
-    const handleAsma = (event)=>{
+    const handleAsma = (event) => {
         setAsma(event.target.checked);
     }
-    const handleInflueza = (event)=>{
+    const handleInflueza = (event) => {
         setInflueza(event.target.checked);
     }
-    const handlePregnancyTime = (event)=>{
+    const handlePregnancyTime = (event) => {
         setPregnancyTime(event.target.value);
     }
-    const handleGravidez = (event)=>{
+    const handleGravidez = (event) => {
         setGravidez(event.target.value);
     }
-    const handleFeetSize = (event)=>{
+    const handleFeetSize = (event) => {
         setFeetSize(event.target.value);
     }
-    const handlePantsSize = (event)=>{
+    const handlePantsSize = (event) => {
         setPantsSize(event.target.value);
     }
-    const handleChessSize = (event)=>{
+    const handleChessSize = (event) => {
         setChessSize(event.target.value);
     }
-    const handleHeight = (event)=>{
+    const handleHeight = (event) => {
         setheight(event.target.value);
     }
-    const handleWeight = (event)=>{
+    const handleWeight = (event) => {
         setWeight(event.target.value);
     }
-    const handleWhoLive = (event)=>{
+    const handleWhoLive = (event) => {
         setWhoLive(event.target.value);
     }
-    const handleStdAddress = (event)=>{
+    const handleStdAddress = (event) => {
         setStdAddress(event.target.value);
     }
-    const handleUrbanizacion = (event)=>{
+    const handleUrbanizacion = (event) => {
         setUrbanizacion(event.target.value);
     }
-    const handleTown = (event)=>{
+    const handleTown = (event) => {
         setTown(event.target.value);
     }
-    const handleParroquia = (event)=>{
+    const handleParroquia = (event) => {
         setParroquia(event.target.value);
     }
-    const handleSiblinsNumer = (event)=>{
+    const handleSiblinsNumer = (event) => {
         setSiblinsNumer(event.target.value);
     }
-    const handleFatherPhone = (event)=>{
+    const handleFatherPhone = (event) => {
         setFatherPhone(event.target.value);
     }
-    const handleFatherCi = (event)=>{
+    const handleFatherCi = (event) => {
         setFatherCi(event.target.value);
     }
-    const handleFatherLastName = (event)=>{
+    const handleFatherLastName = (event) => {
         setFatherLastName(event.target.value);
     }
-    const handleFatherName = (event)=>{
+    const handleFatherName = (event) => {
         setFatherName(event.target.value);
     }
-    const handleMotherPhone = (event)=>{
+    const handleMotherPhone = (event) => {
         setMotherPhone(event.target.value);
     }
-    const handleMotherCi = (event)=>{
+    const handleMotherCi = (event) => {
         setMotherCi(event.target.value);
     }
-    const handleLastMotherName = (event)=>{
+    const handleLastMotherName = (event) => {
         setMotherLastName(event.target.value);
     }
-    const handleMotherName = (event)=>{
+    const handleMotherName = (event) => {
         setMotherName(event.target.value);
     }
-    const handleInstagram = (event)=>{
+    const handleInstagram = (event) => {
         setInstagram(event.target.value);
     }
-    const handleTikTok = (event)=>{
+    const handleTikTok = (event) => {
         setTikTok(event.target.value);
     }
-    const handleWhatsapp = (event)=>{
+    const handleWhatsapp = (event) => {
         setWhatsapp(event.target.value);
     }
-    const handleTwitter = (event)=>{
+    const handleTwitter = (event) => {
         setTwitter(event.target.value);
     }
-    const handleFacebook = (event)=>{
+    const handleFacebook = (event) => {
         setFacebook(event.target.value);
     }
-    const handleSixGrade = (event)=>{
+    const handleSixGrade = (event) => {
         setSixGrade(event.target.checked);
     }
-    const handleCanainaRecipe = (event)=>{
+    const handleCanainaRecipe = (event) => {
         setCanainaRecipe(event.target.checked);
     }
-    const handleGradesCertificateCopy = (event)=>{
+    const handleGradesCertificateCopy = (event) => {
         setGradesCertificateCopy(event.target.checked);
     }
-    const handleGradesCertificate = (event)=>{
+    const handleGradesCertificate = (event) => {
         setGradesCertificate(event.target.checked);
     }
-    const handlePhotos = (event)=>{
+    const handlePhotos = (event) => {
         setPhotos(event.target.checked);
     }
-    const handle_ci = (event)=>{
+    const handle_ci = (event) => {
         _setCi(event.target.checked);
     }
-    const handleBirthActCopy = (event)=>{
+    const handleBirthActCopy = (event) => {
         setBirthActCopy(event.target.checked);
     }
-    const handleBirthAct = (event)=>{
+    const handleBirthAct = (event) => {
         setBirthAct(event.target.checked);
     }
-    const handleGender = (event)=>{
+    const handleGender = (event) => {
         setGender(event.target.value);
     }
-    const handleMarried = (event)=>{
+    const handleMarried = (event) => {
         setMarried(event.target.value);
     }
-    const handleNationality = (event)=>{
+    const handleNationality = (event) => {
         setNationality(event.target.value);
     }
-    const handlePreviusSchool = (event)=>{
+    const handlePreviusSchool = (event) => {
         setPreviusSchool(event.target.value);
     }
-    const handleStudentEmail = (event)=>{
+    const handleStudentEmail = (event) => {
         setStudenEmail(event.target.value);
     }
-    const handleStudentPhone = (event) =>{
+    const handleStudentPhone = (event) => {
         setStudentPhone(event.target.value);
     }
-    const handleDate = (event)=>{
+    const handleDate = (event) => {
         setDate(event.target.value);
     }
-    const handleLastNames = (event)=>{
+    const handleLastNames = (event) => {
         setLastNames(event.target.value)
     }
-    const handleNames = (event)=>{
+    const handleNames = (event) => {
         setNames(event.target.value)
     }
     const handlePeriod = (event) => {
-       setPeriodo(event.target.value);
+        setPeriodo(event.target.value);
     }
     const handleHaveCi = (event) => {
         setHaveCi(!event.target.checked);
@@ -392,173 +392,265 @@ export default function Inscription() {
         setTutorNation(event.target.value);
     };
 
-    function checkMissingData(){
+    function checkMissingData() {
 
-        if(ci === ""){
+        if (ci === "") {
             return "Cédula"
         }
-        if(period === ""){
+        if (period === "") {
             return "Peíodo escolar"
         }
-        if(names === ""){
+        if (names === "") {
             return "Nombres del estudiante"
         }
-        if(lastNames === ""){
+        if (lastNames === "") {
             return "Apellidos del estudiante"
         }
-        if(studentPhone === ""){
+        if (studentPhone === "") {
             return "Teléfono del estudiante"
         }
-        if(studenEmail === ""){
+        if (studenEmail === "") {
             return "Email del estudiante"
         }
-        if(previusSchool === ""){
+        if (previusSchool === "") {
             return "Escuela anterior del estudiante"
         }
-        if(birthPlace === ""){
+        if (birthPlace === "") {
             return "Lugar de nacimiento del estudiante"
         }
-        if(facebook === ""){
+        if (facebook === "") {
             return "Facebook"
         }
-        if(twitter === ""){
+        if (twitter === "") {
             return "Twitter"
         }
-        if(whatsapp === ""){
+        if (whatsapp === "") {
             return "Whatsapp"
         }
-        if(tikTok === ""){
+        if (tikTok === "") {
             return "TikTok"
         }
-        if(instagram === ""){
+        if (instagram === "") {
             return "Instagram"
         }
-        if(motherName === ""){
+        if (motherName === "") {
             return "Nombre de la Madre"
         }
-        if(motherLastName === ""){
+        if (motherLastName === "") {
             return "Apellido de la Madre"
         }
-        if(motherCi === ""){
+        if (motherCi === "") {
             return "Cédula de la Madre"
         }
-        if(motherPhone === ""){
+        if (motherPhone === "") {
             return "Teléfono de la Madre"
         }
-        if(fatherName === ""){
+        if (fatherName === "") {
             return "Nombre del Padre"
         }
-        if(fatherLastName === ""){
+        if (fatherLastName === "") {
             return "Apellido del Padre"
         }
-        if(fatherCi === ""){
+        if (fatherCi === "") {
             return "Cédula del Padre"
         }
-        if(fatherPhone === ""){
+        if (fatherPhone === "") {
             return "Teléfono del Padre"
         }
-        if(siblinsNumber === ""){
+        if (siblinsNumber === "") {
             return "Número de hermanos"
         }
-        if(municipio === ""){
+        if (municipio === "") {
             return "Municipio"
         }
-        if(parroquia === ""){
+        if (parroquia === "") {
             return "Parroquia"
         }
-        if(town === ""){
+        if (town === "") {
             return "Población"
         }
-        if(urbanizacion === ""){
+        if (urbanizacion === "") {
             return "Urbanización"
         }
-        if(stdAddres === ""){
+        if (stdAddres === "") {
             return "Dirección del Estudiante"
         }
-        if(whoLive === ""){
+        if (whoLive === "") {
             return "¿Con quien vives?"
         }
-        if(weight === ""){
+        if (weight === "") {
             return "Peso"
         }
-        if(height === ""){
+        if (height === "") {
             return "Estatura"
         }
-        if(chessSize === ""){
+        if (chessSize === "") {
             return "Talla de la Camisa"
         }
-        if(pantsSize === ""){
+        if (pantsSize === "") {
             return "Talla del Pantalón"
         }
-        if(feetSize === ""){
+        if (feetSize === "") {
             return "Talla de los Zapatos"
         }
-        if(gravidez === "y" && pregnancyTime === ""){
+        if (gravidez === "y" && pregnancyTime === "") {
             return "Tiempo de embarazo"
         }
-        if(drugAllegies === ""){
+        if (drugAllegies === "") {
             return "Alergia a algun medicamento"
         }
-        if(foodAllegies === ""){
+        if (foodAllegies === "") {
             return "Alergia a algun alimento"
         }
-        if(emergencyName === ""){
+        if (emergencyName === "") {
             return "Nombre de contacto de emergencias"
         }
-        if(emergencyPhone === ""){
+        if (emergencyPhone === "") {
             return "Teléfono de contacto de emergencias"
         }
-        if(emergencyRelation ===""){
+        if (emergencyRelation === "") {
             return "Relación con el contacto de emergencias"
         }
-        if(becas && becaName === ""){
+        if (becas && becaName === "") {
             return "Nombre de la beca"
         }
-        if(studentPatriaCode === ""){
+        if (studentPatriaCode === "") {
             return "Código del carnet de la patria del estudiante"
         }
-        if(studentPatriaSerial === ""){
+        if (studentPatriaSerial === "") {
             return "Serial del carnet de la patria del estudiante"
         }
-        if(tutorName === ""){
+        if (tutorName === "") {
             return "Nombre del Tutor"
         }
-        if(tutorLastName ===""){
+        if (tutorLastName === "") {
             return "Apellido del Tutor"
         }
-        if(tutorCi === ""){
+        if (tutorCi === "") {
             return "Cédula del tutor"
         }
-        if(tutorPhone === ""){
+        if (tutorPhone === "") {
             return "Teléfono del tutor"
         }
-        if(tutorEmail === ""){
+        if (tutorEmail === "") {
             return "Email del tutor"
         }
-        if(tutorAddress === ""){
+        if (tutorAddress === "") {
             return "Dirección del tutor"
         }
-        if(tutorPatriaCode === ""){
+        if (tutorPatriaCode === "") {
             return "Código del carnet de la patria del tutor"
         }
-        if(tutorPatriaSrial === ""){
+        if (tutorPatriaSrial === "") {
             return "Serial del carnet de la patria del tutor"
         }
-        if(tutorBank === "Otro" && tutorBankAux === ""){
+        if (tutorBank === "Otro" && tutorBankAux === "") {
             return "Banco del tutor"
         }
-        if(tutorBankAccoun === ""){
+        if (tutorBankAccoun === "") {
             return "Cuenta bancaria del tutor"
         }
         return "none";
     }
 
-    function getData(){
+    function cleanData(){
+        setCi("");
+        setHaveCi(true);
+        setGrade("1");
+        setSeccion("A");
+        setPeriodo("2022");
+        setNation("Venezuela");
+        setTutorNation("Venezuela");
+        setbirthState("Distrito Capital");
+        setbirthPlace("");
+        setHomeState("Distrito Capital");
+        setMunicipio("");
+        setNames("");
+        setLastNames("");
+        setDate("2022-01-01");
+        setStudentPhone("");
+        setStudenEmail("");
+        setPreviusSchool("");
+        setNationality("v");
+        setMarried("s")
+        setGender("f");
+        setBirthAct(false);
+        setBirthActCopy(false);
+        _setCi(false);
+        setPhotos(false);
+        setGradesCertificate(false);
+        setGradesCertificateCopy(false);
+        setCanainaRecipe(false);
+        setSixGrade(false);
+        setFacebook("");
+        setTwitter("");
+        setWhatsapp("");
+        setTikTok("");
+        setInstagram("");
+        setMotherName("");
+        setMotherLastName("");
+        setMotherCi("");
+        setMotherPhone("");
+        setFatherName("");
+        setFatherLastName("");
+        setFatherCi("");
+        setFatherPhone("");
+        setSiblinsNumer("");
+        setParroquia("");
+        setTown("");
+        setUrbanizacion("");
+        setStdAddress("");
+        setWhoLive("");
+        setWeight("");
+        setheight("");
+        setChessSize("");
+        setPantsSize("");
+        setFeetSize("");
+        setGravidez("n");
+        setPregnancyTime("");
+        setInflueza(false);
+        setAsma(false);
+        setDiabetes(false);
+        setEpilepsia(false);
+        setTension(false);
+        setHarth(false);
+        setDrugAllergies("");
+        setFoodAllergies("");
+        setHouseType("CasaFamiliar");
+        setHouseCondition("Media");
+        setEmergencyName("");
+        setEmergencyPhone("");
+        setEmergencyRelation("");
+        setCanaima(false);
+        setTablet(false);
+        setSmarthPhone(false);
+        setPC(false);
+        setBecas(false);
+        setBecaName("");
+        setStudentPatriaCode("");
+        setStudentPatriaSerial("");
+        setTutorName("");
+        setTutorLastName("");
+        setTutorCi("");
+        setTutorNationality("v");
+        setTutorInstruction("3");
+        setTutorPhone("");
+        setTutorEmail("");
+        setTutorAddress("");
+        setTutorPatriaCode("");
+        setTutorPatriaSrial("");
+        setTutorBank("BANCO DE VENEZUELA, S.A. BANCO UNIVERSAL.");
+        setTutorBankAux("");
+        setTutorBankAccounType("corriente");
+        setTutorBankAccoun("");
+    }
+
+    function getData() {
         return {
             ci,
             names,
             lastNames,
-            birthdate :date,
+            birthdate: date,
             studentPhone,
             studenEmail,
             grade,
@@ -643,25 +735,50 @@ export default function Inscription() {
     }
 
 
-    function handleSendData(){
+    function handleSendData() {
         let missingData = checkMissingData();
-        if(missingData !== "none"){
-            setMessageParams({type:"error", message: `No ha suministrado el campo: ${missingData}`})
+        if (missingData !== "none") {
+            setMessageParams({ type: "error", message: `No ha suministrado el campo: ${missingData}` })
             setOpenMessage(true)
-        }else{
+        } else {
             let data = getData();
 
+            fetch("/student", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "*/*"
+                },
+                body: JSON.stringify(data)
+            })
+                .then(answer => answer.json())
+                .then(response => {
+                    if(response.error){
+                        setMessageParams({ type: "error", message: response.error })
+                        setOpenMessage(true)
+                    }else{
+                        setMessageParams({ type: "success", message: `Se ha inscrito satisfactoriamente al estudiante` })
+                        cleanData();
+                        setOpenMessage(true)
+                    }
 
-            setMessageParams({type:"success", message: `Se ha inscrito satisfactoriamente al estudiante`})
-            setOpenMessage(true)
+                })
+                .catch(err=>{
+                    setMessageParams({ type: "error", message: `Ocurrió un error, no se ha inscrito al estudiante` })
+                    setOpenMessage(true)
+                })
+
         }
+
+
+
     }
 
 
 
     let countryKey = 0;
     return <div id="InscriptionContainer">
-        <Message open={openMessage} setOpen={setOpenMessage} data ={messageParams}/>
+        <Message open={openMessage} setOpen={setOpenMessage} data={messageParams} />
         <div id="divCi">
             <div id='ciContainer'>
                 <TextField id="outlined-basic" label={haveCi ? "Cédula" : "Cédula provicional"} variant="outlined" type="number" autoComplete='off' value={ci} onChange={handleCi} />
@@ -676,7 +793,7 @@ export default function Inscription() {
             <TextField id="outlined-basic" label="Apellidos" variant="outlined" autoComplete='off' value={lastNames} onChange={handleLastNames} />
             <div className='auxContainer'>
                 <TextField id="outlined-basic" label="Cumpleaños" variant="outlined" type="date" autoComplete='off' value={date} onChange={handleDate} />
-                <TextField id="outlined-basic" label="Télefono" variant="outlined" type="number" autoComplete='off' value={studentPhone} onChange={handleStudentPhone}/>
+                <TextField id="outlined-basic" label="Télefono" variant="outlined" type="number" autoComplete='off' value={studentPhone} onChange={handleStudentPhone} />
                 <TextField id="outlined-basic" label="Email" variant="outlined" type="email" autoComplete='off' value={studenEmail} onChange={handleStudentEmail} />
             </div>
             <div className='auxContainer'>
@@ -736,10 +853,10 @@ export default function Inscription() {
                 </FormControl>
 
                 <TextField id="outlined-basic" className='period' label="Inicio perído escolar" variant="outlined" autoComplete='off' type="number" value={period} onChange={handlePeriod} />
-                <TextField id="outlined-basic" className='period' label="Fin período escolar" variant="outlined" autoComplete='off' value={isNaN(Number.parseInt(period)) ? " " : Number.parseInt(period) + 1}/>
+                <TextField id="outlined-basic" className='period' label="Fin período escolar" variant="outlined" autoComplete='off' value={isNaN(Number.parseInt(period)) ? " " : Number.parseInt(period) + 1} />
 
             </div>
-            <TextField id="outlined-basic" label="Institución Anterior" variant="outlined" autoComplete='off' value={previusSchool} onChange = {handlePreviusSchool}/>
+            <TextField id="outlined-basic" label="Institución Anterior" variant="outlined" autoComplete='off' value={previusSchool} onChange={handlePreviusSchool} />
 
             <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Pais de nacimiento</InputLabel>
@@ -830,7 +947,7 @@ export default function Inscription() {
                     row
                     aria-labelledby="demo-radio-buttons-group-label"
                     value={gender}
-                    onChange ={handleGender}
+                    onChange={handleGender}
                     name="gender"
                 >
                     <FormControlLabel value="f" control={<Radio />} label="Femenino" />
@@ -840,12 +957,12 @@ export default function Inscription() {
 
             <div id="requisites" className='list'>
                 <FormControlLabel control={<Checkbox checked={birthAct} onChange={handleBirthAct} />} label="Partida de nacimiento original" />
-                <FormControlLabel control={<Checkbox checked={birthActCopy} onChange={handleBirthActCopy}/>} label="Partida de nacimiento copia" />
+                <FormControlLabel control={<Checkbox checked={birthActCopy} onChange={handleBirthActCopy} />} label="Partida de nacimiento copia" />
                 <FormControlLabel control={<Checkbox checked={_ci} onChange={handle_ci} />} label="Cédula de identidad" />
-                <FormControlLabel control={<Checkbox checked={photos} onChange={handlePhotos}/>} label="Fotos tipo carnet" />
-                <FormControlLabel control={<Checkbox checked={gradesCertificate} onChange={handleGradesCertificate}/>} label="Certificado de calificaciones original" />
-                <FormControlLabel control={<Checkbox checked={gradesCertificateCopy} onChange={handleGradesCertificateCopy}/>} label="Certificado de calificaciones copia" />
-                <FormControlLabel control={<Checkbox checked={canainaRecipe} onChange={handleCanainaRecipe}/>} label="Constancia de no poseer canaima" />
+                <FormControlLabel control={<Checkbox checked={photos} onChange={handlePhotos} />} label="Fotos tipo carnet" />
+                <FormControlLabel control={<Checkbox checked={gradesCertificate} onChange={handleGradesCertificate} />} label="Certificado de calificaciones original" />
+                <FormControlLabel control={<Checkbox checked={gradesCertificateCopy} onChange={handleGradesCertificateCopy} />} label="Certificado de calificaciones copia" />
+                <FormControlLabel control={<Checkbox checked={canainaRecipe} onChange={handleCanainaRecipe} />} label="Constancia de no poseer canaima" />
                 <FormControlLabel control={<Checkbox />} checked={sixGrade} onChange={handleSixGrade} label="Boleta de promocion de 6to grado" />
             </div>
             <div id="socialNetworking" className='list'>
@@ -900,18 +1017,18 @@ export default function Inscription() {
                     </Select>
                 </FormControl>
 
-                <TextField id="outlined-basic" label="Parroquia" value={parroquia} onChange ={handleParroquia} variant="outlined" autoComplete='off' />
-                <TextField id="outlined-basic" label="Poblacíon" value={town} onChange ={handleTown} variant="outlined" autoComplete='off' />
-                <TextField id="outlined-basic" label="Urbanización" value={urbanizacion} onChange ={handleUrbanizacion} variant="outlined" autoComplete='off' />
-                <TextField id="outlined-basic" label="Dirección" value={stdAddres} onChange ={handleStdAddress} variant="outlined" autoComplete='off' />
-                <TextField id="outlined-basic" label="¿Con quien vives?" value={whoLive} onChange ={handleWhoLive} variant="outlined" autoComplete='off' />
+                <TextField id="outlined-basic" label="Parroquia" value={parroquia} onChange={handleParroquia} variant="outlined" autoComplete='off' />
+                <TextField id="outlined-basic" label="Poblacíon" value={town} onChange={handleTown} variant="outlined" autoComplete='off' />
+                <TextField id="outlined-basic" label="Urbanización" value={urbanizacion} onChange={handleUrbanizacion} variant="outlined" autoComplete='off' />
+                <TextField id="outlined-basic" label="Dirección" value={stdAddres} onChange={handleStdAddress} variant="outlined" autoComplete='off' />
+                <TextField id="outlined-basic" label="¿Con quien vives?" value={whoLive} onChange={handleWhoLive} variant="outlined" autoComplete='off' />
             </div>
             <div id="studentBody" className='list'>
-                <TextField id="outlined-basic" label="Peso" value={weight} onChange ={handleWeight} variant="outlined" autoComplete='off' type="number" />
-                <TextField id="outlined-basic" label="Estatura" value={height} onChange ={handleHeight} variant="outlined" autoComplete='off' type="number" />
-                <TextField id="outlined-basic" label="Talla de la camisa" value={chessSize} onChange ={handleChessSize} variant="outlined" autoComplete='off' type="number" />
-                <TextField id="outlined-basic" label="Talla del pantalon" value={pantsSize} onChange ={handlePantsSize} variant="outlined" autoComplete='off' type="number" />
-                <TextField id="outlined-basic" label="Talla de los zapatos" value={feetSize} onChange ={handleFeetSize} variant="outlined" autoComplete='off' type="number" />
+                <TextField id="outlined-basic" label="Peso" value={weight} onChange={handleWeight} variant="outlined" autoComplete='off' type="number" />
+                <TextField id="outlined-basic" label="Estatura" value={height} onChange={handleHeight} variant="outlined" autoComplete='off' type="number" />
+                <TextField id="outlined-basic" label="Talla de la camisa" value={chessSize} onChange={handleChessSize} variant="outlined" autoComplete='off' type="number" />
+                <TextField id="outlined-basic" label="Talla del pantalon" value={pantsSize} onChange={handlePantsSize} variant="outlined" autoComplete='off' type="number" />
+                <TextField id="outlined-basic" label="Talla de los zapatos" value={feetSize} onChange={handleFeetSize} variant="outlined" autoComplete='off' type="number" />
             </div>
             <div id="gravidez" className='list'>
                 <FormControl>
@@ -920,23 +1037,23 @@ export default function Inscription() {
                         row
                         aria-labelledby="demo-radio-buttons-group-label"
                         value={gravidez}
-                        onChange ={handleGravidez}
+                        onChange={handleGravidez}
                         name="gravidez"
                     >
                         <FormControlLabel value="y" control={<Radio />} label="Si" />
                         <FormControlLabel value="n" control={<Radio />} label="No" />
                     </RadioGroup>
                 </FormControl>
-                <TextField id="outlined-basic" className={gravidez === "y"? "":"invisible"} label="Tiempo de embarazo (meses)" value={pregnancyTime} onChange={handlePregnancyTime} variant="outlined" autoComplete='off' type="number" />
+                <TextField id="outlined-basic" className={gravidez === "y" ? "" : "invisible"} label="Tiempo de embarazo (meses)" value={pregnancyTime} onChange={handlePregnancyTime} variant="outlined" autoComplete='off' type="number" />
             </div>
 
             <div id="medicalData" className='list'>
                 <FormControlLabel control={<Checkbox checked={influenza} onChange={handleInflueza} />} label="¿Se vacuna contra la gripe anualmente?" />
-                <FormControlLabel control={<Checkbox checked={asma} onChange={handleAsma}/>} label="Asma" />
-                <FormControlLabel control={<Checkbox checked={diabetes} onChange={handleDiabetes}/>} label="Diabetes" />
-                <FormControlLabel control={<Checkbox checked={epilepsia} onChange={handleEpilepsia}/>} label="Epilepcias" />
-                <FormControlLabel control={<Checkbox checked={tension} onChange={handleTension}/>} label="Hipertenso" />
-                <FormControlLabel control={<Checkbox checked={harth} onChange={handleHarth}/>} label="Problemas con el corazón" />
+                <FormControlLabel control={<Checkbox checked={asma} onChange={handleAsma} />} label="Asma" />
+                <FormControlLabel control={<Checkbox checked={diabetes} onChange={handleDiabetes} />} label="Diabetes" />
+                <FormControlLabel control={<Checkbox checked={epilepsia} onChange={handleEpilepsia} />} label="Epilepcias" />
+                <FormControlLabel control={<Checkbox checked={tension} onChange={handleTension} />} label="Hipertenso" />
+                <FormControlLabel control={<Checkbox checked={harth} onChange={handleHarth} />} label="Problemas con el corazón" />
                 <TextField id="outlined-basic" value={drugAllegies} onChange={handleDrugAllergies} label="Alergias a Medicamentos" variant="outlined" autoComplete='off' />
                 <TextField id="outlined-basic" value={foodAllegies} onChange={handleFoodAllergies} label="Alergias a Alimentos" variant="outlined" autoComplete='off' />
             </div>
@@ -948,7 +1065,7 @@ export default function Inscription() {
                         row
                         aria-labelledby="demo-radio-buttons-group-label"
                         value={houseType}
-                        onChange ={handleHouseType}
+                        onChange={handleHouseType}
                         name="house"
                     >
                         <FormControlLabel value="CasaFamiliar" control={<Radio />} label="Casa Familiar" />
@@ -984,10 +1101,10 @@ export default function Inscription() {
             </div>
 
             <div id="resourses" className='list'>
-                <FormControlLabel control={<Checkbox checked={canaima} onChange={handleCanaima}/>} label="Canaima" />
-                <FormControlLabel control={<Checkbox checked={tablet} onChange={handleTablet}/>} label="Tablet" />
-                <FormControlLabel control={<Checkbox checked={smarthPhone} onChange={handleSmarthPhone}/>} label="Teléfono inteligente" />
-                <FormControlLabel control={<Checkbox checked={pc} onChange={handlePC}/>} label="Computador de escritorio" />
+                <FormControlLabel control={<Checkbox checked={canaima} onChange={handleCanaima} />} label="Canaima" />
+                <FormControlLabel control={<Checkbox checked={tablet} onChange={handleTablet} />} label="Tablet" />
+                <FormControlLabel control={<Checkbox checked={smarthPhone} onChange={handleSmarthPhone} />} label="Teléfono inteligente" />
+                <FormControlLabel control={<Checkbox checked={pc} onChange={handlePC} />} label="Computador de escritorio" />
             </div>
 
             <div id="documents" className='list'>
@@ -1008,7 +1125,7 @@ export default function Inscription() {
                         row
                         aria-labelledby="demo-radio-buttons-group-label"
                         value={tutorNationality}
-                        onChange = {handleTutorNationality}
+                        onChange={handleTutorNationality}
                         name="tutorNationality"
                     >
                         <FormControlLabel value="v" control={<Radio />} label="Venezolano" />
@@ -1056,7 +1173,7 @@ export default function Inscription() {
                 <TextField id="outlined-basic" value={tutorAddress} onChange={handleTutorAddress} label="Dirección" variant="outlined" autoComplete='off' />
                 <TextField id="outlined-basic" value={tutorPatriaCode} onChange={handleTutorPatriaCode} label="Código del carnet de la patría" type="number" variant="outlined" autoComplete='off' />
                 <TextField id="outlined-basic" value={tutorPatriaSrial} onChange={handleTutorPatriaSrial} label="Serial del carnet de la patría" type="number" variant="outlined" autoComplete='off' />
-                
+
                 <FormControl fullWidth>
                     <InputLabel id="demo-simple-select-label">Banco del representante</InputLabel>
                     <Select
@@ -1074,10 +1191,10 @@ export default function Inscription() {
 
                     </Select>
                 </FormControl>
-                
+
                 <TextField id="outlined-basic" className={tutorBank === "Otro" ? "" : "invisible"} value={tutorBankAux} onChange={handleTutorBankAux} label="Banco" type="number" variant="outlined" autoComplete='off' />
-                
-                
+
+
                 <FormControl>
                     <FormLabel id="demo-radio-buttons-group-label">Tipo de cuenta</FormLabel>
                     <RadioGroup
@@ -1094,7 +1211,7 @@ export default function Inscription() {
                 <TextField id="outlined-basic" value={tutorBankAccoun} onChange={handleTutorBankAccoun} label="Cuenta Bancaría del Representante" type="number" variant="outlined" autoComplete='off' />
 
             </div>
-            <Button variant="contained" endIcon={<SendIcon />} onClick = {handleSendData}>Inscribir</Button>
+            <Button variant="contained" endIcon={<SendIcon />} onClick={handleSendData}>Inscribir</Button>
             <br />
 
         </div>
@@ -1424,7 +1541,7 @@ function getMunicipio(state) {
     return list[state];
 }
 
-function getBanks(){
+function getBanks() {
     let raw = "BANCO NACIONAL DE CRÉDITO, C.A. BANCO UNIVERSAL.|BANCO PLAZA, C.A., BANCO UNIVERSAL.|BANCO DEL CARIBE C.A., BANCO UNIVERSAL (BANCARIBE).|BANCO SOFITASA BANCO UNIVERSAL, C.A.|DEL SUR BANCO UNIVERSAL, C.A.|BANCO DEL TESORO, C.A., BANCO UNIVERSAL.|BANCO EXTERIOR, C.A., BANCO UNIVERSAL.|BANCO INTERNACIONAL DE DESARROLLO, C.A BANCO UNIVERSAL.|BANCO DE LA FUERZA ARMADA NACIONAL BOLIVARIANA, BANCO UNIVERSAL, C.A. (BANFANB).|BFC BANCO FONDO COMUN, C.A. BANCO UNIVERSAL.|BANPLUS BANCO UNIVERSAL, C.A.|100% BANCO, BANCO UNIVERSAL, C.A.|BANCO PROVINCIAL, S.A. BANCO UNIVERSAL.|BANCO BICENTENARIO, DEL PUEBLO, DE LA CLASE OBRERA, MUJER Y COMUNAS, BANCO UNIVERSAL, C.A.|BANCO DE VENEZUELA, S.A. BANCO UNIVERSAL.|BANCO AGRÍCOLA DE VENEZUELA, C.A.|BANESCO BANCO UNIVERSAL, C.A.|BANCO CARONÍ, C.A., BANCO UNIVERSAL.|MERCANTIL, C.A., BANCO UNIVERSAL.|BANCO ACTIVO C.A., BANCO UNIVERSAL.|VENEZOLANO DE CRÉDITO, S.A., BANCO UNIVERSAL.|BANCAMIGA BANCO UNIVERSAL, C.A.|BANCO NACIONAL DE VIVIENDA Y HABITAT (BANAVIH).|INSTITUTO MUNICIPAL DE CRÉDITO POPULAR (I.M.C.P.).|BANCO INDUSTRIAL DE VENEZUELA C.A.|BANCO DE LA GENTE EMPRENDEDORA (BANGENTE) C.A.|BANCO DE DESARROLLO ECONÓMICO Y SOCIAL DE VENEZUELA (BANDES).|BANCO DE COMERCIO EXTERIOR, C.A. (BANCOEX).|MI BANCO, BANCO MICROFINANCIERO, C.A.|BANCRECER, S.A. BANCO MICROFINANCIERO.|Otro";
     let banks = raw.split("|");
     return banks;

@@ -252,7 +252,7 @@ export function DataName() {
                     <div id="dataTitle">{activeSeccion}</div>
                     <div id="dataTitleSchoolYear">{getSchoolPeriod()}</div>
                 </div>
-                <div id="studentDataContainer">
+                <div id="studentDataContainerx">
                     <div id="studentPhoto"></div>
                     <div id="auxStudenName">
                         <TextField id="studentName" className="studentInput" label="Nombre del Alumno" variant="outlined" value={studentName} onChange={handleNameChange} spellCheck="false" />
