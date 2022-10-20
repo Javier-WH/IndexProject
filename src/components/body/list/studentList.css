@@ -20,6 +20,7 @@
     overflow-y: auto;
     margin-top: 20px;
     height: calc(100% - 60px);
+    z-index: 999;
 }
 
 .selected{
@@ -69,8 +70,9 @@ table {
   @media (max-width: 600px) {
     #MobileListButton{
       position: absolute;
-      left: auto;
+      left: 10px;
       right: auto;
       top: 3px;
+      z-index: 1000;
     }
   }

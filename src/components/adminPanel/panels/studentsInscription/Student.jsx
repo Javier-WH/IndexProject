@@ -14,17 +14,24 @@ import Tooltip from '@mui/material/Tooltip';
 import "./student.css"
 import { useState } from 'react';
 import Message from "../../message/Message"
-
+import LocalPrintshopTwoToneIcon from '@mui/icons-material/LocalPrintshopTwoTone';
+import PersonSearchTwoToneIcon from '@mui/icons-material/PersonSearchTwoTone';
+import { OpenModal } from "../../../modal/Modal"
 
 export default function Inscription() {
 
 
-
+    const [modal, setModal] = useState({ state: false })
     const [openMessage, setOpenMessage] = useState(false);
     const [messageParams, setMessageParams] = useState({
         type: "success",
         message: "Wololooo"
     })
+    const [havFacebook, setHavFacebook] = useState(false);
+    const [havTwitter, setHavTwitter] = useState(false);
+    const [havWhatsapp, setHavWhatsapp] = useState(false);
+    const [havTikTok, setHavTikTok] = useState(false);
+    const [havInstagram, setHavInstagram] = useState(false);
     const [ci, setCi] = useState("");
     const [haveCi, setHaveCi] = useState(true);
     const [grade, setGrade] = useState("1");
@@ -74,7 +81,7 @@ export default function Inscription() {
     const [whoLive, setWhoLive] = useState("");
     const [weight, setWeight] = useState("");
     const [height, setheight] = useState("");
-    const [chessSize, setChessSize] = useState("");
+    const [chessSize, setChessSize] = useState("M");
     const [pantsSize, setPantsSize] = useState("");
     const [feetSize, setFeetSize] = useState("");
     const [gravidez, setGravidez] = useState("n");
@@ -114,6 +121,47 @@ export default function Inscription() {
     const [tutorBankAux, setTutorBankAux] = useState("");
     const [tutorBankAccounType, setTutorBankAccounType] = useState("corriente");
     const [tutorBankAccoun, setTutorBankAccoun] = useState("");
+
+    const handleHavFacebook = event => {
+        if (event.target.checked) {
+            setFacebook("No tiene");
+        } else {
+            setFacebook("");
+        }
+        setHavFacebook(event.target.checked)
+    }
+    const handleHavTwitter = event => {
+        if (event.target.checked) {
+            setTwitter("No tiene");
+        } else {
+            setTwitter("");
+        }
+        setHavTwitter(event.target.checked)
+    }
+    const handleHavWhatsapp = event => {
+        if (event.target.checked) {
+            setWhatsapp("No tiene");
+        } else {
+            setWhatsapp("");
+        }
+        setHavWhatsapp(event.target.checked)
+    }
+    const handleHavTikTok = event => {
+        if (event.target.checked) {
+            setTikTok("No tiene");
+        } else {
+            setTikTok("");
+        }
+        setHavTikTok(event.target.checked)
+    }
+    const handleHavInstagram = event => {
+        if (event.target.checked) {
+            setInstagram("No tiene");
+        } else {
+            setInstagram("");
+        }
+        setHavInstagram(event.target.checked)
+    }
 
     const handleBecaName = (event) => {
         setBecaName(event.target.value)
@@ -356,8 +404,15 @@ export default function Inscription() {
     const handleHaveCi = (event) => {
         setHaveCi(!event.target.checked);
         if (event.target.checked) {
-            let number = getRandom(10);
-            setCi("99" + number);
+            let number = "99" + getRandom(10);
+            setCi(number);
+            setModal({
+                state: true,
+                buttons: 1,
+                title: "Advertencia",
+                message: `Se ha asignado una cédula provicional, esta cédula provicional puede ser cambiada a futuro cuando obtenga una cédula legal. Por los momentos guarde bien este numero ${number}, ya que es necesario para imprimir la planilla de inscripción`,
+                type: "warning"
+            })
         } else {
             setCi("");
         }
@@ -391,6 +446,113 @@ export default function Inscription() {
     const handleTutorNation = (event) => {
         setTutorNation(event.target.value);
     };
+    const handleSearch = () => {
+
+        fetch(`/student?ci=${ci}`).then(response => response.json())
+            .then(student => {
+
+                if (student.error) {
+                    console.log("el alumno no está registrado");
+                    return
+                }
+
+                setNation(student.birthCountry);
+                setGrade(student.schoolYear);
+                setSeccion(student.section);
+                setPeriodo(student.period);
+                setTutorNation(student.tutorNationality);
+                setbirthState(student.birthState);
+                setbirthPlace(student.birthPlace);
+                setHomeState(student.homeState);
+                setMunicipio(student.municipio); ////////////////////////////bug
+                setNames(student.names);
+                setLastNames(student.lastNames);
+                setDate(student.birthdate.split("T")[0]);
+                setStudentPhone(student.studentPhone);
+                setStudenEmail(student.studenEmail);
+                setPreviusSchool(student.previusSchool);
+                setNationality(student.nationality);
+                setMarried(student.married)
+                setGender(student.gender);
+                setBirthAct(student.birthAct);
+                setBirthActCopy(student.birthActCopy);
+                _setCi(student._ci);
+                setPhotos(student.photos);
+                setGradesCertificate(student.gradesCertificate);
+                setGradesCertificateCopy(student.gradesCertificateCopy);
+                setCanainaRecipe(student.canainaRecipe);
+                setSixGrade(student.sixGrade);
+                setFacebook(student.facebook);
+                setTwitter(student.twitter);
+                setWhatsapp(student.whatsapp);
+                setTikTok(student.tikTok);
+                setInstagram(student.instagram);
+                setMotherName(student.motherName);
+                setMotherLastName(student.motherLastName);
+                setMotherCi(student.motherCi);
+                setMotherPhone(student.motherPhone);
+                setFatherName(student.fatherName);
+                setFatherLastName(student.fatherLastName);
+                setFatherCi(student.fatherCi);
+                setFatherPhone(student.fatherPhone);
+                setSiblinsNumer(student.siblinsNumber);
+                setParroquia(student.parroquia);
+                setTown(student.town);
+                setUrbanizacion(student.urbanizacion);
+                setStdAddress(student.stdAddres);
+                setWhoLive(student.whoLive);
+                setWeight(student.weight);
+                setheight(student.height);
+                setChessSize(student.chessSize);
+                setPantsSize(student.pantsSize);
+                setFeetSize(student.feetSize);
+                setGravidez(student.gravidez);
+                setPregnancyTime(student.pregnancyTime);
+                setInflueza(student.influenza);
+                setAsma(student.asma);
+                setDiabetes(student.diabetes);
+                setEpilepsia(student.epilepsia);
+                setTension(student.tension);
+                setHarth(student.harth);
+                setDrugAllergies(student.drugAllegies);
+                setFoodAllergies(student.foodAllegies);
+                setHouseType(student.houseType);
+                setHouseCondition(student.houseCondition);
+                setEmergencyName(student.emergencyName);
+                setEmergencyPhone(student.emergencyPhone);
+                setEmergencyRelation(student.emergencyRelation);
+                setCanaima(student.canaima);
+                setTablet(student.tablet);
+                setSmarthPhone(student.smarthPhone);
+                setPC(student.pc);
+                setBecas(student.becas);
+                setBecaName(student.becaName);
+                setStudentPatriaCode(student.studentPatriaCode);
+                setStudentPatriaSerial(student.studentPatriaSerial);
+                setTutorName(student.tutorName);
+                setTutorLastName(student.tutorLastName);
+                setTutorCi(student.tutorCi);
+                setTutorNationality(student.tutorNationality);
+                setTutorInstruction(student.tutorInstruction);
+                setTutorPhone(student.tutorPhone);
+                setTutorEmail(student.tutorEmail);
+                setTutorAddress(student.tutorAddress);
+                setTutorPatriaCode(student.tutorPatriaCode);
+                setTutorPatriaSrial(student.tutorPatriaSrial);
+                setTutorBank(student.tutorBank);
+                setTutorBankAux(student.tutorBankAux);
+                setTutorBankAccounType(student.tutorBankAccounType);
+                setTutorBankAccoun(student.tutorBankAccoun);
+            })
+
+
+
+
+    }
+    const handlePrint = () => {
+
+        console.log("holaX")
+    }
 
     function checkMissingData() {
 
@@ -553,7 +715,7 @@ export default function Inscription() {
         return "none";
     }
 
-    function cleanData(){
+    function cleanData() {
         setCi("");
         setHaveCi(true);
         setGrade("1");
@@ -730,7 +892,10 @@ export default function Inscription() {
             tutorBank,
             tutorBankAux,
             tutorBankAccounType,
-            tutorBankAccoun
+            tutorBankAccoun,
+            municipio,
+            homeState,
+            whatsapp
         }
     }
 
@@ -753,31 +918,27 @@ export default function Inscription() {
             })
                 .then(answer => answer.json())
                 .then(response => {
-                    if(response.error){
+                    if (response.error) {
                         setMessageParams({ type: "error", message: response.error })
                         setOpenMessage(true)
-                    }else{
+                    } else {
                         setMessageParams({ type: "success", message: `Se ha inscrito satisfactoriamente al estudiante` })
                         cleanData();
                         setOpenMessage(true)
                     }
 
                 })
-                .catch(err=>{
+                .catch(err => {
                     setMessageParams({ type: "error", message: `Ocurrió un error, no se ha inscrito al estudiante` })
                     setOpenMessage(true)
                 })
-
         }
-
-
-
     }
-
 
 
     let countryKey = 0;
     return <div id="InscriptionContainer">
+        <OpenModal modal={modal} setModal={setModal} />
         <Message open={openMessage} setOpen={setOpenMessage} data={messageParams} />
         <div id="divCi">
             <div id='ciContainer'>
@@ -786,7 +947,8 @@ export default function Inscription() {
                     <FormControlLabel control={<Checkbox checked={!haveCi} onChange={handleHaveCi} />} label="No tiene cédula" />
                 </Tooltip>
             </div>
-            <Button variant="outlined" className={haveCi ? "" : "invisible"}>Buscar</Button>
+            <Button variant="outlined" className={`btnIscrip  ${haveCi ? "" : "invisible"}`} onClick={handleSearch}> <PersonSearchTwoToneIcon /> Buscar</Button>
+            <Button variant="outlined" className='btnIscrip' onClick={handlePrint}><LocalPrintshopTwoToneIcon />imprimir</Button>
         </div>
         <div id="studentDataContainer">
             <TextField id="outlined-basic" label="Nombres" variant="outlined" autoComplete='off' value={names} onChange={handleNames} />
@@ -963,14 +1125,29 @@ export default function Inscription() {
                 <FormControlLabel control={<Checkbox checked={gradesCertificate} onChange={handleGradesCertificate} />} label="Certificado de calificaciones original" />
                 <FormControlLabel control={<Checkbox checked={gradesCertificateCopy} onChange={handleGradesCertificateCopy} />} label="Certificado de calificaciones copia" />
                 <FormControlLabel control={<Checkbox checked={canainaRecipe} onChange={handleCanainaRecipe} />} label="Constancia de no poseer canaima" />
-                <FormControlLabel control={<Checkbox />} checked={sixGrade} onChange={handleSixGrade} label="Boleta de promocion de 6to grado" />
+                <FormControlLabel control={<Checkbox checked={sixGrade} onChange={handleSixGrade} />} label="Boleta de promocion de 6to grado" />
             </div>
             <div id="socialNetworking" className='list'>
-                <TextField id="outlined-basic" label="Facebook" value={facebook} onChange={handleFacebook} variant="outlined" autoComplete='off' />
-                <TextField id="outlined-basic" label="Twitter" value={twitter} onChange={handleTwitter} variant="outlined" autoComplete='off' />
-                <TextField id="outlined-basic" label="Whatsapp" value={whatsapp} onChange={handleWhatsapp} variant="outlined" autoComplete='off' />
-                <TextField id="outlined-basic" label="TikTok" value={tikTok} onChange={handleTikTok} variant="outlined" autoComplete='off' />
-                <TextField id="outlined-basic" label="Instagram" value={instagram} onChange={handleInstagram} variant="outlined" autoComplete='off' />
+                <div className="networkingContainer">
+                    <TextField id="outlined-basic" label="Facebook" value={facebook} onChange={handleFacebook} variant="outlined" autoComplete='off' InputProps={{ readOnly: havFacebook }} />
+                    <FormControlLabel control={<Checkbox checked={havFacebook} onChange={handleHavFacebook} />} label="No tiene Facebook" />
+                </div>
+                <div className="networkingContainer">
+                    <TextField id="outlined-basic" label="Twitter" value={twitter} onChange={handleTwitter} variant="outlined" autoComplete='off' InputProps={{ readOnly: havTwitter }} />
+                    <FormControlLabel control={<Checkbox checked={havTwitter} onChange={handleHavTwitter} />} label="No tiene Twitter" />
+                </div>
+                <div className="networkingContainer">
+                    <TextField id="outlined-basic" label="Whatsapp" value={whatsapp} onChange={handleWhatsapp} variant="outlined" autoComplete='off' InputProps={{ readOnly: havWhatsapp }} />
+                    <FormControlLabel control={<Checkbox checked={havWhatsapp} onChange={handleHavWhatsapp} />} label="No tiene Whatsapp" />
+                </div>
+                <div className="networkingContainer">
+                    <TextField id="outlined-basic" label="TikTok" value={tikTok} onChange={handleTikTok} variant="outlined" autoComplete='off' InputProps={{ readOnly: havTikTok }} />
+                    <FormControlLabel control={<Checkbox checked={havTikTok} onChange={handleHavTikTok} />} label="No tiene TikTok" />
+                </div>
+                <div className="networkingContainer">
+                    <TextField id="outlined-basic" label="Instagram" value={instagram} onChange={handleInstagram} variant="outlined" autoComplete='off' InputProps={{ readOnly: havInstagram }} />
+                    <FormControlLabel control={<Checkbox checked={havInstagram} onChange={handleHavInstagram} />} label="No tiene Instagram" />
+                </div>
             </div>
             <div id="familly" className='list'>
                 <TextField id="outlined-basic" label="Nombres de la Madre" value={motherName} onChange={handleMotherName} variant="outlined" autoComplete='off' />
@@ -1024,9 +1201,29 @@ export default function Inscription() {
                 <TextField id="outlined-basic" label="¿Con quien vives?" value={whoLive} onChange={handleWhoLive} variant="outlined" autoComplete='off' />
             </div>
             <div id="studentBody" className='list'>
-                <TextField id="outlined-basic" label="Peso" value={weight} onChange={handleWeight} variant="outlined" autoComplete='off' type="number" />
-                <TextField id="outlined-basic" label="Estatura" value={height} onChange={handleHeight} variant="outlined" autoComplete='off' type="number" />
-                <TextField id="outlined-basic" label="Talla de la camisa" value={chessSize} onChange={handleChessSize} variant="outlined" autoComplete='off' type="number" />
+                <TextField id="outlined-basic" label="Peso(Kg)" value={weight} onChange={handleWeight} variant="outlined" autoComplete='off' type="number" />
+                <TextField id="outlined-basic" label="Estatura(m)" value={height} onChange={handleHeight} variant="outlined" autoComplete='off' type="number" />
+
+                <div id='chessSize'>
+                    <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Talla de la camisa</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label-camisa"
+                            id="demo-simple-selectcamisa"
+                            value={chessSize}
+                            label="Estado de nacimiento"
+                            onChange={handleChessSize}
+                        >
+                            <MenuItem value="XS">XS</MenuItem>
+                            <MenuItem value="S">S</MenuItem>
+                            <MenuItem value="M">M</MenuItem>
+                            <MenuItem value="L">L</MenuItem>
+                            <MenuItem value="XL">XL</MenuItem>
+                            <MenuItem value="XXL">XXL</MenuItem>
+                        </Select>
+                    </FormControl>
+                </div>
+
                 <TextField id="outlined-basic" label="Talla del pantalon" value={pantsSize} onChange={handlePantsSize} variant="outlined" autoComplete='off' type="number" />
                 <TextField id="outlined-basic" label="Talla de los zapatos" value={feetSize} onChange={handleFeetSize} variant="outlined" autoComplete='off' type="number" />
             </div>
@@ -1054,8 +1251,8 @@ export default function Inscription() {
                 <FormControlLabel control={<Checkbox checked={epilepsia} onChange={handleEpilepsia} />} label="Epilepcias" />
                 <FormControlLabel control={<Checkbox checked={tension} onChange={handleTension} />} label="Hipertenso" />
                 <FormControlLabel control={<Checkbox checked={harth} onChange={handleHarth} />} label="Problemas con el corazón" />
-                <TextField id="outlined-basic" value={drugAllegies} onChange={handleDrugAllergies} label="Alergias a Medicamentos" variant="outlined" autoComplete='off' />
-                <TextField id="outlined-basic" value={foodAllegies} onChange={handleFoodAllergies} label="Alergias a Alimentos" variant="outlined" autoComplete='off' />
+                <TextField className='allergies' id="outlined-basic" value={drugAllegies} onChange={handleDrugAllergies} label="Alergias a Medicamentos" variant="outlined" autoComplete='off' />
+                <TextField className='allergies' id="outlined-basic" value={foodAllegies} onChange={handleFoodAllergies} label="Alergias a Alimentos" variant="outlined" autoComplete='off' />
             </div>
 
             <div id="houseData" className='list'>
@@ -1108,8 +1305,10 @@ export default function Inscription() {
             </div>
 
             <div id="documents" className='list'>
-                <FormControlLabel control={<Checkbox checked={becas} onChange={handleBecas} />} label="Tiene becas" />
-                <TextField id="outlined-basic" value={becaName} onChange={handleBecaName} className={becas ? "" : "invisible"} label="Nombre de la beca" variant="outlined" autoComplete='off' />
+                <div id="becaContainer">
+                    <FormControlLabel control={<Checkbox checked={becas} onChange={handleBecas} />} label="Tiene becas" />
+                    <TextField id="outlined-basic" value={becaName} onChange={handleBecaName} className={becas ? "" : "invisible"} label="Nombre de la beca" variant="outlined" autoComplete='off' />
+                </div>
                 <TextField id="outlined-basic" value={studentPatriaCode} onChange={handleStudentPatriaCode} label="Código del carnet de la patria" variant="outlined" type="number" autoComplete='off' />
                 <TextField id="outlined-basic" value={studentPatriaSerial} onChange={handleStudentPatriaSerial} label="Serial del carnet de la patria" variant="outlined" type="number" autoComplete='off' />
             </div>
@@ -1174,25 +1373,29 @@ export default function Inscription() {
                 <TextField id="outlined-basic" value={tutorPatriaCode} onChange={handleTutorPatriaCode} label="Código del carnet de la patría" type="number" variant="outlined" autoComplete='off' />
                 <TextField id="outlined-basic" value={tutorPatriaSrial} onChange={handleTutorPatriaSrial} label="Serial del carnet de la patría" type="number" variant="outlined" autoComplete='off' />
 
-                <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">Banco del representante</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label-banck"
-                        id="demo-simple-select-banck"
-                        value={tutorBank}
-                        label="Banco del representante"
-                        onChange={handleTutorBank}
-                    >
-                        {
-                            getBanks().map(bank => {
-                                return <MenuItem key={countryKey++} value={bank}>{bank}</MenuItem>
-                            })
-                        }
+                <div id="banckNameContainer">
+                    <div id="banckName">
+                        <FormControl fullWidth>
+                            <InputLabel id="demo-simple-select-label">Banco del representante</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label-banck"
+                                id="demo-simple-select-banck"
+                                value={tutorBank}
+                                label="Banco del representante"
+                                onChange={handleTutorBank}
+                            >
+                                {
+                                    getBanks().map(bank => {
+                                        return <MenuItem key={countryKey++} value={bank}>{bank}</MenuItem>
+                                    })
+                                }
 
-                    </Select>
-                </FormControl>
+                            </Select>
+                        </FormControl>
+                    </div>
 
-                <TextField id="outlined-basic" className={tutorBank === "Otro" ? "" : "invisible"} value={tutorBankAux} onChange={handleTutorBankAux} label="Banco" type="number" variant="outlined" autoComplete='off' />
+                    <TextField id="outlined-basic" className={tutorBank === "Otro" ? "" : "invisible"} value={tutorBankAux} onChange={handleTutorBankAux} label="Nombre del banco" variant="outlined" autoComplete='off' />
+                </div>
 
 
                 <FormControl>

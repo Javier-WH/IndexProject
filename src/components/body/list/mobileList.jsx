@@ -40,7 +40,7 @@ export function MobileList() {
     );
     let iconsStyle = {
         fontSize: 50,
-        color: "white"
+        color: "var(--mainColor)"
     }
     return <>
         <React.Fragment key={"top"}>
