@@ -2,7 +2,7 @@ import "./navBar.css";
 import { MainContext } from "../../context/MainContext"
 import { SubjectMenu } from "./subjectMenu/SubjectMenu";
 import { MainMenu } from "./mainMenu/MainMenu"
-import Logo from "./logo.svg"
+import Logo from "../../logo.svg"
 
 import LocalPrintshopIcon from '@mui/icons-material/LocalPrintshop';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';

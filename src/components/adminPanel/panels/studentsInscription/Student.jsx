@@ -13,10 +13,15 @@ import SendIcon from '@mui/icons-material/Send';
 import Tooltip from '@mui/material/Tooltip';
 import "./student.css"
 import { useState } from 'react';
-import Message from "../../message/Message"
-import LocalPrintshopTwoToneIcon from '@mui/icons-material/LocalPrintshopTwoTone';
+import Message from "../../message/Message";
+
 import PersonSearchTwoToneIcon from '@mui/icons-material/PersonSearchTwoTone';
-import { OpenModal } from "../../../modal/Modal"
+import { OpenModal } from "../../../modal/Modal";
+import Recipe from "./recipe.jsx";
+
+import infoVenezuela from "./auxFolder/getInfo"
+import getMunicipios from './auxFolder/getMunicipios';
+import Parroquias from "./auxFolder/getParroquias"
 
 export default function Inscription() {
 
@@ -549,10 +554,6 @@ export default function Inscription() {
 
 
     }
-    const handlePrint = () => {
-
-        console.log("holaX")
-    }
 
     function checkMissingData() {
 
@@ -948,7 +949,7 @@ export default function Inscription() {
                 </Tooltip>
             </div>
             <Button variant="outlined" className={`btnIscrip  ${haveCi ? "" : "invisible"}`} onClick={handleSearch}> <PersonSearchTwoToneIcon /> Buscar</Button>
-            <Button variant="outlined" className='btnIscrip' onClick={handlePrint}><LocalPrintshopTwoToneIcon />imprimir</Button>
+            <Recipe ci={ci} />
         </div>
         <div id="studentDataContainer">
             <TextField id="outlined-basic" label="Nombres" variant="outlined" autoComplete='off' value={names} onChange={handleNames} />
@@ -1048,7 +1049,8 @@ export default function Inscription() {
                     onChange={handleBirthState}
                 >
                     {
-                        getStates(nation).map(state => {
+                        infoVenezuela().map(register => {
+                            let state = register.estado;
                             return <MenuItem key={countryKey++} value={state}>{state}</MenuItem>
                         })
                     }
@@ -1066,9 +1068,10 @@ export default function Inscription() {
                     onChange={handleBirthPlace}
                 >
                     {
-                        getMunicipio(birthState).map(state => {
-                            return <MenuItem key={countryKey++} value={state}>{state}</MenuItem>
-                        })}
+                        getMunicipios(birthState).map(municipio => {
+                            return <MenuItem key={countryKey++} value={municipio}>{municipio}</MenuItem>
+                        })
+                    }
 
                 </Select>
             </FormControl>
@@ -1171,9 +1174,11 @@ export default function Inscription() {
                         onChange={handleHomeState}
                     >
                         {
-                            getStates().map(state => {
+                            infoVenezuela().map(register => {
+                                let state = register.estado;
                                 return <MenuItem key={countryKey++} value={state}>{state}</MenuItem>
-                            })}
+                            })
+                        }
 
                     </Select>
                 </FormControl>
@@ -1187,14 +1192,31 @@ export default function Inscription() {
                         onChange={handleMunicipio}
                     >
                         {
-                            getMunicipio(homeState).map(muni => {
-                                return <MenuItem key={countryKey++} value={muni}>{muni}</MenuItem>
-                            })}
+                            getMunicipios(homeState).map(municipio => {
+                                return <MenuItem key={countryKey++} value={municipio}>{municipio}</MenuItem>
+                            })
+                        }
 
                     </Select>
                 </FormControl>
 
-                <TextField id="outlined-basic" label="Parroquia" value={parroquia} onChange={handleParroquia} variant="outlined" autoComplete='off' />
+                <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label">Parroquias</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label-municipio"
+                        id="demo-simple-select"
+                        value={parroquia}
+                        label="Municipio"
+                        onChange={handleParroquia}
+                    >
+                        {
+                            Parroquias(homeState, municipio).map(parroquia => {
+                                return <MenuItem key={countryKey++} value={parroquia}>{parroquia}</MenuItem>
+                            })
+                        }
+
+                    </Select>
+                </FormControl>
                 <TextField id="outlined-basic" label="Poblacíon" value={town} onChange={handleTown} variant="outlined" autoComplete='off' />
                 <TextField id="outlined-basic" label="Urbanización" value={urbanizacion} onChange={handleUrbanizacion} variant="outlined" autoComplete='off' />
                 <TextField id="outlined-basic" label="Dirección" value={stdAddres} onChange={handleStdAddress} variant="outlined" autoComplete='off' />
@@ -1434,315 +1456,6 @@ function getCountries() {
     return countrines;
 }
 
-function getStates(nation = "Venezuela") {
-    if (nation !== "Venezuela") {
-        return ["otro"]
-    }
-
-    const raw = "Amazonas|Anzoátegui|Apure|Aragua|Barinas|Bolívar|Carabobo|Cojedes|Delta Amacuro|Distrito Capital|Falcón|Guárico|Lara|Mérida|Miranda|Monagas|Nueva Esparta|Portuguesa|Sucre|Táchira|Trujillo|Vargas|Yaracuy|Zulia"
-    const states = raw.split("|");
-    return states;
-}
-
-function getMunicipio(state) {
-
-    if (state === "otro") {
-        return ["otro"]
-    }
-
-
-    const list = {
-        "Distrito Capital": ["Municipio Libertador (Caracas)"],
-        Amazonas: ["Municipio Alto Orinoco (La Esmeralda)",
-            "Municipio Atabapo (San Fernando de Atabapo)",
-            "Municipio Atures (Puerto Ayacucho)",
-            "Municipio Autana (Isla Ratón)",
-            "Municipio Manapiare (San Juan de Manapiare)",
-            "Municipio Maroa (Maroa)",
-            "Municipio Río Negro (San Carlos de Río Negro)"],
-        Anzoátegui: ["Municipio Anaco (Anaco)",
-            "Municipio Aragua (Aragua de Barcelona)",
-            "Municipio Bolívar (Barcelona)",
-            "Municipio Bruzual (Clarines)",
-            "Municipio Cajigal (Onoto)",
-            "Municipio Carvajal (Valle de Guanape)",
-            "Municipio Diego Bautista Urbaneja (Lechería)",
-            "Municipio Freites (Cantaura)",
-            "Municipio Guanipa (San José de Guanipa)",
-            "Municipio Guanta (Guanta)",
-            "Municipio Independencia (Soledad)",
-            "Municipio Libertad (San Mateo)",
-            "Municipio McGregor (El Chaparro)",
-            "Municipio Miranda (Pariaguán)",
-            "Municipio Monagas (San Diego de Cabrutica)",
-            "Municipio Peñalver (Puerto Píritu)",
-            "Municipio Píritu (Píritu)",
-            "Municipio San Juan de Capistrano (Boca de Uchire)",
-            "Municipio Santa Ana (Santa Ana)",
-            "Municipio Simón Rodriguez (El Tigre)",
-            "Municipio Sotillo (Puerto La Cruz)"],
-        Apure: ["Municipio Achaguas (Achaguas)",
-            "Municipio Biruaca (Biruaca)",
-            "Municipio Muñoz (Bruzual)",
-            "Municipio Páez (Guasdualito)",
-            "Municipio Pedro Camejo (San Juan de Payara)",
-            "Municipio Rómulo Gallegos (Elorza)",
-            "Municipio San Fernando (San Fernando de Apure)"],
-        Aragua: ["Municipio Bolívar (San Mateo)",
-            "Municipio Camatagua(Camatagua)",
-            "Municipio Francisco Linares Alcántara (Santa Rita)",
-            "Municipio Girardot (Maracay)",
-            "Municipio José Ángel Lamas (Santa Cruz)",
-            "Municipio José Félix Ribas (La Victoria)",
-            "Municipio José Rafael Revenga (El Consejo)",
-            "Municipio Libertador (Palo Negro)",
-            "Municipio Mario Briceño Iragorry (El Limón)",
-            "Municipio Ocumare de la Costa de Oro (Ocumare de la Costa)",
-            "Municipio San Casimiro (San Casimiro)",
-            "Municipio San Sebastián (San Sebastián de los Reyes)",
-            "Municipio Santiago Mariño (Turmero)",
-            "Municipio Santos Michelena (Las Tejerías)",
-            "Municipio Sucre (Cagua)",
-            "Municipio Tovar (Colonia Tovar)",
-            "Municipio Urdaneta (Barbacoas)",
-            "Municipio Zamora (Villa de Cura)"],
-        Barinas: ["Municipio Alberto Arvelo Torrealba (Sabaneta)",
-            "Municipio Andrés Eloy Blanco (El Cantón)",
-            "Municipio Antonio José de Sucre (Socopó)",
-            "Municipio Arismendi (Arismendi)",
-            "Municipio Barinas (Barinas)",
-            "Municipio Bolívar (Barinitas)",
-            "Municipio Cruz Paredes (Barrancas)",
-            "Municipio Ezequiel Zamora (Santa Bárbara)",
-            "Municipio Obispos (Obispos)",
-            "Municipio Pedraza (Ciudad Bolivia)",
-            "Municipio Rojas (Libertad)",
-            "Municipio Sosa (Ciudad de Nutrias)"],
-        Bolívar: ["Municipio Caroní (Ciudad Guayana)",
-            "Municipio Cedeño (Caicara del Orinoco)",
-            "Municipio El Callao (El Callao)",
-            "Municipio Gran Sabana (Santa Elena de Uairén)",
-            "Municipio Heres (Ciudad Bolívar)",
-            "Municipio Piar (Upata)",
-            "Municipio Raúl Leoni (Ciudad Piar)",
-            "Municipio Roscio (Guasipati)",
-            "Municipio Sifontes (Tumeremo)",
-            "Municipio Sucre (Maripa)",
-            "Municipio Padre Pedro Chen (El Palmar)"],
-        Carabobo: ["Municipio Bejuma (Bejuma)",
-            "Municipio Carlos Arvelo (Güigüe)",
-            "Municipio Diego Ibarra (Mariara)",
-            "Municipio Guacara (Guacara)",
-            "Municipio Juan José Mora (Morón)",
-            "Municipio Libertador (Tocuyito)",
-            "Municipio Los Guayos (Los Guayos)",
-            "Municipio Miranda (Miranda)",
-            "Municipio Montalbán (Montalbán)",
-            "Municipio Naguanagua (Naguanagua)",
-            "Municipio Puerto Cabello (Puerto Cabello)",
-            "Municipio San Diego (San Diego)",
-            "Municipio San Joaquín (San Joaquín)",
-            "Municipio Valencia (Valencia)"],
-        Cojedes: ["Municipio Anzoátegui (Cojedes)",
-            "Municipio Falcón (Tinaquillo)",
-            "Municipio Girardot (El Baúl)",
-            "Municipio Lima Blanco (Macapo)",
-            "Municipio Pao de San Juan Bautista (El Pao)",
-            "Municipio Ricaurte (Libertad)",
-            "Municipio Rómulo Gallegos"],
-        "Delta Amacuro": ["Municipio Antonio Díaz Curiapo (Curiapo)",
-            "Municipio Casacoima (Sierra Imataca)",
-            "Municipio Pedernales (Pedernales)",
-            "Municipio Tucupita (Tucupita)"],
-        Falcón: ["Municipio Acosta (San Juan de los Cayos)",
-            "Municipio Bolívar (San Luis)",
-            "Municipio Buchivacoa (Capatárida)",
-            "Municipio Cacique Manaure (Yaracal)",
-            "Municipio Carirubana (Punto Fijo)",
-            "Municipio Colina (La Vela de Coro)",
-            "Municipio Dabajuro (Dabajuro)",
-            "Municipio Democracia (Pedregal)",
-            "Municipio Falcón (Pueblo Nuevo)",
-            "Municipio Federación (Churuguara)",
-            "Municipio Jacura (Jacura)",
-            "Municipio Los Taques (Santa Cruz de Los Taques)",
-            "Municipio Mauroa (Mene de Mauroa)",
-            "Municipio Miranda (Santa Ana de Coro)",
-            "Municipio Monseñor Iturriza (Chichiriviche)",
-            "Municipio Palmasola (Palmasola)",
-            "Municipio Petit (Cabure)",
-            "Municipio Píritu (Píritu)",
-            "Municipio San Francisco (Mirimire)",
-            "Municipio Silva (Tucacas)",
-            "Municipio Sucre (La Cruz de Taratara)",
-            "Municipio Tocópero (Tocópero)",
-            "Municipio Unión (Santa Cruz de Bucaral)",
-            "Municipio Urumaco (Urumaco)",
-            "Municipio Zamora (Puerto Cumarebo)"],
-        Guárico: ["Municipio Esteros de Camaguan(Camaguan)",
-            "Municipio Chaguaramas(Chaguaramas)",
-            "Municipio El Socorro (El Socorro)",
-            "Municipio Francisco de Miranda (Calabozo)",
-            "Municipio José Félix Ribas (Tucupido)",
-            "Municipio José Tadeo Monagas (Altagracia de Orituco)",
-            "Municipio Juan Germán Roscio (San Juan de Los Morros)",
-            "Municipio Julián Mellado (El Sombrero)",
-            "Municipio Las Mercedes (Las Mercedes)",
-            "Municipio Leonardo Infante (Valle de La Pascua)",
-            "Municipio Pedro Zaraza (Zaraza)",
-            "Municipio Ortíz (Ortíz)",
-            "Municipio San Gerónimo de Guayabal (Guayabal)",
-            "Municipio San José de Guaribe (San José de Guaribe)",
-            "Municipio Santa María de Ipire (Santa María de Ipire)"],
-        Lara: ["Municipio Andrés Eloy Blanco (Sanare)",
-            "Municipio Crespo (Duaca)",
-            "Municipio Iribarren (Barquisimeto)",
-            "Municipio Jiménez (Quibor)",
-            "Municipio Morán (El Tocuyo)",
-            "Municipio Palavecino (Cabudare)",
-            "Municipio Simón Planas (Sarare)",
-            "Municipio Torres (Carora)",
-            "Municipio Urdaneta (Siquisique)"],
-        Mérida: ["Municipio Alberto Adriani (El Vigía)",
-            "Municipio Andrés Bello (La Azulita)",
-            "Municipio Antonio Pinto Salinas (Santa Cruz de Mora)",
-            "Municipio Sucre (Lagunillas)",
-            "Municipio Tovar (Tovar)",
-            "Municipio Tulio Febres Cordero (Nueva Bolivia)",
-            "Municipio Zea (Zea)"],
-        Miranda: ["Municipio Acevedo (Caucagua)",
-            "Municipio Andrés Bello (San José de Barlovento)",
-            "Municipio Baruta (Baruta)",
-            "Municipio Brión (Higuerote)",
-            "Municipio Buroz (Mamporal)",
-            "Municipio Carrizal (Carrizal)",
-            "Municipio Chacao (Chacao)",
-            "Municipio Cristóbal Rojas (Charallave)",
-            "Municipio El Hatillo (El Hatillo)",
-            "Municipio Guaicaipuro (Los Teques)",
-            "Municipio Independencia (Santa Teresa del Tuy)",
-            "Municipio Lander (Ocumare del Tuy)",
-            "Municipio Los Salias (San Antonio de los Altos)",
-            "Municipio Páez (Río Chico)",
-            "Municipio Paz Castillo (Santa Lucía)",
-            "Municipio Pedro Gual (Cúpira)",
-            "Municipio Plaza (Guarenas)",
-            "Municipio Simón Bolívar (San Francisco de Yare)",
-            "Municipio Sucre (Petare)",
-            "Municipio Urdaneta (Cúa)",
-            "Municipio Zamora (Guatire)"],
-        Monagas: ["Municipio Acosta (San Antonio de Capayacuar)",
-            "Municipio Aguasay (Aguasai)",
-            "Municipio Bolívar",
-            "Municipio Cedeño (Caicara)",
-            "Municipio Ezequiel Zamora (Punta de Mata)",
-            "Municipio Libertador (Temblador)",
-            "Municipio Maturín (Maturín)",
-            "Municipio Piar (Aragua)",
-            "Municipio Punceres (Quiriquire)",
-            "Municipio Santa Bárbara (Santa Bárbara)",
-            "Municipio Sotillo (Barrancas del Orinco)",
-            "Municipio Uracoa (Uracoa)"],
-        "Nueva Esparta": ["Municipio Antolín del Campo (La Plaza de Paraguachí)",
-            "Municipio Arismendi (La Asunción)",
-            "Municipio Díaz (San Juan Bautista)",
-            "Municipio García (El Valle del Espíritu Santo)",
-            "Municipio Gómez (Santa Ana)",
-            "Municipio Maneiro (Pampatar)",
-            "Municipio Marcano (Juan Griego)",
-            "Municipio Mariño (Porlamar)",
-            "Municipio Península de Macanao (Boca de Río)",
-            "Municipio Tubores (Punta de Piedras)",
-            "Municipio Villalba (San Pedro de Coche)"],
-        Portuguesa: ["Municipio Agua Blanca (Agua Blanca)",
-            "Municipio Araure (Araure)",
-            "Municipio Esteller (Píritu)",
-            "Municipio Guanare (Guanare)",
-            "Municipio Guanarito (Guanarito)",
-            "Municipio Monseñor José Vicenti de Unda (Chabasquén de Unda)",
-            "Municipio Ospino (Ospino)",
-            "Municipio Páez (Acarigua)",
-            "Municipio Papelón (Papelón)",
-            "Municipio San Genaro de Boconoíto (Boconoíto)",
-            "Municipio San Rafael de Onoto (San Rafael de Onoto)",
-            "Municipio Santa Rosalía (El Playón)",
-            "Municipio Sucre (Biscucuy)",
-            "Municipio Turén (Villa Bruzual)"],
-        Sucre: ["Municipio Andrés Eloy Blanco (Casanay)",
-            "Municipio Andrés Mata (San José de Aerocuar)",
-            "Municipio Arismendi (Río Caribe)",
-            "Municipio Benítez (El Pilar)",
-            "Municipio Bermúdez (Carúpano)",
-            "Municipio Bolívar (Marigüitar)",
-            "Municipio Cajigal (Yaguaraparo)",
-            "Municipio Cruz Salmerón Acosta (Araya)",
-            "Municipio Libertador (Tunapuy)",
-            "Municipio Mariño (Irapa)",
-            "Municipio Mejía (San Antonio del Golfo)",
-            "Municipio Montes (Cumanacoa)",
-            "Municipio Ribero (Cariaco)",
-            "Municipio Sucre (Cumaná)",
-            "Municipio Valdez (Güiria)"],
-        Táchira: ["Municipio Andrés Bello(Cordero)",
-            "Municipio Antonio Rómulo Costa (Las Mesas)",
-            "Municipio Ayacucho (El Colón)",
-            "Municipio Bolívar (San Antonio del Táchira)",
-            "Municipio Cárdenas (Táriba)",
-            "Municipio Córdoba (Santa Ana de Táchira)",
-            "Municipio Fernández Feo (San Rafael del Piñal)",
-            "Municipio Francisco de Miranda (San José de Bolívar)",
-            "Municipio García de Hevia (La Fría)",
-            "Municipio Guásimos (Palmira)",
-            "Municipio Independencia (Capacho Nuevo)",
-            "Municipio Jáuregui (La Grita)",
-            "Municipio José María Vargas (El Cobre)",
-            "Municipio Junín (Rubio)",
-            "Municipio San Judas Tadeo (Umuquena)",
-            "Municipio Libertad (Capacho Viejo)",
-            "Municipio Libertador (Abejales)",
-            "Municipio Lobatera (Lobatera)",
-            "Municipio Michelena (Michelena)",
-            "Municipio Panamericano (Coloncito)",
-            "Municipio Pedro María Ureña (Ureña)",
-            "Municipio Rafael Urdaneta (Delicias)",
-            "Municipio Samuel Dario Maldonado (La Tendida)",
-            "Municipio San Cristóbal (San Cristóbal)",
-            "Municipio Seboruco (Seboruco)",
-            "Municipio Simón Rodríguez (San Simon)",
-            "Municipio Sucre (Queniquea)",
-            "Municipio Torbes (San Josesito)",
-            "Municipio Uribante (Pregonero)"],
-        Trujillo: ["Municipio Andrés Bello (Santa Isabel)",
-            "Municipio Boconó (Boconó)",
-            "Municipio Bolívar (Sabana Grande)",
-            "Municipio Candelaria (Chejendé)",
-            "Municipio Carache (Carache)",
-            "Municipio Escuque (Escuque)",
-            "Municipio José Felipe Márquez Cañizalez (El Paradero)",
-            "Municipio Juan Vicente Campos Elías (Campo Elías)",
-            "Municipio La Ceiba (Santa Apolonia)",
-            "Municipio Miranda (El Dividive)",
-            "Municipio Pampán (Pampán)",
-            "Municipio Trujillo (Trujillo)",
-            "Municipio Andres Linares (San Lazaro)",
-            "Municipio Pampanito (Pampanito)"],
-        Vargas: ["Municipio Vargas (La Guaira)"],
-        Yaracuy: ["Municipio Arístides Bastidas (San Pablo)",
-            "Municipio Bolívar (Aroa)",
-            "Municipio Bruzual (Chivacoa)",
-            "Municipio Cocorote (Cocorote)",
-            "Municipio Independencia (Independencia)"],
-        Zulia: ["Municipio Almirante Padilla (El Toro)",
-            "Municipio Baralt (San Timoteo)",
-            "Municipio Cabimas (Cabimas)",
-            "Municipio Catatumbo (Encontrados)",
-            "Municipio Colón (San Carlos del Zulia)",
-            "Municipio Francisco Javier Pulgar (Pueblo Nuevo-El Chivo)",
-            "Municipio Jesús Enrique Losada (La Concepción)",
-            "Municipio Jesús María Semprún (Casigua El Cubo)"]
-    }
-    return list[state];
-}
 
 function getBanks() {
     let raw = "BANCO NACIONAL DE CRÉDITO, C.A. BANCO UNIVERSAL.|BANCO PLAZA, C.A., BANCO UNIVERSAL.|BANCO DEL CARIBE C.A., BANCO UNIVERSAL (BANCARIBE).|BANCO SOFITASA BANCO UNIVERSAL, C.A.|DEL SUR BANCO UNIVERSAL, C.A.|BANCO DEL TESORO, C.A., BANCO UNIVERSAL.|BANCO EXTERIOR, C.A., BANCO UNIVERSAL.|BANCO INTERNACIONAL DE DESARROLLO, C.A BANCO UNIVERSAL.|BANCO DE LA FUERZA ARMADA NACIONAL BOLIVARIANA, BANCO UNIVERSAL, C.A. (BANFANB).|BFC BANCO FONDO COMUN, C.A. BANCO UNIVERSAL.|BANPLUS BANCO UNIVERSAL, C.A.|100% BANCO, BANCO UNIVERSAL, C.A.|BANCO PROVINCIAL, S.A. BANCO UNIVERSAL.|BANCO BICENTENARIO, DEL PUEBLO, DE LA CLASE OBRERA, MUJER Y COMUNAS, BANCO UNIVERSAL, C.A.|BANCO DE VENEZUELA, S.A. BANCO UNIVERSAL.|BANCO AGRÍCOLA DE VENEZUELA, C.A.|BANESCO BANCO UNIVERSAL, C.A.|BANCO CARONÍ, C.A., BANCO UNIVERSAL.|MERCANTIL, C.A., BANCO UNIVERSAL.|BANCO ACTIVO C.A., BANCO UNIVERSAL.|VENEZOLANO DE CRÉDITO, S.A., BANCO UNIVERSAL.|BANCAMIGA BANCO UNIVERSAL, C.A.|BANCO NACIONAL DE VIVIENDA Y HABITAT (BANAVIH).|INSTITUTO MUNICIPAL DE CRÉDITO POPULAR (I.M.C.P.).|BANCO INDUSTRIAL DE VENEZUELA C.A.|BANCO DE LA GENTE EMPRENDEDORA (BANGENTE) C.A.|BANCO DE DESARROLLO ECONÓMICO Y SOCIAL DE VENEZUELA (BANDES).|BANCO DE COMERCIO EXTERIOR, C.A. (BANCOEX).|MI BANCO, BANCO MICROFINANCIERO, C.A.|BANCRECER, S.A. BANCO MICROFINANCIERO.|Otro";

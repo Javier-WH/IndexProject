@@ -64,7 +64,8 @@
     margin-top: 3mm;
 }
 #printLogo{
-    width: 5cm;
+    width: 3cm;
+    margin-left: 1.5cm;
 }
 .printTitle{
     font-size: 18px;
