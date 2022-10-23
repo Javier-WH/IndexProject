@@ -25,6 +25,7 @@ import Parroquias from "./auxFolder/getParroquias";
 import getSubjects from './auxFolder/getSubjects';
 
 export default function Inscription() {
+    const [failedSubjects, setFailedSubjects]= useState("");
     const [pensum, setPensum] = useState([]);
     const [inscriptionType, setInscriptionType] = useState("")
     const [stdFounded, setStdFounded] = useState(false);
@@ -1476,7 +1477,7 @@ export default function Inscription() {
             </div>
             <div id="MateriaPendiete" className={`list ${inscriptionType === "Nuevo Ingreso" ? "folded" : ""}`}>
                 {
-                    checkSubjects(stdFounded).map(subject=>{
+                    checkSubjects(stdFounded, failedSubjects).map(subject=>{
                         return <div className="subjects">{subject}</div>
                      })
                 }

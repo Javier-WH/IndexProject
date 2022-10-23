@@ -1,4 +1,4 @@
-export default function checkSubjects(student) {
+export default function checkSubjects(student, setFailedSubjects) {
     try {
         let subjectList = student.subjects
         let subjectListKeys = Object.keys(subjectList);
@@ -11,6 +11,7 @@ export default function checkSubjects(student) {
         })
 
         if(failedSubjects.length > 0){
+            setFailedSubjects(failedSubjects)
             return failedSubjects;
         }else{
             return ["Ninguna"]
