@@ -1,5 +1,9 @@
 
-export default function getInfo() {
+export default function getInfo(nation = "Venezuela") {
+
+    if(nation !== "Venezuela"){
+        return [{ "estado":"Otro"}]
+    }
 
     return [
         {

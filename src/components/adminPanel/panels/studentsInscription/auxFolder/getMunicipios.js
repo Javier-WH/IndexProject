@@ -1,6 +1,11 @@
 import infoVenezuela from "./getInfo"
 
 export default function getMunicipios(State){
+
+    if(State === "Otro"){
+        return ["Otro"]
+    }
+
     let municipios = [];
     infoVenezuela().map(register => {
         if (register.estado === State) {

@@ -4,7 +4,11 @@ export default function getParroquias(estado, municipio) {
     if(estado === "" || estado === undefined || municipio === "" || municipio === undefined){
         return [];
     }
-   
+
+    if(estado === "Otro"){
+        return ["Otro"]
+    }
+
     try {
         let parroquias = [];
         infoVenezuela().map(registro => {

@@ -12,20 +12,22 @@ import Checkbox from '@mui/material/Checkbox';
 import SendIcon from '@mui/icons-material/Send';
 import Tooltip from '@mui/material/Tooltip';
 import "./student.css"
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Message from "../../message/Message";
-
+import checkSubjects from './auxFolder/checkSumbjects';
 import PersonSearchTwoToneIcon from '@mui/icons-material/PersonSearchTwoTone';
 import { OpenModal } from "../../../modal/Modal";
 import Recipe from "./recipe.jsx";
 
 import infoVenezuela from "./auxFolder/getInfo"
 import getMunicipios from './auxFolder/getMunicipios';
-import Parroquias from "./auxFolder/getParroquias"
+import Parroquias from "./auxFolder/getParroquias";
+import getSubjects from './auxFolder/getSubjects';
 
 export default function Inscription() {
-
-
+    const [pensum, setPensum] = useState([]);
+    const [inscriptionType, setInscriptionType] = useState("")
+    const [stdFounded, setStdFounded] = useState(false);
     const [modal, setModal] = useState({ state: false })
     const [openMessage, setOpenMessage] = useState(false);
     const [messageParams, setMessageParams] = useState({
@@ -418,8 +420,12 @@ export default function Inscription() {
                 message: `Se ha asignado una cédula provicional, esta cédula provicional puede ser cambiada a futuro cuando obtenga una cédula legal. Por los momentos guarde bien este numero ${number}, ya que es necesario para imprimir la planilla de inscripción`,
                 type: "warning"
             })
+            setInscriptionType('Nuevo Ingreso');
+            setStdFounded(false);
+            cleanData();
         } else {
             setCi("");
+            setInscriptionType("")
         }
     }
     const handleCi = (event) => {
@@ -457,10 +463,13 @@ export default function Inscription() {
             .then(student => {
 
                 if (student.error) {
-                    console.log("el alumno no está registrado");
+                    setInscriptionType('Nuevo Ingreso')
+                    setStdFounded(false);
+                    cleanData();
                     return
                 }
-
+                setInscriptionType('Estudiante encontrado')
+                setStdFounded(student);
                 setNation(student.birthCountry);
                 setGrade(student.schoolYear);
                 setSeccion(student.section);
@@ -549,9 +558,6 @@ export default function Inscription() {
                 setTutorBankAccounType(student.tutorBankAccounType);
                 setTutorBankAccoun(student.tutorBankAccoun);
             })
-
-
-
 
     }
 
@@ -717,8 +723,7 @@ export default function Inscription() {
     }
 
     function cleanData() {
-        setCi("");
-        setHaveCi(true);
+
         setGrade("1");
         setSeccion("A");
         setPeriodo("2022");
@@ -925,6 +930,8 @@ export default function Inscription() {
                     } else {
                         setMessageParams({ type: "success", message: `Se ha inscrito satisfactoriamente al estudiante` })
                         cleanData();
+                        setHaveCi(true);
+                        setCi("");
                         setOpenMessage(true)
                     }
 
@@ -935,6 +942,14 @@ export default function Inscription() {
                 })
         }
     }
+
+
+    useEffect(() => {
+        fetch("/matricula").then(respose => respose.json())
+            .then(matricula => {setPensum(matricula)});
+
+    }, [])
+
 
 
     let countryKey = 0;
@@ -949,9 +964,10 @@ export default function Inscription() {
                 </Tooltip>
             </div>
             <Button variant="outlined" className={`btnIscrip  ${haveCi ? "" : "invisible"}`} onClick={handleSearch}> <PersonSearchTwoToneIcon /> Buscar</Button>
-            <Recipe ci={ci} />
+            <Recipe student={stdFounded} />
         </div>
-        <div id="studentDataContainer">
+        <div id="studentDataContainer" className={inscriptionType === "Nuevo Ingreso" || inscriptionType === "Estudiante encontrado" ? "" : "folded"} >
+            <div id="inscriptionType">{inscriptionType}</div>
             <TextField id="outlined-basic" label="Nombres" variant="outlined" autoComplete='off' value={names} onChange={handleNames} />
             <TextField id="outlined-basic" label="Apellidos" variant="outlined" autoComplete='off' value={lastNames} onChange={handleLastNames} />
             <div className='auxContainer'>
@@ -1049,12 +1065,11 @@ export default function Inscription() {
                     onChange={handleBirthState}
                 >
                     {
-                        infoVenezuela().map(register => {
+                        infoVenezuela(nation).map(register => {
                             let state = register.estado;
                             return <MenuItem key={countryKey++} value={state}>{state}</MenuItem>
                         })
                     }
-
                 </Select>
             </FormControl>
 
@@ -1217,7 +1232,22 @@ export default function Inscription() {
 
                     </Select>
                 </FormControl>
-                <TextField id="outlined-basic" label="Poblacíon" value={town} onChange={handleTown} variant="outlined" autoComplete='off' />
+
+                <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label">Poblacíon</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label-camisaPoblacion"
+                        id="demo-simple-selectcamisaPoblacion"
+                        value={town}
+                        label="Estado de nacimiento"
+                        onChange={handleTown}
+                    >
+                        <MenuItem value="Rural">Poblacíon Rural</MenuItem>
+                        <MenuItem value="Urbana">Poblacíon Urbana</MenuItem>
+
+                    </Select>
+                </FormControl>
+
                 <TextField id="outlined-basic" label="Urbanización" value={urbanizacion} onChange={handleUrbanizacion} variant="outlined" autoComplete='off' />
                 <TextField id="outlined-basic" label="Dirección" value={stdAddres} onChange={handleStdAddress} variant="outlined" autoComplete='off' />
                 <TextField id="outlined-basic" label="¿Con quien vives?" value={whoLive} onChange={handleWhoLive} variant="outlined" autoComplete='off' />
@@ -1436,6 +1466,22 @@ export default function Inscription() {
                 <TextField id="outlined-basic" value={tutorBankAccoun} onChange={handleTutorBankAccoun} label="Cuenta Bancaría del Representante" type="number" variant="outlined" autoComplete='off' />
 
             </div>
+
+            <div id="subjecsList" className='list'>
+                {
+                    getSubjects(pensum, grade ).map(subject=>{
+                       return <div className="subjects">{subject}</div>
+                    })
+                }
+            </div>
+            <div id="MateriaPendiete" className={`list ${inscriptionType === "Nuevo Ingreso" ? "folded" : ""}`}>
+                {
+                    checkSubjects(stdFounded).map(subject=>{
+                        return <div className="subjects">{subject}</div>
+                     })
+                }
+            </div>
+
             <Button variant="contained" endIcon={<SendIcon />} onClick={handleSendData}>Inscribir</Button>
             <br />
 

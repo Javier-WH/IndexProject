@@ -90,6 +90,23 @@
 #tutor::after{
     content: "Representante legal del estudiante";
 }
+#subjecsList::after{
+    content: "Pensum del grado a cursar";
+}
+#MateriaPendiete::after{
+    content: "Materias reprobadas";
+}
+
+#MateriaPendiete,
+#subjecsList{
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+}
+.subjects{
+    font-family: Arial, Helvetica, sans-serif;
+    border-bottom: 1px solid var(--secondaryColor);
+}
 .period{
     width: 400px;
 }
@@ -126,4 +143,17 @@
     display: flex;
     flex-wrap: wrap;
     column-gap: 10px;
+}
+
+#inscriptionType{
+    width: 100%;
+    text-align: center;
+    font-weight: 500;
+    color: var(--secondaryColor);
+}
+.folded{
+    overflow: hidden;
+    height: 1px;
+    pointer-events: none;
+    visibility: hidden;
 }
