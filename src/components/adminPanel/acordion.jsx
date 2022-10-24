@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 
 import Config from "./panels/config/config"
 import Inscription from './panels/studentsInscription/Student';
-
+import Tutor from "./panels/tutorInscription/tutor"
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -60,7 +60,7 @@ export default function CustomizedAccordions() {
           <Typography>Configuración</Typography>
         </AccordionSummary>
         <AccordionDetails>
-              <Config/>
+          <Config />
         </AccordionDetails>
       </Accordion>
 
@@ -70,7 +70,7 @@ export default function CustomizedAccordions() {
           <Typography>Inscribir Estudiante</Typography>
         </AccordionSummary>
         <AccordionDetails>
-            <Inscription/>
+          <Inscription />
         </AccordionDetails>
       </Accordion>
 
@@ -80,10 +80,7 @@ export default function CustomizedAccordions() {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor
-            sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget.
+            <Tutor />
           </Typography>
         </AccordionDetails>
       </Accordion>

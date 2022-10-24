@@ -33,7 +33,7 @@ export function DataName() {
         let lap3Input = document.getElementById("lap3").value;
 
         let final = (( Number.parseFloat(lap1Input)+Number.parseFloat(lap2Input)+Number.parseFloat(lap3Input))/3).toFixed(2)
-       // final = Number.parseFloat(final).toFixed(2)
+       
         
         if(isNaN(final)){
             final = ""
@@ -59,6 +59,7 @@ export function DataName() {
                 value = Number.parseFloat(value).toFixed(2);
             }
 
+            let def = handleDef();
             let objectName = `id-${selectedStudent.id}`;
             let dataToSave = {
                 name: objectName,
@@ -66,9 +67,10 @@ export function DataName() {
                     id: selectedStudent.id,
                     session: activeSeccion,
                     l1: value,
-                    def:  handleDef()
+                    def
                 }
             }
+        
             pushNewData(dataToSave);
          
         }

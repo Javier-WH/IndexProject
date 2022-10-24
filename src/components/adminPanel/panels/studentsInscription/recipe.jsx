@@ -14,7 +14,7 @@ export default function InscriptionRecipe({ student }) {
     const componentRef = useRef();
 
     if(student === false){
-        return <h1></h1>
+        return <h1>{" "}</h1>
     }
 
     function getSchoolYear(){

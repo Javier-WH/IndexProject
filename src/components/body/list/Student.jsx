@@ -5,7 +5,6 @@ export function Student({ data, number, seccion }) {
     let seccionArray = seccion.split(" ");
     let seccionName = seccionArray[0];
     let grades = data.subjects[seccionName];
-   
 
     if (grades !== undefined) {
         return <>

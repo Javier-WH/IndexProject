@@ -8,7 +8,7 @@ import "./login.css";
 
 function App() {
 
-  const [logType, setLogType] = useState(0);
+  const [logType, setLogType] = useState(3);
 
   if (logType === 0) {
     return <div id="mainContainer">
