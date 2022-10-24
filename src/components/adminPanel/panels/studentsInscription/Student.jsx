@@ -25,7 +25,7 @@ import Parroquias from "./auxFolder/getParroquias";
 import getSubjects from './auxFolder/getSubjects';
 
 export default function Inscription() {
-    const [failedSubjects, setFailedSubjects]= useState("");
+
     const [pensum, setPensum] = useState([]);
     const [inscriptionType, setInscriptionType] = useState("")
     const [stdFounded, setStdFounded] = useState(false);
@@ -913,41 +913,66 @@ export default function Inscription() {
             setMessageParams({ type: "error", message: `No ha suministrado el campo: ${missingData}` })
             setOpenMessage(true)
         } else {
-            let data = getData();
-
-            fetch("/student", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "*/*"
-                },
-                body: JSON.stringify(data)
-            })
-                .then(answer => answer.json())
-                .then(response => {
-                    if (response.error) {
-                        setMessageParams({ type: "error", message: response.error })
-                        setOpenMessage(true)
-                    } else {
-                        setMessageParams({ type: "success", message: `Se ha inscrito satisfactoriamente al estudiante` })
-                        cleanData();
-                        setHaveCi(true);
-                        setCi("");
-                        setOpenMessage(true)
+            let failedSubjects = checkSubjects(stdFounded);
+            if (failedSubjects.length > 0) {
+                let subjs = failedSubjects.join(", ");
+                setModal({
+                    state: true,
+                    buttons: 2,
+                    title: "Advertencia",
+                    message: `Este estudiante tiene materias reprobadas de un periodo anterior, ${subjs}, solo inscribirá las materias reprobadas ¿desea inscribirlo de todos modos?`,
+                    type: "warning",
+                    handleCancel: () => setModal({ state: false }),
+                    handleAccept: () => {
+                        sendData()
+                        setModal({ state: false })
                     }
+                })
+            }else{
+                sendData()
+            }
 
+            function sendData(){
+                let data = getData();
+
+                fetch("/student", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "*/*"
+                    },
+                    body: JSON.stringify(data)
                 })
-                .catch(err => {
-                    setMessageParams({ type: "error", message: `Ocurrió un error, no se ha inscrito al estudiante` })
-                    setOpenMessage(true)
-                })
+                    .then(answer => answer.json())
+                    .then(response => {
+                        if (response.error) {
+                            setMessageParams({ type: "error", message: response.error })
+                            setOpenMessage(true)
+                        } else {
+                            setMessageParams({ type: "success", message: `Se ha inscrito satisfactoriamente al estudiante` })
+                            cleanData();
+                            setHaveCi(true);
+                            setCi("");
+                            setOpenMessage(true)
+                            setInscriptionType("");
+                        }
+    
+                    })
+                    .catch(err => {
+                        setMessageParams({ type: "error", message: `Ocurrió un error, no se ha inscrito al estudiante` })
+                        setOpenMessage(true)
+                    })
+    
+            }
+          
+                ////
         }
     }
 
 
     useEffect(() => {
         fetch("/matricula").then(respose => respose.json())
-            .then(matricula => {setPensum(matricula)});
+            .then(matricula => { setPensum(matricula) });
 
     }, [])
 
@@ -1470,16 +1495,16 @@ export default function Inscription() {
 
             <div id="subjecsList" className='list'>
                 {
-                    getSubjects(pensum, grade ).map(subject=>{
-                       return <div className="subjects">{subject}</div>
+                    getSubjects(pensum, grade).map(subject => {
+                        return <div className="subjects">{subject}</div>
                     })
                 }
             </div>
             <div id="MateriaPendiete" className={`list ${inscriptionType === "Nuevo Ingreso" ? "folded" : ""}`}>
                 {
-                    checkSubjects(stdFounded, failedSubjects).map(subject=>{
+                    checkSubjects(stdFounded).map(subject => {
                         return <div className="subjects">{subject}</div>
-                     })
+                    })
                 }
             </div>
 

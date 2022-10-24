@@ -39,6 +39,9 @@
 #requisites::after{
     content: "Documentos";
 }
+#socialNetworking{
+   width: 100%;
+}
 #socialNetworking::after{
     content: "Redes Sociales";
 }
@@ -122,6 +125,8 @@
     width: 100px;
 }
 .networkingContainer{
+    width: 200px;
+    height: 120px;
     display: flex;
     flex-direction: column;
 }

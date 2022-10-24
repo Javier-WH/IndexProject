@@ -34,8 +34,8 @@ export function OpenModal({ modal, setModal }) {
            return <Button variant="outlined" color="error" onClick={handleClose}> Cerrar</Button>
         }else if(modal.buttons === 2){
             return <>
-                <Button variant="outlined" color="success"> Aceptar</Button>
-                <Button variant="outlined" color="error"> Cancelar</Button>
+                <Button variant="outlined" color="success" onClick={modal.handleAccept}> Aceptar</Button>
+                <Button variant="outlined" color="error" onClick={modal.handleCancel}> Cancelar</Button>
             </>
         }else if(modal.buttons === 3){
             return <>

@@ -1,22 +1,20 @@
-export default function checkSubjects(student, setFailedSubjects) {
+export default function checkSubjects(student) {
     try {
         let subjectList = student.subjects
         let subjectListKeys = Object.keys(subjectList);
 
-        let failedSubjects = subjectListKeys.map(subject=>{
+        let failedSubjects = [];
+        subjectListKeys.map(subject=>{
             if(subjectList[subject].def < 10){
-          
-                return `${subject}  ( ${subjectList[subject].def} )`
+                failedSubjects.push(`${subject}  ( ${subjectList[subject].def} )`)
             }
+            return 0;
         })
 
         if(failedSubjects.length > 0){
-            setFailedSubjects(failedSubjects)
             return failedSubjects;
-        }else{
-            return ["Ninguna"]
         }
-
+        return ["Ninguna"]
 
     } catch (error) {
         return []
