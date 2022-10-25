@@ -1,0 +1,17 @@
+#teacherCiContainer{
+    display: flex;
+    gap: 20px;
+    align-items: stretch;
+}
+
+#btnSearchTeacher{
+    display: flex;
+    flex-direction: column;
+}
+
+#teacherDataContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 30px;
+}
