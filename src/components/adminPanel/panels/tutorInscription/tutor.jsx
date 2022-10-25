@@ -10,10 +10,19 @@ import FormLabel from '@mui/material/FormLabel';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
+import Message from "../../message/Message.jsx"
+
 
 import "./tutor.css"
 import { useState } from 'react';
 export default function Tutor() {
+
+    const [openMessage, setOpenMessage] = useState(false);
+    const [messageParams, setMessageParams] = useState({
+        type: "success",
+        message: "Wololooo"
+    })
+    const [showData, setShowData] = useState(false);
 
     const [ci, setCi] = useState("");
     const [name, setname] = useState("");
@@ -33,9 +42,20 @@ export default function Tutor() {
     const [password2, setPassword2] = useState("");
 
 
-    function handleSend(){
+    function handleSend() {
+        let missing = checkMissing();
+        if(missing !== "OK"){
+            setMessageParams({
+                type: "error",
+                message: `No ha suministrado el campo: ${missing}`
+            })
+            setOpenMessage(true);
+            return
+        }
+
+
         let data = {
-            tutorName : name,
+            tutorName: name,
             tutorLastName: lastNames,
             tutorCi: ci,
             tutorNationality: nationality,
@@ -51,23 +71,177 @@ export default function Tutor() {
             tutorBankAccoun: bankAccoun,
             password
         }
-        console.log(data)
+
+        fetch("/tutor", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "*/*"
+            },
+            body: JSON.stringify(data)
+        }).then(e => e.json())
+            .then(response => {
+                if(response.message === "OK"){
+                    setMessageParams({
+                        type: "success",
+                        message: "Se ha inscrito al representante correctamente"
+                    })
+                    setOpenMessage(true);
+                }
+                if(response.error){
+                    setMessageParams({
+                        type: "error",
+                        message: response.error
+                    })
+                    setOpenMessage(true);
+                }
+
+            })
+            .catch(e => {
+                console.log(e)
+            })
+
     }
     function handleSearch() {
-        console.log(ci)
+        if(ci === ""){
+            setMessageParams({
+                type: "error",
+                message: "No ha suministrado ninguna cédula"
+            })
+            setOpenMessage(true);
+            setShowData(false)
+            cleanData();
+            return
+        }
+        async function getTutor() {
+            try {
+                let resquest = await fetch(`/tutor?ci=${ci}`);
+                let response = await resquest.json();
+                setShowData(true)
+                if(response.error){
+                    setMessageParams({
+                        type: "warning",
+                        message: response.error
+                    })
+                    setOpenMessage(true);
+                    cleanData();
+                    return
+                }
+                setMessageParams({
+                    type: "success",
+                    message: "Tutor encontrado"
+                })
+                setOpenMessage(true);
+                fillData(response);
+            } catch (error) {
+                setMessageParams({
+                    type: "error",
+                    message: error.message
+                })
+                cleanData();
+                setOpenMessage(true);
+            }
+        }
+        getTutor();
     }
 
     function handleChange(e, cb) {
         cb(e.target.value)
     }
+    function handleCiChange(e){
+        setCi(e.target.value);
+        setShowData(false);
+    }
+
+    function fillData({ password, tutorAddress, tutorBank, tutorBankAccoun, tutorBankAccounType, tutorBankAux, tutorEmail, tutorInstruction, tutorLastName, tutorName, tutorNationality, tutorPatriaCode, tutorPatriaSrial, tutorPhone }) {
+        setname(tutorName);
+        setLastNames(tutorLastName);
+        setNationality(tutorNationality);
+        setInstrution(tutorInstruction);
+        setPhone(tutorPhone)
+        setEmail(tutorEmail);
+        setAddress(tutorAddress);
+        setPatrriaSerial(tutorPatriaSrial);
+        setPatrriaCode(tutorPatriaCode);
+        setBank(tutorBank);
+        setBankAux(tutorBankAux);
+        setBankAccounType(tutorBankAccounType);
+        setBankAccoun(tutorBankAccoun);
+        setPassword(password);
+        setPassword2(password);
+
+    }
+
+    function cleanData(){
+        setname("");
+        setLastNames("");
+        setNationality("v");
+        setInstrution("3");
+        setPhone("")
+        setEmail("");
+        setAddress("");
+        setPatrriaSerial("");
+        setPatrriaCode("");
+        setBank("");
+        setBankAux("");
+        setBankAccounType("corriente");
+        setBankAccoun("");
+        setPassword("");
+        setPassword2("");
+    }
+
+    function checkMissing(){
+        if(ci === ""){
+            return "Cédula";
+        }
+        if(name === ""){
+            return "Nombres";
+        }
+        if(lastNames === ""){
+            return "Apellidos";
+        }
+        if(phone === ""){
+            return "Télefono";
+        }
+        if(email === ""){
+            return "Email";
+        }
+        if(address === ""){
+            return "Dirección";
+        }
+        if(patrriaSerial === ""){
+            return "Seríal del carnet de la patria";
+        }
+        if(patrriaCode === ""){
+            return "Código del carnet de la patria";
+        }
+        if(bank === ""){
+            return "Nombre del banco";
+        }
+        if(bank === "Otro" && bankAux === ""){
+            return "Nombre del banco";
+        }
+        if(bankAccoun === ""){
+            return "Cuenta bancaria";
+        }
+        if(password === ""){
+            return "Contraseña";
+        }
+        if(password !== password2){
+            return "Las contraseñas no son iguales";
+        }
+        return "OK";
+    }
+
 
     let key = 0;
     return <div id="tutorPanelContainer">
+        <Message open={openMessage} setOpen={setOpenMessage} data={messageParams} />
         <div id="tutorPanelCiContainer">
-            <TextField id="outlined-basic" label="Cédula" variant="outlined" type="number" autoComplete='off' value={ci} onChange={e => { handleChange(e, setCi) }} />
+            <TextField id="outlined-basic" label="Cédula" variant="outlined" type="number" autoComplete='off' value={ci} onChange={handleCiChange} />
             <Button variant="outlined" id='tutorBTNsearch' onClick={handleSearch}> <PersonSearchTwoToneIcon /> Buscar</Button>
         </div>
-        <div id="tutorDataContainer">
+        <div id="tutorDataContainer" className={showData? "" : "invisible"}>
             <TextField id="outlined-basic" label="Nombres" variant="outlined" autoComplete='off' value={name} onChange={e => { handleChange(e, setname) }} />
             <TextField id="outlined-basic" label="Apellidos" variant="outlined" autoComplete='off' value={lastNames} onChange={e => { handleChange(e, setLastNames) }} />
             <TextField id="outlined-basic" type="password" label="Contraseña" variant="outlined" autoComplete='off' value={password} onChange={e => { handleChange(e, setPassword) }} />
