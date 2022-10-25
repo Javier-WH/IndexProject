@@ -39,45 +39,83 @@ export default function Teacher() {
     const [birthdate, setBirthdate] = useState("2000-01-01");
     const [phone, setPhone] = useState("");
     const [email, setEmail] = useState("");
-    const [isAdmin, setIsAdmin] = useState(false); 
-    const [grade, setGrade] = useState("1"); 
-    const [seccion, setSeccion] = useState("A"); 
-    const [matricula, setMatricula]= useState({})
-   
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [grade, setGrade] = useState("1");
+    const [seccion, setSeccion] = useState("A");
+    const [matricula, setMatricula] = useState({})
 
-    function handleRegister(){
-        console.log(right)
+
+    function handleRegister() {
+        async function register() {
+            let teacherData = {
+                ci,
+                names,
+                lastNames,
+                gender,
+                birthdate,
+                phone,
+                email,
+                admin: isAdmin,
+                subjects: right
+            }
+
+            let response = await fetch("/teacher", {
+                method: "POST",
+                body: JSON.stringify(teacherData),
+                headers: {
+                    "Accept": "*/*",
+                    "Content-Type": "application/json"
+                }
+            });
+
+            let data = await response.json();
+            if(data.error){
+                setMessageParams({
+                    type: "error",
+                    message: data.error
+                })
+                setOpenMessage(true);
+            
+            }else{
+                setMessageParams({
+                    type: "success",
+                    message: "Se ha inscrito correctamente al profesor"
+                })
+                setOpenMessage(true);
+            }
+        }
+        register();
     }
-    
-    useEffect(()=>{
-        async function getPensum(){
+
+    useEffect(() => {
+        async function getPensum() {
             let ask = await fetch("/matricula");
             let pensum = await ask.json();
-            //console.log(pensum)
             setMatricula(pensum);
         }
         getPensum();
-    },[])
+    }, [])
 
-    useEffect(()=>{
+    useEffect(() => {
         try {
+            setLeft([]);
             let subjects = []
-    
-            matricula.map(register=>{
-                if(register.schoolYear === Number.parseInt(grade)){
-                    register.subjects.map(subjec=>{
+
+            matricula.map(register => {
+                if (register.schoolYear === Number.parseInt(grade)) {
+                    register.subjects.map(subjec => {
                         subjects.push(`${subjec} ${grade}${seccion}`)
                     })
                 }
             })
             setLeft(subjects);
-     
+
 
         } catch (error) {
 
         }
 
-    },[seccion, grade , matricula ])
+    }, [seccion, grade, matricula])
 
 
     return <div id="teacherContainer">
@@ -111,7 +149,7 @@ export default function Teacher() {
             <FormGroup>
                 <FormControlLabel control={<Switch defaultChecked checked={isAdmin} onChange={e => setIsAdmin(e.target.checked)} />} label="Permisos de Administrador" />
             </FormGroup>
-            
+
             <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Grado</InputLabel>
                 <Select
@@ -119,7 +157,7 @@ export default function Teacher() {
                     id="demo-simple-Grado"
                     value={grade}
                     label="Grado"
-                    onChange={e=>setGrade(e.target.value)}
+                    onChange={e => setGrade(e.target.value)}
                 >
                     <MenuItem value="1">Primer año</MenuItem>
                     <MenuItem value="2">Segundo año</MenuItem>
@@ -137,7 +175,7 @@ export default function Teacher() {
                     id="demo-simple-selectseccion"
                     value={seccion}
                     label="seccion"
-                    onChange={e=>setSeccion(e.target.value)}
+                    onChange={e => setSeccion(e.target.value)}
                 >
                     <MenuItem value="A">Sección A</MenuItem>
                     <MenuItem value="B">Sección B</MenuItem>
@@ -167,8 +205,10 @@ export default function Teacher() {
                     <MenuItem value="Z">Sección Z</MenuItem>
                 </Select>
             </FormControl>
-            
-            <Selector grade={grade} seccion={seccion} left ={left} setLeft={setLeft} right ={right} setRight={setRight}/>
+
+            <div className="info">Materias asignadas al profesor</div>
+
+            <Selector grade={grade} seccion={seccion} left={left} setLeft={setLeft} right={right} setRight={setRight} />
 
             <Button variant="outlined" id="btnSearchTeacher" onClick={handleRegister}> <HowToRegIcon /> Registrar</Button>
 
