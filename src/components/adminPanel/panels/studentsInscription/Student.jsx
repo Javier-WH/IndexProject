@@ -410,6 +410,7 @@ export default function Inscription() {
         setPeriodo(event.target.value);
     }
     const handleHaveCi = (event) => {
+      
         setHaveCi(!event.target.checked);
         if (event.target.checked) {
             let number = "99" + getRandom(10);
@@ -430,6 +431,8 @@ export default function Inscription() {
         }
     }
     const handleCi = (event) => {
+        setInscriptionType('');
+        setStdFounded(false);
         if (haveCi) {
             setCi(event.target.value);
         }
