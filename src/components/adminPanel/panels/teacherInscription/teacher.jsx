@@ -69,14 +69,14 @@ export default function Teacher() {
             });
 
             let data = await response.json();
-            if(data.error){
+            if (data.error) {
                 setMessageParams({
                     type: "error",
                     message: data.error
                 })
                 setOpenMessage(true);
-            
-            }else{
+
+            } else {
                 setMessageParams({
                     type: "success",
                     message: "Se ha inscrito correctamente al profesor"
@@ -117,12 +117,35 @@ export default function Teacher() {
 
     }, [seccion, grade, matricula])
 
+    function handleSearch(){
+
+        async function getTeacher(){
+
+            let request = await fetch(`/teacher?ci=${ci}`);
+            let teacher = await request.json();
+            
+            setCi(teacher.ci);
+            setNames(teacher.names);
+            setLastNames(teacher.lastNames);
+            setGender(teacher.gender);
+            setBirthdate(teacher.birthdate.split("T")[0]);
+            setPhone(teacher.phone);
+            setEmail(teacher.email);
+            setIsAdmin(teacher.admin);
+            setRight(teacher.subject);
+
+        }
+
+        getTeacher();
+    }
+
+
 
     return <div id="teacherContainer">
         <Message open={openMessage} setOpen={setOpenMessage} data={messageParams} />
         <div id="teacherCiContainer">
             <TextField id="outlined-basic" label="Cédula" type="number" autoComplete='off' variant="outlined" value={ci} onChange={e => setCi(e.target.value)} />
-            <Button variant="outlined" id="btnSearchTeacher"> <SchoolTwoToneIcon /> Buscar</Button>
+            <Button variant="outlined" id="btnSearchTeacher" onClick={handleSearch}> <SchoolTwoToneIcon /> Buscar</Button>
         </div>
 
         <div id="teacherDataContainer">
@@ -150,63 +173,67 @@ export default function Teacher() {
                 <FormControlLabel control={<Switch defaultChecked checked={isAdmin} onChange={e => setIsAdmin(e.target.checked)} />} label="Permisos de Administrador" />
             </FormGroup>
 
-            <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Grado</InputLabel>
-                <Select
-                    labelId="demo-simple-select-Grado"
-                    id="demo-simple-Grado"
-                    value={grade}
-                    label="Grado"
-                    onChange={e => setGrade(e.target.value)}
-                >
-                    <MenuItem value="1">Primer año</MenuItem>
-                    <MenuItem value="2">Segundo año</MenuItem>
-                    <MenuItem value="3">Tercer año</MenuItem>
-                    <MenuItem value="4">Cuarto año</MenuItem>
-                    <MenuItem value="5">Quinto año</MenuItem>
-                </Select>
-            </FormControl>
-
-
-            <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Sección</InputLabel>
-                <Select
-                    labelId="demo-simple-select-labelseccion"
-                    id="demo-simple-selectseccion"
-                    value={seccion}
-                    label="seccion"
-                    onChange={e => setSeccion(e.target.value)}
-                >
-                    <MenuItem value="A">Sección A</MenuItem>
-                    <MenuItem value="B">Sección B</MenuItem>
-                    <MenuItem value="C">Sección C</MenuItem>
-                    <MenuItem value="D">Sección D</MenuItem>
-                    <MenuItem value="E">Sección E</MenuItem>
-                    <MenuItem value="F">Sección F</MenuItem>
-                    <MenuItem value="G">Sección G</MenuItem>
-                    <MenuItem value="H">Sección H</MenuItem>
-                    <MenuItem value="I">Sección I</MenuItem>
-                    <MenuItem value="J">Sección J</MenuItem>
-                    <MenuItem value="K">Sección K</MenuItem>
-                    <MenuItem value="L">Sección L</MenuItem>
-                    <MenuItem value="M">Sección M</MenuItem>
-                    <MenuItem value="N">Sección N</MenuItem>
-                    <MenuItem value="O">Sección O</MenuItem>
-                    <MenuItem value="P">Sección P</MenuItem>
-                    <MenuItem value="Q">Sección Q</MenuItem>
-                    <MenuItem value="R">Sección R</MenuItem>
-                    <MenuItem value="S">Sección S</MenuItem>
-                    <MenuItem value="T">Sección T</MenuItem>
-                    <MenuItem value="U">Sección U</MenuItem>
-                    <MenuItem value="V">Sección V</MenuItem>
-                    <MenuItem value="W">Sección W</MenuItem>
-                    <MenuItem value="X">Sección X</MenuItem>
-                    <MenuItem value="Y">Sección Y</MenuItem>
-                    <MenuItem value="Z">Sección Z</MenuItem>
-                </Select>
-            </FormControl>
-
             <div className="info">Materias asignadas al profesor</div>
+
+            <div id="subjecsContainer">
+                <FormControl >
+                    <InputLabel id="demo-simple-select-label">Grado</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-Grado"
+                        id="demo-simple-Grado"
+                        value={grade}
+                        label="Grado"
+                        onChange={e => setGrade(e.target.value)}
+                    >
+                        <MenuItem value="1">Primer año</MenuItem>
+                        <MenuItem value="2">Segundo año</MenuItem>
+                        <MenuItem value="3">Tercer año</MenuItem>
+                        <MenuItem value="4">Cuarto año</MenuItem>
+                        <MenuItem value="5">Quinto año</MenuItem>
+                    </Select>
+                </FormControl>
+
+
+                <FormControl >
+                    <InputLabel id="demo-simple-select-label">Sección</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-labelseccion"
+                        id="demo-simple-selectseccion"
+                        value={seccion}
+                        label="seccion"
+                        onChange={e => setSeccion(e.target.value)}
+                    >
+                        <MenuItem value="A">Sección A</MenuItem>
+                        <MenuItem value="B">Sección B</MenuItem>
+                        <MenuItem value="C">Sección C</MenuItem>
+                        <MenuItem value="D">Sección D</MenuItem>
+                        <MenuItem value="E">Sección E</MenuItem>
+                        <MenuItem value="F">Sección F</MenuItem>
+                        <MenuItem value="G">Sección G</MenuItem>
+                        <MenuItem value="H">Sección H</MenuItem>
+                        <MenuItem value="I">Sección I</MenuItem>
+                        <MenuItem value="J">Sección J</MenuItem>
+                        <MenuItem value="K">Sección K</MenuItem>
+                        <MenuItem value="L">Sección L</MenuItem>
+                        <MenuItem value="M">Sección M</MenuItem>
+                        <MenuItem value="N">Sección N</MenuItem>
+                        <MenuItem value="O">Sección O</MenuItem>
+                        <MenuItem value="P">Sección P</MenuItem>
+                        <MenuItem value="Q">Sección Q</MenuItem>
+                        <MenuItem value="R">Sección R</MenuItem>
+                        <MenuItem value="S">Sección S</MenuItem>
+                        <MenuItem value="T">Sección T</MenuItem>
+                        <MenuItem value="U">Sección U</MenuItem>
+                        <MenuItem value="V">Sección V</MenuItem>
+                        <MenuItem value="W">Sección W</MenuItem>
+                        <MenuItem value="X">Sección X</MenuItem>
+                        <MenuItem value="Y">Sección Y</MenuItem>
+                        <MenuItem value="Z">Sección Z</MenuItem>
+                    </Select>
+                </FormControl>
+
+            </div>
+          
 
             <Selector grade={grade} seccion={seccion} left={left} setLeft={setLeft} right={right} setRight={setRight} />
 

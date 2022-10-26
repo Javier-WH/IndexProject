@@ -22,3 +22,11 @@
     color: var(--secondaryColor);
     margin: 20px 0;
 }
+
+#subjecsContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+
+}
