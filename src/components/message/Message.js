@@ -28,11 +28,7 @@ export default function CustomizedSnackbars() {
     setOpen(false);
   };
 
-  /*
-    <Button variant="outlined" onClick={handleClick}>
-        Open success snackbar
-      </Button>
-  */
+
 
   return (
     <Stack spacing={2} sx={{ width: '100%' }}>

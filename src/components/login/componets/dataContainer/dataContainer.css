@@ -36,7 +36,29 @@
     background-color: var(--mainColor) !important;
     color: white !important;
 }
+.invisible{
+    pointer-events: none;
+    visibility: hidden;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+}
 
+#links{
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: var(--secondaryColor);
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.links:hover{
+    color: white;
+ 
+}
 
 @media (max-width: 460px) {
     .tabItem{
