@@ -30,3 +30,11 @@
     gap: 20px;
 
 }
+
+.invisible{
+    pointer-events: none;
+    visibility: hidden;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}

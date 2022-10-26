@@ -28,6 +28,7 @@ export default function Teacher() {
         message: "Wololooo"
     })
 
+    const [openPanel, setOpenPanel] = useState(false);
 
     const [left, setLeft] = useState([]);
     const [right, setRight] = useState([]);
@@ -82,6 +83,9 @@ export default function Teacher() {
                     message: "Se ha inscrito correctamente al profesor"
                 })
                 setOpenMessage(true);
+                cleanData();
+                setCi("");
+                setOpenPanel(false)
             }
         }
         register();
@@ -97,6 +101,12 @@ export default function Teacher() {
     }, [])
 
     useEffect(() => {
+        /*eslint-disable*/
+        fillMatricula();
+
+    }, [seccion, grade, matricula])
+
+    function fillMatricula() {
         try {
             setLeft([]);
             let subjects = []
@@ -114,16 +124,38 @@ export default function Teacher() {
         } catch (error) {
 
         }
+    }
 
-    }, [seccion, grade, matricula])
+    function handleSearch() {
 
-    function handleSearch(){
+        async function getTeacher() {
 
-        async function getTeacher(){
+            if (ci === "") {
+                setMessageParams({
+                    type: "error",
+                    message: "El campo cédula está vacio"
+                })
+                setOpenMessage(true);
+                cleanData();
+                setOpenPanel(false)
+                return
+            }
 
+            setOpenPanel(true)
             let request = await fetch(`/teacher?ci=${ci}`);
             let teacher = await request.json();
-            
+
+            if (teacher.error) {
+                setMessageParams({
+                    type: "error",
+                    message: teacher.error
+                })
+                setOpenMessage(true);
+                cleanData();
+                setCi("");
+                return
+            }
+
             setCi(teacher.ci);
             setNames(teacher.names);
             setLastNames(teacher.lastNames);
@@ -139,16 +171,32 @@ export default function Teacher() {
         getTeacher();
     }
 
+    function cleanData() {
+        setNames("");
+        setLastNames("");
+        setGender("m");
+        setBirthdate("2000-01-01");
+        setPhone("");
+        setEmail("");
+        setIsAdmin(false);
+        setRight([]);
+        setLeft([])
+        fillMatricula();
+    }
 
 
     return <div id="teacherContainer">
         <Message open={openMessage} setOpen={setOpenMessage} data={messageParams} />
         <div id="teacherCiContainer">
-            <TextField id="outlined-basic" label="Cédula" type="number" autoComplete='off' variant="outlined" value={ci} onChange={e => setCi(e.target.value)} />
+            <TextField id="outlined-basic" label="Cédula" type="number" autoComplete='off' variant="outlined" value={ci} onChange={e =>{
+                setCi(e.target.value)
+                setOpenPanel(false);
+                cleanData();
+                }} />
             <Button variant="outlined" id="btnSearchTeacher" onClick={handleSearch}> <SchoolTwoToneIcon /> Buscar</Button>
         </div>
 
-        <div id="teacherDataContainer">
+        <div id="teacherDataContainer" className={openPanel ? "" : "invisible"}>
             <TextField id="outlined-basic" label="Nombres" autoComplete='off' variant="outlined" value={names} onChange={e => setNames(e.target.value)} />
             <TextField id="outlined-basic" label="Apellidos" autoComplete='off' variant="outlined" value={lastNames} onChange={e => setLastNames(e.target.value)} />
 
@@ -233,7 +281,7 @@ export default function Teacher() {
                 </FormControl>
 
             </div>
-          
+
 
             <Selector grade={grade} seccion={seccion} left={left} setLeft={setLeft} right={right} setRight={setRight} />
 
