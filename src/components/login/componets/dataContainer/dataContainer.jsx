@@ -68,7 +68,7 @@ export function DataContainer({ log }) {
     function handleRegister() {
         setModal({
             state: true,
-            title: "Recuperación de contraseña",
+            title: "Registro de profesor",
             label: "Cédula",
             action: e=>{
                 if(e === ""){
