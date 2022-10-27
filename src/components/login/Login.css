@@ -16,7 +16,11 @@
   position: absolute;
   left: calc(50% - 100px);
   top: -50px;
-
+}
+.razetti{
+  background-color: transparent !important;
+  border-radius: 0% !important;
+  border: none !important;
 }
 @media (max-width: 460px) {
 

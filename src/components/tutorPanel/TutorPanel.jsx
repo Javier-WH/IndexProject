@@ -6,7 +6,8 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
 
-import StudentInscription from "../adminPanel/panels/studentsInscription/Student"
+import StudentInscription from "../adminPanel/panels/studentsInscription/Student";
+import StdPanel from "./showStudents/ShowStudents"
 
 import Logo from "../../logo.svg";
 import "./tutorPanel.css";
@@ -67,7 +68,7 @@ export default function BasicTabs() {
                 </Box>
             </div>
             <TabPanel value={value} index={0}>
-                Item One
+                <StdPanel/>
             </TabPanel>
             <TabPanel value={value} index={1}>
                 <StudentInscription/>

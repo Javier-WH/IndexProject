@@ -1,6 +1,12 @@
 import IndexLogo from "../../../../logo.svg";
 export function Logo() {
-    return <img src={IndexLogo} alt="" id="indexLogo" />
+
+   // let type = "Batalla"
+   //let type = "razetti"
+    let type = "Index"
+
+
+    return <img src={IndexLogo} alt="" id="indexLogo" className={type}/>
 
 
 }
