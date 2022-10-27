@@ -11,6 +11,8 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Message from "../adminPanel/message/Message"
 import { useState } from 'react';
 
+import Logo from "../../logo.svg"
+
 import "./teacherPerfil.css";
 
 const style = {
@@ -118,11 +120,11 @@ export default function KeepMountedModal({ open, setOpen }) {
                     }
                 });
 
-               await response.json();
-                handleClose();                
+                await response.json();
+                handleClose();
 
             } catch (error) {
-         
+
             }
         }
         sendData();
@@ -160,47 +162,52 @@ export default function KeepMountedModal({ open, setOpen }) {
             >
                 <Box sx={style}>
                     <div id="teacherDataContainerX">
-                        <div id="perfilTeacherTitle"> Perfil del profesor </div>
-                        <TextField id="outlined-basic" label="Nombres" variant="outlined" className="input" value={names} onChange={e => setNames(e.target.value)} autoComplete='off' />
-                        <TextField id="outlined-basic" label="Apellidos" variant="outlined" className="input" value={lastNames} onChange={e => setLastNames(e.target.value)} autoComplete='off' />
-                        <TextField id="outlined-basic" label="Cédula" variant="outlined" type="number" className="input" value={ci} autoComplete='off' />
-                        <div id="auxDataContainer">
-                            <FormControl className="perfilTeacherInput2">
-                                <FormLabel id="demo-radio-buttons-group-labelteacherGender">Genero</FormLabel>
-                                <RadioGroup
-                                    row
-                                    aria-labelledby="demo-radio-buttons-group-label_gender"
-                                    value={gender}
-                                    onChange={e => setGender(e.target.value)}
-                                    name="teacherGender"
-                                >
-                                    <FormControlLabel value="m" control={<Radio />} label="Masculino" />
-                                    <FormControlLabel value="f" control={<Radio />} label="Femenino" />
-                                </RadioGroup>
-                            </FormControl>
+                        <div id="PTBG">
+                            <div id="titleperfilcontainer">
+                                <img id='perfilTeacherLogo' src={Logo} alt="" />
+                                <div id="perfilTeacherTitle"> Perfil del profesor </div>
+                            </div>
+                            <TextField id="outlined-basic" label="Nombres" variant="outlined" value={names} onChange={e => setNames(e.target.value)} autoComplete='off' />
+                            <TextField id="outlined-basic" label="Apellidos" variant="outlined" value={lastNames} onChange={e => setLastNames(e.target.value)} autoComplete='off' />
+                            <TextField id="outlined-basic" label="Cédula" variant="outlined" type="number" value={ci} autoComplete='off' />
+                            <div id="auxDataContainer">
+                                <FormControl className="perfilTeacherInput2">
+                                    <FormLabel id="demo-radio-buttons-group-labelteacherGender">Genero</FormLabel>
+                                    <RadioGroup
+                                        row
+                                        aria-labelledby="demo-radio-buttons-group-label_gender"
+                                        value={gender}
+                                        onChange={e => setGender(e.target.value)}
+                                        name="teacherGender"
+                                    >
+                                        <FormControlLabel value="m" control={<Radio />} label="Masculino" />
+                                        <FormControlLabel value="f" control={<Radio />} label="Femenino" />
+                                    </RadioGroup>
+                                </FormControl>
 
-                            <TextField id="outlined-basic" label="Teléfono" variant="outlined" type="number" value={phone} onChange={e => setPhone(e.target.value)} autoComplete='off' />
-                            <TextField id="outlined-basic" label="Email" variant="outlined" value={email} onChange={e => setEmail(e.target.value)} autoComplete='off' />
-                            <TextField id="outlined-basic" label="Cumpleaños" variant="outlined" type="date" autoComplete='off' value={birthdate} onChange={e => setBirthdate(e.target.value)} />
-                        </div>
+                                <TextField id="outlined-basic" label="Teléfono" variant="outlined" type="number" value={phone} onChange={e => setPhone(e.target.value)} autoComplete='off' />
+                                <TextField id="outlined-basic" label="Email" variant="outlined" value={email} onChange={e => setEmail(e.target.value)} autoComplete='off' />
+                                <TextField id="outlined-basic" label="Cumpleaños" variant="outlined" type="date" autoComplete='off' value={birthdate} onChange={e => setBirthdate(e.target.value)} />
+                            </div>
 
-                        <TextField id="outlined-basic" label="Usuario" variant="outlined" className="input" value={user} onChange={e => setUser(e.target.value)} autoComplete='off' />
-                        <TextField id="outlined-basic" type="password" label="Contraseña" variant="outlined" className="input" value={password} onChange={e => setPassword(e.target.value)} autoComplete='off' />
-                        <TextField id="outlined-basic" type="password" label="Repite la contraseña" variant="outlined" className="input" value={password2} onChange={e => setPassword2(e.target.value)} autoComplete='off' />
+                            <TextField id="outlined-basic" label="Usuario" variant="outlined" value={user} onChange={e => setUser(e.target.value)} autoComplete='off' />
+                            <TextField id="outlined-basic" type="password" label="Contraseña" variant="outlined" value={password} onChange={e => setPassword(e.target.value)} autoComplete='off' />
+                            <TextField id="outlined-basic" type="password" label="Repite la contraseña" variant="outlined" value={password2} onChange={e => setPassword2(e.target.value)} autoComplete='off' />
 
-                        <div id="teacherFoundedSubjects">
+                            <div id="teacherFoundedSubjects">
 
-                            {
-                                subjects.map(subject => {
-                                    return <div className="perfilTeacherSubject" key={key++}>{subject}</div>
-                                })
-                            }
+                                {
+                                    subjects.map(subject => {
+                                        return <div className="perfilTeacherSubject" key={key++}>{subject}</div>
+                                    })
+                                }
 
-                        </div>
+                            </div>
 
-                        <div id="perfilBTNContainer">
-                            <Button variant="contained" color="success" onClick={handleSend}>Aceptar</Button>
-                            <Button variant="outlined" color="error" onClick={handleClose}>Cancelar</Button>
+                            <div id="perfilBTNContainer">
+                                <Button variant="contained" color="success" onClick={handleSend}>Aceptar</Button>
+                                <Button variant="outlined" color="error" onClick={handleClose}>Cancelar</Button>
+                            </div>
                         </div>
                     </div>
 
@@ -213,7 +220,7 @@ export default function KeepMountedModal({ open, setOpen }) {
 
 /**
  * {
-            state: true,
-            teacher:{}
-        }
+     state: true,
+     teacher:{}
+    }
  */

@@ -1,8 +1,19 @@
 #teacherDataContainerX{
-    width: 95%;
-    height: 100vh;
-    padding: 5px;
-    overflow: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url("../../components/body/background.svg"); 
+    background-color: #cccccc; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-size: cover; 
+
 }
 #auxDataContainer{
     display: flex;
@@ -10,11 +21,14 @@
     gap: 20px;
 }
 #teacherFoundedSubjects{
-    width: 100%;
+
     border: 1px solid var(--secondaryColor);
     border-radius: 10px;
-    min-height: 20px;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    padding: 20px;
 }
 #teacherFoundedSubjects::after{
     content: "Materias Asignadas";
@@ -38,7 +52,43 @@
     font-size: 18px;
     font-weight: 500;
     text-align: center;
-    width: 100%;
     color: var(--secondaryColor);
     margin-bottom: 20px;
+}
+
+#PTBG{
+    position: relative;
+    padding-top: 80px;
+    width: 500px;
+    height: 600px;
+    padding: 5px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    background-color: white;
+    border: 1px solid var(--secondaryColor);
+    border-radius: 10px;
+    padding: 10px;
+}
+#perfilTeacherLogo{
+    width: 70px;
+}
+#titleperfilcontainer{
+    display: flex;
+    align-items: center;
+    justify-content: baseline;
+    column-gap: 15px;
+    position: sticky;
+    background-color: white;
+    top: 0;
+    left: 0;
+    z-index: 20000;
+}
+@media (max-width: 499px) {
+    #PTBG{
+        width: 100vw;
+        height: 100vh;
+  
+    }
 }

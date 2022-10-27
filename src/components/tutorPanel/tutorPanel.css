@@ -1,0 +1,12 @@
+#tutorLogo{
+    width: 100%;
+}
+#tutorLogoContainer{
+    width: 100px;
+    margin: 20px;
+
+}
+#tutorBox{
+    display: flex;
+    align-items: center;
+}

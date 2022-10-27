@@ -3,6 +3,7 @@ import { Body } from "./components/body/Body"
 import { MainContextProvider } from "./context/MainContext"
 import Login from "./components/login/Login"
 import AdminPanel from "./components/adminPanel/adminPanel"
+import TutorPanel from "./components/tutorPanel/TutorPanel"
 import { useState } from "react";
 import "./login.css";
 
@@ -22,7 +23,7 @@ function App() {
       </MainContextProvider>
     </>;
   }else if(logType === 2){
-    return <h1>representantes</h1>
+    return <TutorPanel/>
   }else if(logType === 3){
     return <AdminPanel/>
   }
