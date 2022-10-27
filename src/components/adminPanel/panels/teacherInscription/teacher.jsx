@@ -152,7 +152,7 @@ export default function Teacher() {
                 })
                 setOpenMessage(true);
                 cleanData();
-                setCi("");
+          
                 return
             }
 
@@ -165,6 +165,7 @@ export default function Teacher() {
             setEmail(teacher.email);
             setIsAdmin(teacher.admin);
             setRight(teacher.subject);
+            console.log(teacher.subject)
 
         }
 

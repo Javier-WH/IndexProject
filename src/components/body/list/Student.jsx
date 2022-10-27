@@ -1,9 +1,9 @@
 
 
 export function Student({ data, number, seccion }) {
-
-    let seccionArray = seccion.split(" ");
-    let seccionName = seccionArray[0];
+    let seccionName = seccion.substring(0, seccion.length -4)
+    //let seccionArray = seccion.split(" ");
+    //let seccionName = seccionArray[0];
     let grades = data.subjects[seccionName];
 
     if (grades !== undefined) {

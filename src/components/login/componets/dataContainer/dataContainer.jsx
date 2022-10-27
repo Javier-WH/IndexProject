@@ -26,7 +26,7 @@ export function DataContainer({ log }) {
     const [openMessage, setOpenMessage] = useState(false);
     const [messageData, setMessageData] = useState({message: "aelimon"})
     //perfil
-    const [openPerfil, setOpenPerfil] = useState({state: false})
+    const [openPerfil, setOpenPerfil] = useState({state: false, teacher:{}})
 
 
     function getLabel() {
@@ -93,6 +93,11 @@ export function DataContainer({ log }) {
                     }
                     
                     if(teacher.password === null){
+
+                        setOpenPerfil({
+                            state: true,
+                            teacher
+                        })
 
                     }else{
                         setMessageData({

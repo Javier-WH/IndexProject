@@ -73,6 +73,7 @@ export function SubjectMenu({ sx }) {
         }
       })
       .catch(error=>{
+        console.log(error)
         setTlist([]);
       
       })

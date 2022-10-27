@@ -8,6 +8,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import Message from "../adminPanel/message/Message"
 import { useState } from 'react';
 
 import "./teacherPerfil.css";
@@ -30,23 +31,127 @@ export default function KeepMountedModal({ open, setOpen }) {
     const [names, setNames] = useState("");
     const [lastNames, setLastNames] = useState("");
     const [ci, setCi] = useState("");
-    const [gender, setGender] = useState("m");
+    const [gender, setGender] = useState("f");
     const [phone, setPhone] = useState("");
     const [email, setEmail] = useState("");
+    const [birthdate, setBirthdate] = useState("2000-01-01");
     const [user, setUser] = useState("");
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
+    const [subjects, setSubjects] = useState([])
+
+    const [openMessage, setOpenMessage,] = useState(false);
+    const [MessageData, setMessageData] = useState({ type: "warning", message: "hola" })
 
 
+    function checkMissing() {
+        if (names === "") {
+            return "Nombres"
+        }
+        if (lastNames === "") {
+            return "Apellidos"
+        }
+        if (ci === "") {
+            return "Cédula"
+        }
+        if (phone === "") {
+            return "Teléfono"
+        }
+        if (email === "") {
+            return "Email"
+        }
+        if (user === "") {
+            return "Usuario"
+        }
+        if (password === "") {
+            return "Contraseña"
+        }
+        if (password2 === "") {
+            return "Repite contraseña"
+        }
+        return "none"
+    }
 
     const handleClose = () => {
         setOpen(false);
 
     }
 
+    function handleSend() {
+        let missing = checkMissing();
 
+        if (missing !== "none") {
+            setMessageData({ type: "error", message: `No ha suministrado el campo: ${missing}` });
+            setOpenMessage(true)
+            return;
+        }
+
+        if (password !== password2) {
+            setMessageData({ type: "error", message: `Las contraseñas son diferentes` });
+            setOpenMessage(true)
+            return;
+        }
+
+
+        let teacherData = {
+            ci,
+            names,
+            lastNames,
+            gender,
+            birthdate,
+            phone,
+            email,
+            user,
+            password,
+            subjects
+        }
+
+        async function sendData() {
+            try {
+
+                let response = await fetch("/teacher", {
+                    method: "POST",
+                    body: JSON.stringify(teacherData),
+                    headers: {
+                        "Accept": "*/*",
+                        "Content-Type": "application/json"
+                    }
+                });
+
+               await response.json();
+                handleClose();                
+
+            } catch (error) {
+         
+            }
+        }
+        sendData();
+    }
+
+    React.useEffect(() => {
+
+        try {
+            let teacher = open.teacher;
+            setNames(teacher.names);
+            setLastNames(teacher.lastNames);
+            setCi(teacher.ci);
+            setGender(teacher.gender);
+            setPhone(teacher.phone);
+            setEmail(teacher.email);
+            setBirthdate(teacher.birthdate.split("T")[0]);
+            setSubjects(teacher.subject);
+
+        } catch (error) {
+
+        }
+
+
+    }, [open])
+
+    let key = 0;
     return (
         <div>
+            <Message open={openMessage} setOpen={setOpenMessage} data={MessageData} />
             <Modal
                 keepMounted
                 open={open.state}
@@ -54,40 +159,47 @@ export default function KeepMountedModal({ open, setOpen }) {
                 aria-describedby="keep-mounted-modal-description"
             >
                 <Box sx={style}>
-                    <div id="teacherDataContainer">
+                    <div id="teacherDataContainerX">
                         <div id="perfilTeacherTitle"> Perfil del profesor </div>
                         <TextField id="outlined-basic" label="Nombres" variant="outlined" className="input" value={names} onChange={e => setNames(e.target.value)} autoComplete='off' />
                         <TextField id="outlined-basic" label="Apellidos" variant="outlined" className="input" value={lastNames} onChange={e => setLastNames(e.target.value)} autoComplete='off' />
                         <TextField id="outlined-basic" label="Cédula" variant="outlined" type="number" className="input" value={ci} autoComplete='off' />
                         <div id="auxDataContainer">
                             <FormControl className="perfilTeacherInput2">
-                                <FormLabel id="demo-radio-buttons-group-label">Genero</FormLabel>
+                                <FormLabel id="demo-radio-buttons-group-labelteacherGender">Genero</FormLabel>
                                 <RadioGroup
                                     row
-                                    aria-labelledby="demo-radio-buttons-group-label"
+                                    aria-labelledby="demo-radio-buttons-group-label_gender"
                                     value={gender}
                                     onChange={e => setGender(e.target.value)}
-                                    name="nationality"
+                                    name="teacherGender"
                                 >
                                     <FormControlLabel value="m" control={<Radio />} label="Masculino" />
                                     <FormControlLabel value="f" control={<Radio />} label="Femenino" />
                                 </RadioGroup>
                             </FormControl>
 
-                            <TextField id="outlined-basic" label="Teléfono" variant="outlined" type="number" className="perfilTeacherInput2" value={phone} onChange={e => setPhone(e.target.value)} autoComplete='off' />
-                            <TextField id="outlined-basic" label="Email" variant="outlined" type="number" className="perfilTeacherInput2" value={email} onChange={e => setEmail(e.target.value)} autoComplete='off' />
-
+                            <TextField id="outlined-basic" label="Teléfono" variant="outlined" type="number" value={phone} onChange={e => setPhone(e.target.value)} autoComplete='off' />
+                            <TextField id="outlined-basic" label="Email" variant="outlined" value={email} onChange={e => setEmail(e.target.value)} autoComplete='off' />
+                            <TextField id="outlined-basic" label="Cumpleaños" variant="outlined" type="date" autoComplete='off' value={birthdate} onChange={e => setBirthdate(e.target.value)} />
                         </div>
 
                         <TextField id="outlined-basic" label="Usuario" variant="outlined" className="input" value={user} onChange={e => setUser(e.target.value)} autoComplete='off' />
-                        <TextField id="outlined-basic" label="Contraseña" variant="outlined" className="input" value={password} onChange={e => setPassword(e.target.value)} autoComplete='off' />
-                        <TextField id="outlined-basic" label="Repite la contraseña" variant="outlined" className="input" value={password2} onChange={e => setPassword2(e.target.value)} autoComplete='off' />
+                        <TextField id="outlined-basic" type="password" label="Contraseña" variant="outlined" className="input" value={password} onChange={e => setPassword(e.target.value)} autoComplete='off' />
+                        <TextField id="outlined-basic" type="password" label="Repite la contraseña" variant="outlined" className="input" value={password2} onChange={e => setPassword2(e.target.value)} autoComplete='off' />
+
                         <div id="teacherFoundedSubjects">
 
+                            {
+                                subjects.map(subject => {
+                                    return <div className="perfilTeacherSubject" key={key++}>{subject}</div>
+                                })
+                            }
 
                         </div>
+
                         <div id="perfilBTNContainer">
-                            <Button variant="contained" color="success">Aceptar</Button>
+                            <Button variant="contained" color="success" onClick={handleSend}>Aceptar</Button>
                             <Button variant="outlined" color="error" onClick={handleClose}>Cancelar</Button>
                         </div>
                     </div>

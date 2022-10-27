@@ -20,8 +20,6 @@ export function StudentList() {
         setSlectedStudent(index);
     }
 
-
-
   
     useEffect(() => {
         let selected = document.getElementsByClassName("selected");

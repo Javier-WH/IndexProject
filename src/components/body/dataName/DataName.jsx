@@ -6,12 +6,15 @@ import { useEffect } from "react";
 
 import { OpenModal } from "../../modal/Modal"
 
+import MalePhoto from "../../../placeHolders/malePlaceholder.jpg"
+import FemalePhoto from "../../../placeHolders/femalePlaceHolder.jpg"
 
 
 export function DataName() {
 
     const { selectedStudent, activeSeccion, getSchoolPeriod, pushNewData, studentList} = useContext(MainContext)
 
+    const [photo, setPhoto] = useState("");
     const [studentName, setStudentName] = useState("");
     const [studentCI, setStudentCI] = useState("");
     const [lap1, setLap1] = useState("");
@@ -194,9 +197,9 @@ export function DataName() {
 
     useEffect(() => {
         try {
-            let subjet = activeSeccion.split(" ")[0];
+            //corrige el bug del espacio en las secciones
+            let subjet = activeSeccion.substring(0, activeSeccion.length -4)
             let grades = selectedStudent.subjects[subjet];
-
             setLap1(grades.lap1);
             setLap2(grades.lap2);
             setLap3(grades.lap3);
@@ -210,6 +213,13 @@ export function DataName() {
         try {
             setStudentName(`${selectedStudent.names} ${selectedStudent.lastNames}`)
             setStudentCI(selectedStudent.ci)
+            if(selectedStudent.photo === "default"){
+                if(selectedStudent.gender === "m"){
+                    setPhoto(MalePhoto); 
+                }else{
+                    setPhoto(FemalePhoto);
+                }
+            }
         } catch (error) {
             setStudentName("")
             setStudentCI("")
@@ -255,7 +265,7 @@ export function DataName() {
                     <div id="dataTitleSchoolYear">{getSchoolPeriod()}</div>
                 </div>
                 <div id="studentDataContainerx">
-                    <div id="studentPhoto"></div>
+                    <div id="studentPhoto"> <img src={photo} alt="" id="stdPhoto" /> </div>
                     <div id="auxStudenName">
                         <TextField id="studentName" className="studentInput" label="Nombre del Alumno" variant="outlined" value={studentName} onChange={handleNameChange} spellCheck="false" />
                         <TextField id="studentCi" className="studentInput" label="Cédula del Alumno" variant="outlined" value={studentCI} onChange={handlePassChange} spellCheck="false" />

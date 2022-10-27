@@ -37,8 +37,12 @@
     border: 1px solid var(--secondaryColor);
     width: 110px;
     height: 130px;
+    display: flex;
 }
-
+#stdPhoto{
+    width: 100%;
+    height: 100%;
+}
 .studentInput {
     width: 100%;
     color: var(--mainColor);
