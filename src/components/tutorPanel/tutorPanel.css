@@ -60,9 +60,11 @@
     justify-content: flex-start;
     margin-bottom: 20px;
 }
-
-/*
-.MuiListItemText-secondary{
-    font-size: 22px !important;
+#tutorBarContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
 }
-*/

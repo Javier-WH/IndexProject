@@ -28,17 +28,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 function createData(subject, l1, l2, l3, def) {
   return { subject, l1, l2, l3, def };
 }
-/*
-let rows = [
-  createData('Matematica', 159, 6.0, 24, 4.0),
-  createData('Castellano', 237, 9.0, 37, 4.3),
-  createData('Biologia', 262, 16.0, 24, 6.0),
-  createData('Ingles', 305, 3.7, 67, 4.3),
-  createData('Informatica', 356, 16.0, 49, 3.9),
-  createData('Quimica', 356, 16.0, 49, 3.9),
-  createData('Fisica', 356, 16.0, 49, 3.9),
-];
-*/
+
 export default function CustomizedTables({grades}) {
 
   const [rows, setRows] = React.useState([])

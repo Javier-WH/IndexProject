@@ -17,13 +17,14 @@
 }
 
 #logoContainer{
-    width: var(--navBarHeight);
-    height: var(--navBarHeight);
+    width: calc(var(--navBarHeight) -10px);
+    height: calc(var(--navBarHeight) -10px);
     display: flex;
     justify-content: center;
     align-items: center;
     filter: drop-shadow( 0 0 3px white);
     margin-left: 20px;
+    margin: 5px;
     cursor: pointer;
 }
 #logoContainer:hover{

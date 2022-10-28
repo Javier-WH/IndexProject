@@ -212,14 +212,23 @@ export function DataName() {
         }
         try {
             setStudentName(`${selectedStudent.names} ${selectedStudent.lastNames}`)
-            setStudentCI(selectedStudent.ci)
-            if(selectedStudent.photo === "default"){
-                if(selectedStudent.gender === "m"){
-                    setPhoto(MalePhoto); 
+            setStudentCI(selectedStudent.ci);
+           
+        
+            async function getPhoto(){
+                let response = await fetch(`/photo?id=${selectedStudent.id}`);
+                let status = await response.status;
+             
+                if(status === 200){
+                    let blob = await response.blob();
+                    setPhoto( URL.createObjectURL(blob));
                 }else{
-                    setPhoto(FemalePhoto);
+                    setPhoto(selectedStudent.gender === "m" ? MalePhoto : FemalePhoto);
                 }
             }
+            getPhoto();    
+
+
         } catch (error) {
             setStudentName("")
             setStudentCI("")
