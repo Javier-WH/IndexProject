@@ -10,3 +10,6 @@
     column-gap: 20px;
     align-items: stretch;
 }
+#btnChangePeriod{
+    margin: 20px;
+}
