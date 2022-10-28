@@ -6,7 +6,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 
 
-export default function SimpleListMenu({options, selectedIndex, setSelectedIndex}) {
+export default function SimpleListMenu({ options, selectedIndex, setSelectedIndex }) {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -59,6 +59,7 @@ export default function SimpleListMenu({options, selectedIndex, setSelectedIndex
         {options.map((option, index) => (
           <MenuItem
             key={option}
+            disabled={index === 0}
             selected={index === selectedIndex}
             onClick={(event) => handleMenuItemClick(event, index)}
           >

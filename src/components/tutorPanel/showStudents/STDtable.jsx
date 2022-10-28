@@ -28,7 +28,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 function createData(subject, l1, l2, l3, def) {
   return { subject, l1, l2, l3, def };
 }
-
+/*
 let rows = [
   createData('Matematica', 159, 6.0, 24, 4.0),
   createData('Castellano', 237, 9.0, 37, 4.3),
@@ -38,9 +38,21 @@ let rows = [
   createData('Quimica', 356, 16.0, 49, 3.9),
   createData('Fisica', 356, 16.0, 49, 3.9),
 ];
+*/
+export default function CustomizedTables({grades}) {
 
-export default function CustomizedTables({list}) {
-
+  const [rows, setRows] = React.useState([])
+  React.useEffect(()=>{
+    let r = Object.keys(grades).map(subject=>{
+        let l1 = grades[subject].lap1;
+        let l2 = grades[subject].lap2;
+        let l3 = grades[subject].lap3;
+        let def = grades[subject].def;  
+        return createData(subject, l1, l2, l3, def);
+        
+    })
+    setRows(r);
+  },[grades])
     
   return (
     <TableContainer component={Paper}>

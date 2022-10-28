@@ -10,3 +10,59 @@
     display: flex;
     align-items: center;
 }
+
+#tutorNameTutorPanel{
+    border: 1px solid var(--secondaryColor);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border-radius: 15px;
+}
+#tutorNameTutorPanel::after{
+    content: "Datos del tutor";
+    position: absolute;
+    left: 10px;
+    top: -10px;
+    color: var(--secondaryColor);
+    background-color: white;
+}
+.tutorDataLabel{
+    color: var(--secondaryColor);
+    font-size: 16px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.tutorPanelTutorName{
+    font-weight: 500;
+}
+.tutorPanelTutorCi{
+    font-size: 12px !important;
+}
+#tutorPanelPhotoContainer{
+    position: relative;
+    width: 110px;
+    height: 130px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--secondaryColor);
+}
+
+#tutorPanelStudentPhoto{
+    width: 100%;
+    height: 100%;
+}
+#tutorPanelStudentData{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+}
+
+/*
+.MuiListItemText-secondary{
+    font-size: 22px !important;
+}
+*/
