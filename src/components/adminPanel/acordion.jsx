@@ -10,6 +10,7 @@ import Config from "./panels/config/config"
 import Inscription from './panels/studentsInscription/Student';
 import Tutor from "./panels/tutorInscription/tutor"
 import Teacher from './panels/teacherInscription/teacher';
+import Report from "./panels/reports/Reports"
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -104,10 +105,7 @@ export default function CustomizedAccordions() {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor
-            sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget.
+            <Report/>
           </Typography>
         </AccordionDetails>
       </Accordion>

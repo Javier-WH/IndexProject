@@ -30,7 +30,7 @@ export function MainMenu({setPrintTeacerName}) {
     });
 
     const [user, setUser] = useState("Esperando...");
-    const [userid, setUserid] = useState();
+    //const [userid, setUserid] = useState();
     const [openPerfil, setOpenPerfil] = useState(false);
     const [openInfo, setOpenInfo] = useState(false);
 
@@ -54,10 +54,10 @@ export function MainMenu({setPrintTeacerName}) {
     
 
     useEffect(()=>{
+        //setUserid(userData.id);
         fetch("/getUserName").then(e=> e.json())
         .then(userData=> {
             setUser(userData.name); 
-            setUserid(userData.id);
             setPrintTeacerName(userData.name)
         })
         .catch(error => setUser("error"))
