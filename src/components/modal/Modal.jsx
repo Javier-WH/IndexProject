@@ -5,6 +5,7 @@ import Modal from '@mui/material/Modal';
 import "./modal.css";
 import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 import ContactSupportIcon from '@mui/icons-material/ContactSupport';
+import ReportIcon from '@mui/icons-material/Report';
 import SickIcon from '@mui/icons-material/Sick';
 import Button from '@mui/material/Button';
 
@@ -88,6 +89,13 @@ function getIcon(type) {
             return <ContactSupportIcon sx={{
                 fontSize: 60,
                 color: "white",
+                marginLeft: "20px",
+                marginRight: "30px"
+            }} />
+        case "error":
+            return <ReportIcon sx={{
+                fontSize: 60,
+                color: "red",
                 marginLeft: "20px",
                 marginRight: "30px"
             }} />
