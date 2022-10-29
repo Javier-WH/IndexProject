@@ -17,6 +17,7 @@ export default function Config() {
     const [period, setPeriod] = useState(2022);
     const [studentCap, setStudentCap] = useState(30);
     const [maxGrade, setMaxGrade] = useState(20);
+    const [institution, setInstitution] = useState("");
 
     const [open, setOpen] = useState(false)
     const[data, setData]=useState({type: "error", message:"hakuna matata"})
@@ -43,6 +44,7 @@ export default function Config() {
     function handleGrande(e) {
         setMaxGrade(e.target.value)
     }
+   
 
     useEffect(() => {
         async function getConfig() {
@@ -56,6 +58,7 @@ export default function Config() {
                 setPeriod(config.period);
                 setMaxGrade(config.maxGradeCap);
                 setStudentCap(config.maxSeccionCap);
+                setInstitution(config.institutionName);
             } catch (error) {
                 console.log(error)
             }
@@ -71,7 +74,8 @@ export default function Config() {
             edit,
             period,
             maxGradeCap: maxGrade,
-            maxSeccionCap: studentCap
+            maxSeccionCap: studentCap,
+            institutionName: institution,
         }
 
         async function send(){
@@ -116,6 +120,10 @@ export default function Config() {
         <div className="optConfigContainer input" >
             <TextField id="outlined-basic" label="Numero maximo de estudiantes por sección" variant="outlined" type="number" value={studentCap} onChange={handleStudentCap} />
             <TextField id="outlined-basic" label="Nota maxima" variant="outlined" type="number" value={maxGrade} onChange={handleGrande} />
+        </div>
+        <br />
+        <div className="optConfigContainer">
+            <TextField id="outlined-basic" label="Nombre de la institución" variant="outlined" fullWidth value={institution} onChange={e=>setInstitution(e.target.value)} />
         </div>
         <Button variant="outlined" id='btnChangePeriod' onClick={handleSendConfig}>Cambiar</Button>
     </div>

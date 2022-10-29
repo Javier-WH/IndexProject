@@ -21,7 +21,7 @@ import { useEffect, useState } from 'react';
 
 
 
-export function MainMenu() {
+export function MainMenu({setPrintTeacerName}) {
     const [state, setState] = useState({
         top: false,
         left: false,
@@ -58,6 +58,7 @@ export function MainMenu() {
         .then(userData=> {
             setUser(userData.name); 
             setUserid(userData.id);
+            setPrintTeacerName(userData.name)
         })
         .catch(error => setUser("error"))
     },[])
@@ -76,7 +77,7 @@ export function MainMenu() {
                         <ListItemIcon>
                             <PersonIcon/>
                         </ListItemIcon>
-                        <ListItemText id={`user-${userid}`} primary={user} onClick={()=>{setOpenPerfil(true)}}/>
+                        <ListItemText id="teacherName" primary={user} onClick={()=>{setOpenPerfil(true)}}/>
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>

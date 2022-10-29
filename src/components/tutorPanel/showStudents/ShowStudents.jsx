@@ -79,7 +79,7 @@ export default function Student() {
 
             async function getPhoto() {
                 /*eslint-disable*/
-                let response = await fetch(`/photo?id=${stdId}`);
+                let response = await fetch(`/photo?id=${selectedStudent.id}`);
                 let status = await response.status;
 
                 if (status === 200) {

@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import ReactToPrint from "react-to-print";
 import LocalPrintshopTwoToneIcon from '@mui/icons-material/LocalPrintshopTwoTone';
 import Tooltip from '@mui/material/Tooltip';
@@ -6,12 +6,31 @@ import Button from '@mui/material/Button';
 import logo from "../../../../logo.svg";
 import Divider from '@mui/material/Divider';
 import "./recipe.css";
+import { useState } from "react";
 
 
 
 export default function InscriptionRecipe({ student }) {
    
     const componentRef = useRef();
+
+    const [institution, setPrintInstitution] = useState("");
+    const [period, setPeriod] = useState("");
+    const [date, setDate] = useState("");
+
+
+    useEffect(()=>{
+        
+        fetch("/config").then(res=> res.json())
+        .then(conf=>{
+            let _date = new Date()
+            setDate(`${_date.getDay()}-${_date.getUTCMonth()}-${_date.getFullYear()}`);
+
+            setPeriod(`${conf.period} - ${Number.parseInt(conf.period) - 1}`);
+            setPrintInstitution(conf.institutionName);
+        })
+        .catch(err=> console.log(err));
+    })
 
     if(student === false){
         return <h1>{" "}</h1>
@@ -53,6 +72,9 @@ export default function InscriptionRecipe({ student }) {
         }
     }
 
+   
+
+
     return <div>
         <ReactToPrint
             trigger={() => {
@@ -68,8 +90,9 @@ export default function InscriptionRecipe({ student }) {
                 <div id="recipeTitleContainerLogo">
                     <img src={logo} alt="" id="recipeLogo" />
                     <div id="recipetitleContainer">
-                        <div id="recipeTitle"> ESCUELA TÉCNICA COMERCIAL LUIS RAZETTI</div>
-                        <div id="recipeSubTitle"> INSCRIPCION ONLINE - PERIODO ESCOLAR <span id="recipePeriodo">2022-2023</span></div>
+                        <div id="recipeTitle"> {institution}</div>
+                        <div id="recipeSubTitle"> INSCRIPCION ONLINE - PERIODO ESCOLAR <span id="recipePeriodo">{period}</span></div>
+                        <div>Fecha de impresión: {date}</div>
                     </div>
                 </div>
                 <Divider />

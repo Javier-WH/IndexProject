@@ -7,10 +7,11 @@ import Logo from "../../logo.svg"
 import LocalPrintshopIcon from '@mui/icons-material/LocalPrintshop';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import Tooltip from '@mui/material/Tooltip';
-import { useContext, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 
 
 import ReactToPrint from "react-to-print";
+import { useState } from "react";
 
 
 export function NavBar() {
@@ -18,6 +19,12 @@ export function NavBar() {
     const { SaveData, studentList, activeSeccion } = useContext(MainContext)
 
     const componentRef = useRef();
+
+    const [printInstitution, setPrintInstitution] = useState("")
+    const [printSubject, setPrintSubjects] = useState("")
+    const [printSeccion, setPrintSeccions] = useState("")
+    const [printPeriod, setPrintPeriod] = useState("")
+    const [printTeacherName, setPrintTeacerName] = useState("")
 
     let iconsStyle = {
         fontSize: 50,
@@ -38,16 +45,36 @@ export function NavBar() {
                 <td>{def}</td>
             </>
         } catch (error) {
-
+            
         }
 
     }
+
+    useEffect(()=>{
+        try {
+
+            fetch("/config").then(res=> res.json())
+            .then(conf=>{
+                setPrintInstitution(conf.institutionName);
+            })
+            .catch(err=> console.log(err));
+
+            setPrintSubjects(activeSeccion.substring(0, activeSeccion.length -4));
+            setPrintSeccions(activeSeccion.substring(activeSeccion.length -3))
+            setPrintPeriod(document.getElementById("dataTitleSchoolYear").innerText);
+           
+        } catch (error) {
+            
+        }
+    })
+
+
     let key = 1;
     return <>
 
         <div id="NavBar">
             <div id="navBarContainer" >
-                <MainMenu />
+                <MainMenu  setPrintTeacerName = {setPrintTeacerName}/>
                 <div id="iconsContainer">
                     <ReactToPrint
                         trigger={() => <Tooltip title="Imprimir Nomina" arrow>
@@ -66,11 +93,11 @@ export function NavBar() {
             <div id="printTitleContainer">
                 <img src={Logo} alt="" id="printLogo" />
                 <div>
-                    <div className="printTitle">U.E. Colegio Batalla de la Victoria</div>
-                    <div className="printTitle">Asignatura: Física</div>
-                    <div className="printTitle">Sección: 3B</div>
-                    <div className="printTitle">Profesor: Antonio Magallanes</div>
-                    <div className="printTitle">Periodo escolar 2022 - 2023</div>
+                    <div className="printTitle">{printInstitution}</div>
+                    <div className="printTitle">Asignatura: {printSubject}</div>
+                    <div className="printTitle">Sección: {printSeccion}</div>
+                    <div className="printTitle">Profesor: {printTeacherName}</div>
+                    <div className="printTitle">{printPeriod}</div>
                 </div>
             </div>
 
