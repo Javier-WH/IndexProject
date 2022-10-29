@@ -12,7 +12,7 @@ import FemalePhoto from "../../../placeHolders/femalePlaceHolder.jpg"
 
 export function DataName() {
 
-    const { selectedStudent, activeSeccion, getSchoolPeriod, pushNewData, studentList } = useContext(MainContext)
+    const { dataToSave, selectedStudent, activeSeccion, getSchoolPeriod, pushNewData, studentList } = useContext(MainContext)
 
     const [gradeCap, setGradeCap] = useState(20)
     const [photo, setPhoto] = useState("");
@@ -23,6 +23,7 @@ export function DataName() {
     const [lap3, setLap3] = useState("");
     const [def, setDef] = useState("");
     const [modal, setModal] = useState({ state: false });
+    const [allowEdit, setAllowEdit] = useState(true);
     const [disabled, setDisabled] = useState({
         lap1: false,
         lap2: false,
@@ -201,15 +202,48 @@ export function DataName() {
 
 
     }
+    ///////////////////////////////////////////////////////////////////////////////
 
-    useEffect(() => {
+    function checkReadOnly(e) {
+
+        if (Object.keys(dataToSave).length === 0) {
+
+            if (e.target.value > 0) {
+                if (allowEdit) {
+                    e.target.readOnly = false;
+                } else {
+                    e.target.readOnly = true;
+                }
+            } else {
+                e.target.readOnly = false;
+
+            }
+        }
+
+    }
+
+
+
+    function setGrades(type = "all") {
         try {
             //corrige el bug del espacio en las secciones
             let subjet = activeSeccion.substring(0, activeSeccion.length - 4)
             let grades = selectedStudent.subjects[subjet];
-            setLap1(grades.lap1);
-            setLap2(grades.lap2);
-            setLap3(grades.lap3);
+            if (type === "all") {
+                setLap1(grades.lap1);
+                setLap2(grades.lap2);
+                setLap3(grades.lap3);
+            }
+            if (type === "1") {
+
+                setLap1(grades.lap1);
+            }
+            if (type === "2") {
+                setLap2(grades.lap2);
+            }
+            if (type === "3") {
+                setLap3(grades.lap3);
+            }
             setDef(grades.def);
         } catch (error) {
             setLap1(0);
@@ -217,6 +251,11 @@ export function DataName() {
             setLap3(0);
             setDef(0);
         }
+    }
+
+    useEffect(() => {
+        /*eslint-disable*/
+        setGrades();
         try {
             setStudentName(`${selectedStudent.names} ${selectedStudent.lastNames}`)
             setStudentCI(selectedStudent.ci);
@@ -272,6 +311,7 @@ export function DataName() {
                 let pull = await fetch("/config");
                 let config = await pull.json();
                 //console.log(config);
+
                 setDisabled({
                     lap1: !config.lap1,
                     lap2: !config.lap2,
@@ -279,9 +319,9 @@ export function DataName() {
                     edit: !config.edit,
                 })
                 setGradeCap(config.maxGradeCap)
-                
+                setAllowEdit(config.edit);
             } catch (error) {
-                
+
                 setModal({
                     state: true,
                     button: "1",
@@ -296,11 +336,25 @@ export function DataName() {
         getConfig();
 
 
-        let interval = setInterval(() => {
+        setInterval(() => {
             getConfig();
+
         }, 5000);
 
     }, [])
+
+
+    useEffect(() => {
+        if (disabled.lap1) {
+            setGrades("1");
+        }
+        if (disabled.lap2) {
+            setGrades("2");
+        }
+        if (disabled.lap3) {
+            setGrades("3");
+        }
+    }, [disabled])
 
 
     if ((activeSeccion === undefined)) {
@@ -325,15 +379,15 @@ export function DataName() {
                 <div id="studenGradesContainer">
                     <div className="studenLapse">
                         <div className="lblLapse">Primer Lapso</div>
-                        <input type="number" id="lap1" className="lapInput" disabled={disabled.lap1} value={lap1} onChange={handleLap1Change} onBlur={lapLostFocus} onKeyDown={handleInputKeyUpDown} spellCheck="false" />
+                        <input type="number" id="lap1" className="lapInput" disabled={disabled.lap1} onClick={checkReadOnly} value={lap1} onChange={handleLap1Change} onBlur={lapLostFocus} onKeyDown={handleInputKeyUpDown} spellCheck="false" />
                     </div>
                     <div className="studenLapse">
                         <div className="lblLapse">Segundo Lapso</div>
-                        <input type="number" id="lap2" className="lapInput" disabled={disabled.lap2} value={lap2} onChange={handleLap2Change} onBlur={lapLostFocus} onKeyDown={handleInputKeyUpDown} spellCheck="false" />
+                        <input type="number" id="lap2" className="lapInput" disabled={disabled.lap2} onClick={checkReadOnly} value={lap2} onChange={handleLap2Change} onBlur={lapLostFocus} onKeyDown={handleInputKeyUpDown} spellCheck="false" />
                     </div>
                     <div className="studenLapse">
                         <div className="lblLapse">Tercer Lapso</div>
-                        <input type="number" id="lap3" className="lapInput" disabled={disabled.lap3} value={lap3} onChange={handleLap3Change} onBlur={lapLostFocus} onKeyDown={handleInputKeyUpDown} spellCheck="false" />
+                        <input type="number" id="lap3" className="lapInput" disabled={disabled.lap3} onClick={checkReadOnly} value={lap3} onChange={handleLap3Change} onBlur={lapLostFocus} onKeyDown={handleInputKeyUpDown} spellCheck="false" />
                     </div>
                 </div>
                 <div id="studentDefContainer">

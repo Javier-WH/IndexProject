@@ -18,7 +18,10 @@ export function MainContextProvider({ children }) {
     //
     const [dataToSave, setDataToSave] = useState({});
     //
-    const [message, setMessage] = useState({ state: false, type: "success", message: "" })
+    const [message, setMessage] = useState({ state: false, type: "success", message: "" });
+
+    // 
+    
 
 
 
@@ -92,6 +95,7 @@ export function MainContextProvider({ children }) {
                     setMessage({ state: true, type: "error", message: response.error })
                 }
                 if (response.message === "OK") {
+
                     setDataToSave({})
                     setMessage({ state: true, type: "success", message: "Las notas han sido guardadas" })
                 }

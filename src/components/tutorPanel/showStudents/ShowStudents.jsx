@@ -55,7 +55,7 @@ export default function Student() {
                 method: "POST",
                 body: data
             });
-            let response = await push.json();
+            await push.json();
 
         }
         pushPhoto();
@@ -78,6 +78,7 @@ export default function Student() {
             setStdScoolYear(translateSchoolYear(Number.parseInt(selectedStudent.schoolYear)))
 
             async function getPhoto() {
+                /*eslint-disable*/
                 let response = await fetch(`/photo?id=${stdId}`);
                 let status = await response.status;
 
