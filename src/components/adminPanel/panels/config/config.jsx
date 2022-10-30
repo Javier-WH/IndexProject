@@ -18,6 +18,7 @@ export default function Config() {
     const [studentCap, setStudentCap] = useState(30);
     const [maxGrade, setMaxGrade] = useState(20);
     const [institution, setInstitution] = useState("");
+    const [failedNumber, setFailedNumber] = useState(3);
 
     const [open, setOpen] = useState(false)
     const[data, setData]=useState({type: "error", message:"hakuna matata"})
@@ -59,6 +60,7 @@ export default function Config() {
                 setMaxGrade(config.maxGradeCap);
                 setStudentCap(config.maxSeccionCap);
                 setInstitution(config.institutionName);
+                setFailedNumber(config.failedNumber);
             } catch (error) {
                 console.log(error)
             }
@@ -76,6 +78,7 @@ export default function Config() {
             maxGradeCap: maxGrade,
             maxSeccionCap: studentCap,
             institutionName: institution,
+            failedNumber
         }
 
         async function send(){
@@ -122,8 +125,9 @@ export default function Config() {
             <TextField id="outlined-basic" label="Nota maxima" variant="outlined" type="number" value={maxGrade} onChange={handleGrande} />
         </div>
         <br />
-        <div className="optConfigContainer">
+        <div className="optConfigContainer namesContainer" >
             <TextField id="outlined-basic" label="Nombre de la institución" variant="outlined" fullWidth value={institution} onChange={e=>setInstitution(e.target.value)} />
+            <TextField id="outlined-basic" className='numberInput' fullWidth label="Numero de materias para repetir el año" type="number" variant="outlined"  value={failedNumber} onChange={e=>setFailedNumber(e.target.value)} />
         </div>
         <Button variant="outlined" id='btnChangePeriod' onClick={handleSendConfig}>Cambiar</Button>
     </div>

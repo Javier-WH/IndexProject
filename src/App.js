@@ -9,7 +9,7 @@ import "./login.css";
 
 function App() {
 
-  const [logType, setLogType] = useState(3);
+  const [logType, setLogType] = useState(0);
 
   if (logType === 0) {
     return <div id="mainContainer">

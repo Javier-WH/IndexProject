@@ -72,7 +72,7 @@ export default function CustomizedAccordions() {
           <Typography>Inscribir Estudiante</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Inscription />
+          <Inscription adm = {true} />
         </AccordionDetails>
       </Accordion>
 

@@ -19,12 +19,13 @@ import PersonSearchTwoToneIcon from '@mui/icons-material/PersonSearchTwoTone';
 import { OpenModal } from "../../../modal/Modal";
 import Recipe from "./recipe.jsx";
 
+import CheckIcon from '@mui/icons-material/Check';
 import infoVenezuela from "./auxFolder/getInfo"
 import getMunicipios from './auxFolder/getMunicipios';
 import Parroquias from "./auxFolder/getParroquias";
 import getSubjects from './auxFolder/getSubjects';
 
-export default function Inscription() {
+export default function Inscription({ adm = false }) {
 
     const [pensum, setPensum] = useState([]);
     const [inscriptionType, setInscriptionType] = useState("")
@@ -410,7 +411,7 @@ export default function Inscription() {
         setPeriodo(event.target.value);
     }
     const handleHaveCi = (event) => {
-      
+
         setHaveCi(!event.target.checked);
         if (event.target.checked) {
             let number = "99" + getRandom(10);
@@ -909,6 +910,34 @@ export default function Inscription() {
         }
     }
 
+    function inscribe() {
+        async function send() {
+            let push = await fetch("/inscribe", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "*/*"
+                },
+                body: JSON.stringify(getData())
+            });
+            let response = await push.json();
+            if(response.error){
+                setMessageParams({
+                    type: "error",
+                    message: response.error
+                })
+                setOpenMessage(true);
+                return
+            }
+            setMessageParams({
+                type: "success",
+                message: "Se ha inscrito al estudiante"
+            })
+            setOpenMessage(true)
+        }
+        send();
+    }
+
 
     function handleSendData() {
         let missingData = checkMissingData();
@@ -931,11 +960,11 @@ export default function Inscription() {
                         setModal({ state: false })
                     }
                 })
-            }else{
+            } else {
                 sendData()
             }
 
-            function sendData(){
+            function sendData() {
                 let data = getData();
 
                 fetch("/student", {
@@ -952,23 +981,23 @@ export default function Inscription() {
                             setMessageParams({ type: "error", message: response.error })
                             setOpenMessage(true)
                         } else {
-                            setMessageParams({ type: "success", message: `Se ha inscrito satisfactoriamente al estudiante` })
+                            setMessageParams({ type: "success", message: `Se ha preinscrito satisfactoriamente al estudiante` })
                             cleanData();
                             setHaveCi(true);
                             setCi("");
                             setOpenMessage(true)
                             setInscriptionType("");
                         }
-    
+
                     })
                     .catch(err => {
                         setMessageParams({ type: "error", message: `Ocurrió un error, no se ha inscrito al estudiante` })
                         setOpenMessage(true)
                     })
-    
+
             }
-          
-                ////
+
+            ////
         }
     }
 
@@ -994,6 +1023,7 @@ export default function Inscription() {
             </div>
             <Button variant="outlined" className={`btnIscrip  ${haveCi ? "" : "invisible"}`} onClick={handleSearch}> <PersonSearchTwoToneIcon /> Buscar</Button>
             <Recipe student={stdFounded} />
+            <Button variant="outlined" className={`btnIscrip  ${stdFounded && adm ? "" : "invisible"}`} onClick={inscribe}> <CheckIcon /> Inscribir</Button>
         </div>
         <div id="studentDataContainer" className={inscriptionType === "Nuevo Ingreso" || inscriptionType === "Estudiante encontrado" ? "" : "folded"} >
             <div id="inscriptionType">{inscriptionType}</div>
@@ -1511,7 +1541,7 @@ export default function Inscription() {
                 }
             </div>
 
-            <Button variant="contained" endIcon={<SendIcon />} onClick={handleSendData}>Inscribir</Button>
+            <Button variant="contained" endIcon={<SendIcon />} onClick={handleSendData}>preinscribir</Button>
             <br />
 
         </div>
