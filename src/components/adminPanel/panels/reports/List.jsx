@@ -1,5 +1,4 @@
 import * as React from 'react';
-import ListSubheader from '@mui/material/ListSubheader';
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -14,6 +13,8 @@ import SummarizeIcon from '@mui/icons-material/Summarize';
 import SchoolIcon from '@mui/icons-material/School';
 import RecentActorsIcon from '@mui/icons-material/RecentActors';
 
+import TeacherList from "../../../teacherList/teacherList";
+
 
 export default function NestedList() {
     const [open, setOpen] = React.useState(true);
@@ -22,12 +23,13 @@ export default function NestedList() {
         setOpen(!open);
     };
 
-    return (
+    return (<>
+        <TeacherList />
         <List
             sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
             component="nav"
             aria-labelledby="nested-list-subheader"
-    
+
         >
             <ListItemButton>
                 <ListItemIcon>
@@ -35,17 +37,18 @@ export default function NestedList() {
                 </ListItemIcon>
                 <ListItemText primary="Bitacora" />
             </ListItemButton>
-          
+
             <ListItemButton>
                 <ListItemIcon>
                     <RecentActorsIcon />
                 </ListItemIcon>
-                <ListItemText primary="Lista de profesores" />
+                <TeacherList />
+
             </ListItemButton>
             {/////////////////////////////////////////////////////////////////////
             }
 
-            
+
             <ListItemButton onClick={handleClick}>
                 <ListItemIcon>
                     <SchoolIcon />
@@ -71,7 +74,7 @@ export default function NestedList() {
                 </List>
             </Collapse>
 
-            
+
             <ListItemButton>
                 <ListItemIcon>
                     <GradeIcon />
@@ -82,5 +85,6 @@ export default function NestedList() {
         </List>
 
 
+    </>
     );
 }
