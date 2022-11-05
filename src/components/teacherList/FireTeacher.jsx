@@ -5,6 +5,9 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 
+import Message from "../adminPanel/message/Message"
+import { useState } from 'react';
+
 
 const style = {
     position: 'absolute',
@@ -18,12 +21,21 @@ const style = {
     p: 4,
 };
 
+
 export default function BasicModal({reload}) {
     const [ci, setCi] = React.useState("")
     const [open, setOpen] = React.useState(false);
+    const [openMessage, setOpenMessage] = useState(false)
+    const [dataMessage, setDataMessage] = useState({type: "error", message: ""});
+    
+    
+    
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
     
+
+
     const handleFire = () => {
         async function fire(){
 
@@ -38,7 +50,11 @@ export default function BasicModal({reload}) {
 
             let response = await ft.json();
             if(response.error){
-                console.log(response.error)
+                setDataMessage({
+                    type: "error", 
+                    message: response.error
+                });
+                setOpenMessage(true)
             }else{
                 reload();
                 handleClose();
@@ -52,6 +68,7 @@ export default function BasicModal({reload}) {
 
     return (
         <div>
+            <Message open ={openMessage} setOpen={setOpenMessage} data={dataMessage}/>
             <Button onClick={handleOpen} variant="outlined" color="error">Despedir Profesor</Button>
             <Modal
                 open={open}
