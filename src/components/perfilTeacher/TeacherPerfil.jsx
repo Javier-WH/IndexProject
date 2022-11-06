@@ -28,7 +28,7 @@ const style = {
     p: 4,
 };
 
-export default function KeepMountedModal({ open, setOpen }) {
+export default function KeepMountedModal({ open, setOpen, editable = true }) {
 
     const [names, setNames] = useState("");
     const [lastNames, setLastNames] = useState("");
@@ -167,9 +167,9 @@ export default function KeepMountedModal({ open, setOpen }) {
                                 <img id='perfilTeacherLogo' src={Logo} alt="" />
                                 <div id="perfilTeacherTitle"> Perfil del profesor </div>
                             </div>
-                            <TextField id="outlined-basic" label="Nombres" variant="outlined" value={names} onChange={e => setNames(e.target.value)} autoComplete='off' />
-                            <TextField id="outlined-basic" label="Apellidos" variant="outlined" value={lastNames} onChange={e => setLastNames(e.target.value)} autoComplete='off' />
-                            <TextField id="outlined-basic" label="Cédula" variant="outlined" type="number" value={ci} autoComplete='off' />
+                            <TextField  InputProps={{readOnly: !editable,}} id="outlined-basic" label="Nombres" variant="outlined" value={names} onChange={e => setNames(e.target.value)} autoComplete='off' />
+                            <TextField  InputProps={{readOnly: !editable,}} id="outlined-basic" label="Apellidos" variant="outlined" value={lastNames} onChange={e => setLastNames(e.target.value)} autoComplete='off' />
+                            <TextField  InputProps={{readOnly: !editable,}} id="outlined-basic" label="Cédula" variant="outlined" type="number" value={ci} autoComplete='off' />
                             <div id="auxDataContainer">
                                 <FormControl className="perfilTeacherInput2">
                                     <FormLabel id="demo-radio-buttons-group-labelteacherGender">Genero</FormLabel>
@@ -185,14 +185,14 @@ export default function KeepMountedModal({ open, setOpen }) {
                                     </RadioGroup>
                                 </FormControl>
 
-                                <TextField id="outlined-basic" label="Teléfono" variant="outlined" type="number" value={phone} onChange={e => setPhone(e.target.value)} autoComplete='off' />
-                                <TextField id="outlined-basic" label="Email" variant="outlined" value={email} onChange={e => setEmail(e.target.value)} autoComplete='off' />
-                                <TextField id="outlined-basic" label="Cumpleaños" variant="outlined" type="date" autoComplete='off' value={birthdate} onChange={e => setBirthdate(e.target.value)} />
+                                <TextField  InputProps={{readOnly: !editable,}} id="outlined-basic" label="Teléfono" variant="outlined" type="number" value={phone} onChange={e => setPhone(e.target.value)} autoComplete='off' />
+                                <TextField  InputProps={{readOnly: !editable,}} id="outlined-basic" label="Email" variant="outlined" value={email} onChange={e => setEmail(e.target.value)} autoComplete='off' />
+                                <TextField  InputProps={{readOnly: !editable,}} id="outlined-basic" label="Cumpleaños" variant="outlined" type="date" autoComplete='off' value={birthdate} onChange={e => setBirthdate(e.target.value)} />
                             </div>
 
-                            <TextField id="outlined-basic" label="Usuario" variant="outlined" value={user} onChange={e => setUser(e.target.value)} autoComplete='off' />
-                            <TextField id="outlined-basic" type="password" label="Contraseña" variant="outlined" value={password} onChange={e => setPassword(e.target.value)} autoComplete='off' />
-                            <TextField id="outlined-basic" type="password" label="Repite la contraseña" variant="outlined" value={password2} onChange={e => setPassword2(e.target.value)} autoComplete='off' />
+                            <TextField className = {editable ? "" : "invisible"} id="outlined-basic" label="Usuario" variant="outlined" value={user} onChange={e => setUser(e.target.value)} autoComplete='off' />
+                            <TextField className = {editable ? "" : "invisible"} id="outlined-basic" type="password" label="Contraseña" variant="outlined" value={password} onChange={e => setPassword(e.target.value)} autoComplete='off' />
+                            <TextField className = {editable ? "" : "invisible"} id="outlined-basic" type="password" label="Repite la contraseña" variant="outlined" value={password2} onChange={e => setPassword2(e.target.value)} autoComplete='off' />
 
                             <div id="teacherFoundedSubjects">
 
@@ -205,7 +205,7 @@ export default function KeepMountedModal({ open, setOpen }) {
                             </div>
 
                             <div id="perfilBTNContainer">
-                                <Button variant="contained" color="success" onClick={handleSend}>Aceptar</Button>
+                                <Button variant="contained" color="success" onClick={handleSend} className = {editable ? "" : "invisible"}>Aceptar</Button>
                                 <Button variant="outlined" color="error" onClick={handleClose}>Cancelar</Button>
                             </div>
                         </div>

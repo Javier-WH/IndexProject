@@ -3,18 +3,13 @@ import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import Collapse from '@mui/material/Collapse';
-import ExpandLess from '@mui/icons-material/ExpandLess';
-import ExpandMore from '@mui/icons-material/ExpandMore';
-
 import GradeIcon from '@mui/icons-material/Grade';
-import PeopleIcon from '@mui/icons-material/People';
 import SummarizeIcon from '@mui/icons-material/Summarize';
 import SchoolIcon from '@mui/icons-material/School';
 import RecentActorsIcon from '@mui/icons-material/RecentActors';
 
 import TeacherList from "../../../teacherList/teacherList";
-
+import RegisteredStudents from "../../../registeredStuidents/StudentList"
 
 export default function NestedList() {
     const [open, setOpen] = React.useState(true);
@@ -45,34 +40,16 @@ export default function NestedList() {
                 <TeacherList />
 
             </ListItemButton>
-            {/////////////////////////////////////////////////////////////////////
-            }
+    
 
-
-            <ListItemButton onClick={handleClick}>
+            <ListItemButton>
                 <ListItemIcon>
                     <SchoolIcon />
                 </ListItemIcon>
-                <ListItemText primary="Estudiantes" />
-                {open ? <ExpandLess /> : <ExpandMore />}
+                <RegisteredStudents />
+
             </ListItemButton>
 
-            <Collapse in={open} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }}>
-                        <ListItemIcon>
-                            <PeopleIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Lista de estudiantes inscritos" />
-                    </ListItemButton>
-                    <ListItemButton sx={{ pl: 4 }}>
-                        <ListItemIcon>
-                            <PeopleIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Lista de estudiantes preinscritos" />
-                    </ListItemButton>
-                </List>
-            </Collapse>
 
 
             <ListItemButton>

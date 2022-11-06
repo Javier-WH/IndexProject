@@ -12,7 +12,8 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { Logo } from "../../logo/Logo";
 
 
-import PerfilTeacher from "../../teacherPerfil/perfilTeacher";
+import Perfil from "../../perfilTeacher/TeacherPerfil"
+
 import Info from "../../info/Info"
 
 import "./mainMenu.css";
@@ -30,8 +31,12 @@ export function MainMenu({setPrintTeacerName}) {
     });
 
     const [user, setUser] = useState("Esperando...");
-    //const [userid, setUserid] = useState();
-    const [openPerfil, setOpenPerfil] = useState(false);
+    const [userCi, setUserCi] = useState("");
+   
+    const [openPerfil, setOpenPerfil] = useState({
+        teacher:"",
+        state: false
+      });
     const [openInfo, setOpenInfo] = useState(false);
 
 
@@ -51,14 +56,25 @@ export function MainMenu({setPrintTeacerName}) {
         fetch("/logout");
         window.location.reload(true);
     }
+//////////////////////////////////
+    async function handleperfil(ci) {
+        let pull = await fetch(`/teacher?ci=${ci}`);
+        let teacher = await pull.json();
+        
+        setOpenPerfil({
+          teacher,
+          state: true
+        })
     
-
+      }    
+///////////////////////////////////
     useEffect(()=>{
-        //setUserid(userData.id);
         fetch("/getUserName").then(e=> e.json())
         .then(userData=> {
             setUser(userData.name); 
+            /*eslint-disable*/
             setPrintTeacerName(userData.name)
+            setUserCi(userData.ci);
         })
         .catch(error => setUser("error"))
     },[])
@@ -77,7 +93,7 @@ export function MainMenu({setPrintTeacerName}) {
                         <ListItemIcon>
                             <PersonIcon/>
                         </ListItemIcon>
-                        <ListItemText id="teacherName" primary={user} onClick={()=>{setOpenPerfil(true)}}/>
+                        <ListItemText id="teacherName" primary={user} onClick={()=>handleperfil(userCi)}/>
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
@@ -100,7 +116,7 @@ export function MainMenu({setPrintTeacerName}) {
         </Box>
     );
     return <>
-        <PerfilTeacher open={openPerfil} setOpen = {setOpenPerfil} setName = {setUser} userID={1}/>
+       <Perfil open= {openPerfil} setOpen={setOpenPerfil} editable = {false}/>
         <Info open={openInfo} setOpen={setOpenInfo}/>
 
         <React.Fragment key={"left"}>
