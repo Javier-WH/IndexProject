@@ -2,13 +2,16 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Switch from '@mui/material/Switch';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import {LogoContext} from "../../../../context/LogoContext"
 
 import "./config.css"
 
 import Message from "../../message/Message"
 
 export default function Config() {
+
+    const {logo, setLogo} = useContext(LogoContext);
 
     const [l1, setL1] = useState(true);
     const [l2, setL2] = useState(true);
@@ -128,6 +131,15 @@ export default function Config() {
         <div className="optConfigContainer namesContainer" >
             <TextField id="outlined-basic" label="Nombre de la institución" variant="outlined" fullWidth value={institution} onChange={e=>setInstitution(e.target.value)} />
             <TextField id="outlined-basic" className='numberInput' fullWidth label="Numero de materias para repetir el año" type="number" variant="outlined"  value={failedNumber} onChange={e=>setFailedNumber(e.target.value)} />
+        </div>
+
+        <div className="optConfigContainer configLogoContainer" >
+           <div id="configLogoTitle"> Logo de la institución</div>
+            <input type="file" id="configLogoInput"  className='invisible'/>
+            <label htmlFor='configLogoInput' id='configlogoContgainer'>
+                <img src={logo} alt="" id='configLogo'/>
+            </label>
+            <Button variant="outlined" size="small" >Restaurar</Button>
         </div>
         <Button variant="outlined" id='btnChangePeriod' onClick={handleSendConfig}>Cambiar</Button>
     </div>

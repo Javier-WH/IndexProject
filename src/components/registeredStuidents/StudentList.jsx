@@ -55,7 +55,6 @@ export default function BasicModal() {
         async function getList() {
             let response = await fetch("/studentFullList");
             let data = await response.json();
-            console.log(data)
             setStudentList(data);
             setFilteredList(data);
         }

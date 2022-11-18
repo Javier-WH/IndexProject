@@ -20,3 +20,32 @@
     gap: 20px;
     width: 300px;
 }
+#configlogoContgainer{
+    position: relative;
+    width: 100px;
+}
+#configLogo{
+    width: 100px;
+    height: 100px;
+}
+.configLogoContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    margin: 20px;
+    border: 1px solid var(--secondaryColor);
+    padding: 10px;
+    width: 400px;
+    border-radius: 10px;
+    position: relative;
+    margin-left: 5px;
+}
+#configLogoTitle{
+    color: var(--secondaryColor);
+    background: white;
+    position: absolute;
+    left: 20px;
+    top: -10px;
+}
