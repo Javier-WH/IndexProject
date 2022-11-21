@@ -11,6 +11,8 @@ import PersonIcon from '@mui/icons-material/Person';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Logo } from "../../logo/Logo";
 
+import {LogoContext} from "../../../context/LogoContext"
+
 
 import Perfil from "../../perfilTeacher/TeacherPerfil"
 
@@ -23,6 +25,9 @@ import { useEffect, useState } from 'react';
 
 
 export function MainMenu({setPrintTeacerName}) {
+
+    const {logo} = React.useContext(LogoContext);
+
     const [state, setState] = useState({
         top: false,
         left: false,
@@ -121,7 +126,7 @@ export function MainMenu({setPrintTeacerName}) {
 
         <React.Fragment key={"left"}>
             <label id="logoContainer" onClick={toggleDrawer("left", true)}>
-                <Logo />
+                <img src={logo} alt="" id='navBarLogo' />
             </label>
             <SwipeableDrawer
                 anchor={"left"}

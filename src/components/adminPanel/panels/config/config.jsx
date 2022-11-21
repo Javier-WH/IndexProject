@@ -5,13 +5,15 @@ import Switch from '@mui/material/Switch';
 import { useContext, useEffect, useState } from 'react';
 import {LogoContext} from "../../../../context/LogoContext"
 
+import Logo from "../../../../logo.svg"
+
 import "./config.css"
 
 import Message from "../../message/Message"
 
 export default function Config() {
 
-    const {logo, setLogo} = useContext(LogoContext);
+    const {logo, setLogo, getLogo} = useContext(LogoContext);
 
     const [l1, setL1] = useState(true);
     const [l2, setL2] = useState(true);
@@ -84,6 +86,7 @@ export default function Config() {
             failedNumber
         }
 
+
         async function send(){
             let push = await fetch("/config",{
                 method: "POST",
@@ -103,6 +106,53 @@ export default function Config() {
             setOpen(true);
         }
         send();
+    }
+
+    function handleChangeLogo(e) {
+
+        let file = e.target.files[0];
+
+        if (file.type !== "image/svg+xml") {
+            console.log("la imagen no es SVG");
+            return
+        }
+        setLogo(URL.createObjectURL(file));
+     
+
+        async function pushPhoto() {
+            let data = new FormData();
+            data.append("file", file);
+            data.append("fileName", file.name);
+
+            let push = await fetch("/logo", {
+                method: "POST",
+                body: data
+            });
+            await push.json();
+
+        }
+        pushPhoto();
+
+    }
+
+    function handleRestoreLogo(){
+
+        async function retoreLogo(){
+
+            let ask = await fetch("/logo", {
+                method: "DELETE"
+            })
+
+            if(ask.status === 200){
+
+                getLogo();
+
+            }
+          
+        }
+        setLogo(Logo);
+        retoreLogo();
+
     }
 
     return <div id="configContainer">
@@ -135,11 +185,11 @@ export default function Config() {
 
         <div className="optConfigContainer configLogoContainer" >
            <div id="configLogoTitle"> Logo de la institución</div>
-            <input type="file" id="configLogoInput"  className='invisible'/>
+            <input type="file" id="configLogoInput"  className='invisible' onChange={handleChangeLogo}/>
             <label htmlFor='configLogoInput' id='configlogoContgainer'>
                 <img src={logo} alt="" id='configLogo'/>
             </label>
-            <Button variant="outlined" size="small" >Restaurar</Button>
+            <Button variant="outlined" size="small" onClick={handleRestoreLogo} >Restaurar</Button>
         </div>
         <Button variant="outlined" id='btnChangePeriod' onClick={handleSendConfig}>Cambiar</Button>
     </div>

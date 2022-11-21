@@ -2,8 +2,8 @@ import "./navBar.css";
 import { MainContext } from "../../context/MainContext"
 import { SubjectMenu } from "./subjectMenu/SubjectMenu";
 import { MainMenu } from "./mainMenu/MainMenu"
-import Logo from "../../logo.svg"
-
+//import Logo from "../../logo.svg"
+import {LogoContext} from "../../context/LogoContext"
 import LocalPrintshopIcon from '@mui/icons-material/LocalPrintshop';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import Tooltip from '@mui/material/Tooltip';
@@ -15,6 +15,8 @@ import { useState } from "react";
 
 
 export function NavBar() {
+
+    const {logo} = useContext(LogoContext)
 
     const { SaveData, studentList, activeSeccion } = useContext(MainContext)
 
@@ -92,7 +94,7 @@ export function NavBar() {
             </div>
         <div id="print" ref={componentRef}>
             <div id="printTitleContainer">
-                <img src={Logo} alt="" id="printLogo" />
+                <img src={logo} alt="" id="printLogo" />
                 <div>
                     <div className="printTitle">{printInstitution}</div>
                     <div className="printTitle">Asignatura: {printSubject}</div>

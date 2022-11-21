@@ -8,15 +8,30 @@ export const LogoContext = createContext();
 
 export function LogoContextProvider({ children }) {
 
-    const [logo, setLogo] = useState("")
+    const [logo, setLogo] = useState("");
+
+    async function getLogo(){
+        setLogo(Logo)
+        let blobLogo = await fetch("/logo");
+        let status = blobLogo.status;
+
+        if(status === 200){
+            let blob = await blobLogo.blob();
+            setLogo(URL.createObjectURL(blob));
+        }
+
+    }   
+
+ 
  
     useEffect(()=>{
-        setLogo(Logo)
+        getLogo();
     },[])
 
     let value ={
         logo,
-        setLogo
+        setLogo,
+        getLogo
     }
 
     return <LogoContext.Provider value={value}>

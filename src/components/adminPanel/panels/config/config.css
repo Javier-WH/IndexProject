@@ -37,7 +37,7 @@
     margin: 20px;
     border: 1px solid var(--secondaryColor);
     padding: 10px;
-    width: 400px;
+    max-width: 400px;
     border-radius: 10px;
     position: relative;
     margin-left: 5px;

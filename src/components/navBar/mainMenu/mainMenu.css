@@ -10,3 +10,7 @@
     padding: 10px 0;
     background-color: var(--mainColor);
 }
+
+#navBarLogo{
+    width: var(--navBarHeight);
+}
