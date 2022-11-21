@@ -3,15 +3,19 @@ import ReactToPrint from "react-to-print";
 import LocalPrintshopTwoToneIcon from '@mui/icons-material/LocalPrintshopTwoTone';
 import Tooltip from '@mui/material/Tooltip';
 import Button from '@mui/material/Button';
-import logo from "../../../../logo.svg";
+//import logo from "../../../../logo.svg";
 import Divider from '@mui/material/Divider';
 import "./recipe.css";
 import { useState } from "react";
-
+import { useContext } from "react";
+import {LogoContext} from "../../../../context/LogoContext"
 
 
 export default function InscriptionRecipe({ student }) {
-   
+    
+    const {logo} = useContext(LogoContext);
+
+
     const componentRef = useRef();
 
     const [institution, setPrintInstitution] = useState("");
