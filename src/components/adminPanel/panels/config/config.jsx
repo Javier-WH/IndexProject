@@ -3,8 +3,9 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Switch from '@mui/material/Switch';
 import { useContext, useEffect, useState } from 'react';
-import {LogoContext} from "../../../../context/LogoContext"
+import {LogoContext} from "../../../../context/LogoContext";
 
+import SeccionList from "../../../seccionList/SeccionListModal";
 import Logo from "../../../../logo.svg"
 
 import "./config.css"
@@ -191,6 +192,8 @@ export default function Config() {
             </label>
             <Button variant="outlined" size="small" onClick={handleRestoreLogo} >Restaurar</Button>
         </div>
+        <SeccionList/>
+
         <Button variant="outlined" id='btnChangePeriod' onClick={handleSendConfig}>Cambiar</Button>
     </div>
 }

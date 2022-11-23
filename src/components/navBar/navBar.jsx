@@ -51,17 +51,18 @@ export function NavBar() {
         }
 
     }
-
+     /*eslint-disable*/
     useEffect(()=>{
-        /*eslint-disable*/
+
         try {
 
             fetch("/config").then(res=> res.json())
             .then(conf=>{
+        
                 setPrintInstitution(conf.institutionName);
             })
             .catch(err=> console.log(err));
-            
+  
             setPrintSubjects( activeSeccion.substring(0, activeSeccion.length -4));
             setPrintSeccions(activeSeccion.substring(activeSeccion.length -3))
             setPrintPeriod(document.getElementById("dataTitleSchoolYear").innerText);

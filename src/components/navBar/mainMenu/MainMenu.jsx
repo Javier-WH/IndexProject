@@ -9,7 +9,7 @@ import ListItemText from '@mui/material/ListItemText';
 import HelpIcon from '@mui/icons-material/Help';
 import PersonIcon from '@mui/icons-material/Person';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { Logo } from "../../logo/Logo";
+//import { Logo } from "../../logo/Logo";
 
 import {LogoContext} from "../../../context/LogoContext"
 
