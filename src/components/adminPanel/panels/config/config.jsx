@@ -6,6 +6,7 @@ import { useContext, useEffect, useState } from 'react';
 import {LogoContext} from "../../../../context/LogoContext";
 
 import SeccionList from "../../../seccionList/SeccionListModal";
+import Subjects from "../../../subjectsList/SubjectList"
 import Logo from "../../../../logo.svg"
 
 import "./config.css"
@@ -193,6 +194,7 @@ export default function Config() {
             <Button variant="outlined" size="small" onClick={handleRestoreLogo} >Restaurar</Button>
         </div>
         <SeccionList/>
+        <Subjects/>
 
         <Button variant="outlined" id='btnChangePeriod' onClick={handleSendConfig}>Cambiar</Button>
     </div>

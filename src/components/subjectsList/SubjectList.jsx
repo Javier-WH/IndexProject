@@ -41,9 +41,9 @@ export default function BasicModal() {
   const handleClose = () => setOpen(false);
 
   function saveSeccions() {
-
+ 
     async function save() {
-      let ask = await fetch("/seccions", {
+      let ask = await fetch("/matricula", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -54,18 +54,20 @@ export default function BasicModal() {
       if (ask.status === 200) {
         setDataMessage({
           type: "success",
-          message: "Se han acutualizado las secciones"
+          message: "Se han acutualizado el pensum"
         })
         setOpenMessage(true)
       }
     }
     save();
+    
   }
 
   function deleteSeccion(sec) {
+
     let newSeccionList = allSeccions.map(list => {
-      if (list.grade === year) {
-        list.seccionsNames = list.seccionsNames.filter(l => l !== sec);
+      if (list.schoolYear === year) {
+        list.subjects = list.subjects.filter(l => l !== sec);
       }
       return list;
     })
@@ -86,8 +88,8 @@ export default function BasicModal() {
 
     //revisa si la seccion ya está agregada
     let isExist = allSeccions.filter(s => {
-      if (s.grade === year) {
-        if (s.seccionsNames.includes(seccionName)) {
+      if (s.schoolYear === year) {
+        if (s.subjects.includes(seccionName)) {
           return s;
         }
       }
@@ -99,8 +101,8 @@ export default function BasicModal() {
 
     //agrega al sección
     let sec = allSeccions.map(s => {
-      if (s.grade === year) {
-        s.seccionsNames.push(seccionName)
+      if (s.schoolYear === year) {
+        s.subjects.push(seccionName)
       }
       return s;
     })
@@ -114,7 +116,7 @@ export default function BasicModal() {
   useEffect(() => {
     async function getAllSeccions() {
 
-      let pull = await fetch("/seccions");
+      let pull = await fetch("/matricula");
 
       if (pull.status === 404) {
         console.log("No existen secciones activas");
@@ -137,8 +139,8 @@ export default function BasicModal() {
 
   useEffect(() => {
     try {
-      let allseccionlist = allSeccions.filter(sec => sec.grade === year);
-      setSeccionList(allseccionlist[0].seccionsNames)
+      let allsubjects = allSeccions.filter(sec => sec.schoolYear === year);
+      setSeccionList(allsubjects[0].subjects)
     } catch (error) {
       setSeccionList([])
     }
@@ -148,7 +150,7 @@ export default function BasicModal() {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Editar Materias</Button>
+      <Button onClick={handleOpen}>Editar Secciones</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -159,12 +161,12 @@ export default function BasicModal() {
           <Message open={openMessage} setOpen={setOpenMessage} data={dataMessage} />
           <div id="seccionCloseX" onClick={handleClose}>X</div>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Configuración de secciones
+            Configuración de las materias
           </Typography>
           <div id='seccionEditsubtitle'>Materias registradas</div>
           <div id="SeccionEditDataContainer">
             <YearSelector year={year} setyear={setyear} />
-            <TextField id="seccionImputName" label="Nombre Sección" variant="outlined" value={seccion} onChange={e => setSeccion(e.target.value)} />
+            <TextField id="seccionImputName" label="Nombre de la Materia" variant="outlined" value={seccion} onChange={e => setSeccion(e.target.value)} />
             <Button variant="outlined" onClick={addSeccion}><AddCircleIcon /></Button>
             <Button variant="outlined" onClick={saveSeccions}><SaveIcon /></Button>
           </div>

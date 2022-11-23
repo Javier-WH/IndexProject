@@ -1,0 +1,29 @@
+#seccionCloseX{
+    width: 50px;
+    text-align:center;
+    margin-left: auto;
+    margin-right: 50px;
+    cursor: pointer;
+    font-weight: 500;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+#seccionImputName,
+#seccionSeclectYear{
+    width: 200px;
+}
+#SeccionEditDataContainer{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100vw;
+    justify-content: flex-start;
+    align-items: stretch;
+    margin-top: 10px;
+    padding-top: 40px;
+    border-top: 1px solid var(--secondaryColor);
+}
+#seccionEditsubtitle{
+    color: var(--secondaryColor);
+    margin-top: 10px;
+    
+}
