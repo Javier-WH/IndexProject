@@ -27,6 +27,8 @@ import getSubjects from './auxFolder/getSubjects';
 
 export default function Inscription({ adm = false }) {
 
+    const [seccionsList, setSeccionList] = useState([])
+    const [allSeccions, setAllseccions] = useState([])
     const [pensum, setPensum] = useState([]);
     const [inscriptionType, setInscriptionType] = useState("")
     const [stdFounded, setStdFounded] = useState(false);
@@ -130,6 +132,7 @@ export default function Inscription({ adm = false }) {
     const [tutorBankAux, setTutorBankAux] = useState("");
     const [tutorBankAccounType, setTutorBankAccounType] = useState("corriente");
     const [tutorBankAccoun, setTutorBankAccoun] = useState("");
+
 
     const handleHavFacebook = event => {
         if (event.target.checked) {
@@ -921,7 +924,7 @@ export default function Inscription({ adm = false }) {
                 body: JSON.stringify(getData())
             });
             let response = await push.json();
-            if(response.error){
+            if (response.error) {
                 setMessageParams({
                     type: "error",
                     message: response.error
@@ -1002,13 +1005,31 @@ export default function Inscription({ adm = false }) {
     }
 
 
+
     useEffect(() => {
         fetch("/matricula").then(respose => respose.json())
             .then(matricula => { setPensum(matricula) });
 
-    }, [])
+    }, []);
 
+    useEffect(() => {
+        async function getSeccions() {
+            let pull = await fetch("/seccions");
+            let seccionList = await pull.json();
+            setAllseccions(seccionList);
+        }
+        getSeccions();
+    }, []);
 
+    useEffect(() => {
+        try {
+            let AS = allSeccions.filter(sec => sec.grade === Number.parseInt(grade));
+
+            setSeccionList(AS[0].seccionsNames);
+        } catch (error) {
+            
+        }
+    }, [grade])
 
     let countryKey = 0;
     return <div id="InscriptionContainer">
@@ -1061,32 +1082,12 @@ export default function Inscription({ adm = false }) {
                         label="Sección"
                         onChange={handleSeccion}
                     >
-                        <MenuItem value="A">Sección A</MenuItem>
-                        <MenuItem value="B">Sección B</MenuItem>
-                        <MenuItem value="C">Sección C</MenuItem>
-                        <MenuItem value="D">Sección D</MenuItem>
-                        <MenuItem value="E">Sección E</MenuItem>
-                        <MenuItem value="F">Sección F</MenuItem>
-                        <MenuItem value="G">Sección G</MenuItem>
-                        <MenuItem value="H">Sección H</MenuItem>
-                        <MenuItem value="I">Sección I</MenuItem>
-                        <MenuItem value="J">Sección J</MenuItem>
-                        <MenuItem value="K">Sección K</MenuItem>
-                        <MenuItem value="L">Sección L</MenuItem>
-                        <MenuItem value="M">Sección M</MenuItem>
-                        <MenuItem value="N">Sección N</MenuItem>
-                        <MenuItem value="O">Sección O</MenuItem>
-                        <MenuItem value="P">Sección P</MenuItem>
-                        <MenuItem value="Q">Sección Q</MenuItem>
-                        <MenuItem value="R">Sección R</MenuItem>
-                        <MenuItem value="S">Sección S</MenuItem>
-                        <MenuItem value="T">Sección T</MenuItem>
-                        <MenuItem value="U">Sección U</MenuItem>
-                        <MenuItem value="V">Sección V</MenuItem>
-                        <MenuItem value="W">Sección W</MenuItem>
-                        <MenuItem value="X">Sección X</MenuItem>
-                        <MenuItem value="Y">Sección Y</MenuItem>
-                        <MenuItem value="Z">Sección Z</MenuItem>
+                        {
+                            seccionsList.map(sec => {
+                                return <MenuItem value={sec} key={countryKey++}>{sec}</MenuItem>
+                            })
+                        }
+
                     </Select>
                 </FormControl>
 

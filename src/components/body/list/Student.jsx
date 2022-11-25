@@ -1,11 +1,13 @@
-
+import {getSubjectName} from "../../../libraries/translateSeccionNames"
 
 export function Student({ data, number, seccion }) {
-    let seccionName = seccion.substring(0, seccion.length -4)
-    //let seccionArray = seccion.split(" ");
-    //let seccionName = seccionArray[0];
-    let grades = data.subjects[seccionName];
 
+    //let seccionName = seccion.substring(0, seccion.length -4)
+    let seccionName = getSubjectName(seccion)
+  
+    let grades = data.subjects[seccionName];
+  
+    
     if (grades !== undefined) {
         return <>
             <tr id={`index-${number}`} name={data.id}>
@@ -28,3 +30,5 @@ export function Student({ data, number, seccion }) {
 
 
 }
+
+

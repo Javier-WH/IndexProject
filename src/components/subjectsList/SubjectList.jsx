@@ -150,7 +150,7 @@ export default function BasicModal() {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Editar Secciones</Button>
+      <Button onClick={handleOpen}>Editar Materias</Button>
       <Modal
         open={open}
         onClose={handleClose}

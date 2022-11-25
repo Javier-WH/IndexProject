@@ -6,9 +6,9 @@ import SchoolIcon from '@mui/icons-material/School';
 import Tooltip from '@mui/material/Tooltip';
 import { useContext, useEffect, useState } from 'react';
 import { OpenModal } from '../../modal/Modal'
-
 import { getTeacherSeccions } from "../../../fetch/fetchSeccions";
 import Message from "../../message/Message"
+import {getSchoolYear, getSeccionName, getSubjectName} from "../../../libraries/translateSeccionNames"
 
 
 export function SubjectMenu({ sx }) {
@@ -51,8 +51,9 @@ export function SubjectMenu({ sx }) {
       document.getElementById("lap3").classList.remove("error");
     }
 
-    //console.log(e.target.id)
-    changeActiveSeccion(e.target.id)
+    if(e.target.id.length > 0){
+      changeActiveSeccion(e.target.id)
+    }
     setAnchorEl(null);
   };
 
@@ -98,7 +99,7 @@ export function SubjectMenu({ sx }) {
         {
 
           list.map(seccion => {
-            return <MenuItem key={key++} id={seccion} onClick={handleClose}>{seccion}</MenuItem>
+            return <MenuItem key={key++} id={seccion} onClick={handleClose}>{`${getSubjectName(seccion)} -  Grado: ${getSchoolYear(seccion)} -  Sección: ${getSeccionName(seccion)}`}</MenuItem>
           })
         }
 

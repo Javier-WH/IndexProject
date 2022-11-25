@@ -44,7 +44,26 @@ export default function Teacher() {
     const [grade, setGrade] = useState("1");
     const [seccion, setSeccion] = useState("A");
     const [matricula, setMatricula] = useState({})
+    const [allSeccions, setAllSeccions] = useState([]);
+    const [seccionList, setSeccionList] = useState([]);
 
+    useEffect(()=>{
+        async function getSeccions(){
+            let pull = await fetch("/seccions");
+            let seccionList = await pull.json();
+            setAllSeccions(seccionList);
+        }
+        getSeccions();
+    },[])
+
+    useEffect(() => {
+        try {
+            let AS = allSeccions.filter(sec => sec.grade === Number.parseInt(grade));
+            setSeccionList(AS[0].seccionsNames);
+        } catch (error) {
+            
+        }
+    }, [grade])
 
     function handleRegister() {
         async function register() {
@@ -114,7 +133,7 @@ export default function Teacher() {
             matricula.map(register => {
                 if (register.schoolYear === Number.parseInt(grade)) {
                     register.subjects.map(subjec => {
-                        subjects.push(`${subjec} ${grade}${seccion}`)
+                        subjects.push(`${subjec} (${grade}-${seccion})`) //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
                     })
                 }
             })
@@ -185,7 +204,7 @@ export default function Teacher() {
         fillMatricula();
     }
 
-
+    let key = 1;
     return <div id="teacherContainer">
         <Message open={openMessage} setOpen={setOpenMessage} data={messageParams} />
         <div id="teacherCiContainer">
@@ -234,6 +253,7 @@ export default function Teacher() {
                         label="Grado"
                         onChange={e => setGrade(e.target.value)}
                     >
+                         <MenuItem value="0" disabled selected>Selecciona uno</MenuItem>
                         <MenuItem value="1">Primer año</MenuItem>
                         <MenuItem value="2">Segundo año</MenuItem>
                         <MenuItem value="3">Tercer año</MenuItem>
@@ -252,32 +272,15 @@ export default function Teacher() {
                         label="seccion"
                         onChange={e => setSeccion(e.target.value)}
                     >
-                        <MenuItem value="A">Sección A</MenuItem>
-                        <MenuItem value="B">Sección B</MenuItem>
-                        <MenuItem value="C">Sección C</MenuItem>
-                        <MenuItem value="D">Sección D</MenuItem>
-                        <MenuItem value="E">Sección E</MenuItem>
-                        <MenuItem value="F">Sección F</MenuItem>
-                        <MenuItem value="G">Sección G</MenuItem>
-                        <MenuItem value="H">Sección H</MenuItem>
-                        <MenuItem value="I">Sección I</MenuItem>
-                        <MenuItem value="J">Sección J</MenuItem>
-                        <MenuItem value="K">Sección K</MenuItem>
-                        <MenuItem value="L">Sección L</MenuItem>
-                        <MenuItem value="M">Sección M</MenuItem>
-                        <MenuItem value="N">Sección N</MenuItem>
-                        <MenuItem value="O">Sección O</MenuItem>
-                        <MenuItem value="P">Sección P</MenuItem>
-                        <MenuItem value="Q">Sección Q</MenuItem>
-                        <MenuItem value="R">Sección R</MenuItem>
-                        <MenuItem value="S">Sección S</MenuItem>
-                        <MenuItem value="T">Sección T</MenuItem>
-                        <MenuItem value="U">Sección U</MenuItem>
-                        <MenuItem value="V">Sección V</MenuItem>
-                        <MenuItem value="W">Sección W</MenuItem>
-                        <MenuItem value="X">Sección X</MenuItem>
-                        <MenuItem value="Y">Sección Y</MenuItem>
-                        <MenuItem value="Z">Sección Z</MenuItem>
+
+                        {
+                            seccionList.map(sec=>{
+                                return <MenuItem value={sec} key={key++}>{sec}</MenuItem>
+
+                            })
+
+                        }
+       
                     </Select>
                 </FormControl>
 

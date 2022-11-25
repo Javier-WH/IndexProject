@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import { useContext, useState } from "react";
 import { MainContext } from "../../../context/MainContext"
 import { useEffect } from "react";
-
+import {getSeccionName, getSchoolYear, getSubjectName } from "../../../libraries/translateSeccionNames"
 import { OpenModal } from "../../modal/Modal"
 
 import MalePhoto from "../../../placeHolders/malePlaceholder.jpg"
@@ -226,9 +226,9 @@ export function DataName() {
 
     function setGrades(type = "all") {
         try {
-            //corrige el bug del espacio en las secciones
-            let subjet = activeSeccion.substring(0, activeSeccion.length - 4)
+            let subjet = getSubjectName(activeSeccion);
             let grades = selectedStudent.subjects[subjet];
+
             if (type === "all") {
                 setLap1(grades.lap1);
                 setLap2(grades.lap2);
@@ -366,7 +366,7 @@ export function DataName() {
             <OpenModal modal={modal} setModal={setModal} />
             <div id="dataName">
                 <div id="dataTitleContainer">
-                    <div id="dataTitle">{activeSeccion}</div>
+                    <div id="dataTitle">{`${getSubjectName(activeSeccion)} (${getSchoolYear(activeSeccion)} ${getSeccionName(activeSeccion)})`}</div>
                     <div id="dataTitleSchoolYear">{getSchoolPeriod()}</div>
                 </div>
                 <div id="studentDataContainerx">
