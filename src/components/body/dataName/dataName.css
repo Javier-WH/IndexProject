@@ -113,6 +113,13 @@ input::-webkit-inner-spin-button {
     border-color: red;
 }
 
+#dataTitleContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
 
 @media (max-width: 600px) {
     #dataName {
@@ -147,4 +154,10 @@ input::-webkit-inner-spin-button {
         font-size: 20px;
     }
   
+}
+
+@media (max-height: 900px) {
+    #dataName {
+        height: 700px;
+    }
 }

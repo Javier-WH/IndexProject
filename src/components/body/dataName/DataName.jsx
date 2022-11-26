@@ -5,6 +5,7 @@ import { MainContext } from "../../../context/MainContext"
 import { useEffect } from "react";
 import {getSeccionName, getSchoolYear, getSubjectName } from "../../../libraries/translateSeccionNames"
 import { OpenModal } from "../../modal/Modal"
+import EvaluationPlan from "../EvaluationPlan/EvaluationPlan";
 
 import MalePhoto from "../../../placeHolders/malePlaceholder.jpg"
 import FemalePhoto from "../../../placeHolders/femalePlaceHolder.jpg"
@@ -356,14 +357,15 @@ export function DataName() {
         }
     }, [disabled])
 
-
+    //<div id="dataName"> Debe seleccionar una sección para iniciar</div>
     if ((activeSeccion === undefined)) {
-        return <div id="dataName"> Debe seleccionar una sección para iniciar</div>
+        return<div id="dataName"><EvaluationPlan/></div> 
     } else if (studentList.length <= 0) {
         return <div id="dataName">{`No se han encontado estudiantes inscritos en la seccion ${activeSeccion}`}</div>
     } else {
         return <>
             <OpenModal modal={modal} setModal={setModal} />
+           
             <div id="dataName">
                 <div id="dataTitleContainer">
                     <div id="dataTitle">{`${getSubjectName(activeSeccion)} (${getSchoolYear(activeSeccion)} ${getSeccionName(activeSeccion)})`}</div>

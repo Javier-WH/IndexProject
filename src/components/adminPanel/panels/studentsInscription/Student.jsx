@@ -1021,10 +1021,12 @@ export default function Inscription({ adm = false }) {
         getSeccions();
     }, []);
 
+         /*eslint-disable*/
     useEffect(() => {
         try {
+     
             let AS = allSeccions.filter(sec => sec.grade === Number.parseInt(grade));
-
+            
             setSeccionList(AS[0].seccionsNames);
         } catch (error) {
             
