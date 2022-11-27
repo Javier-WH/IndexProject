@@ -31,14 +31,7 @@ const style = {
     }
 }
 */
-export default function BasicModal() {
-
-    const [evalData, setEvalData] = React.useState({
-        lap1: [25, 14, 10, 0, 0, 0],
-        lap2: [21, 25, 25, 25, 0, 0],
-        lap3: [10, 10, 10, 10, 10, 10],
-        count: [4, 6, 5]
-    })
+export default function BasicModal({evalData, setEvalData}) {
 
     const [evalCount, SetEvalCount] = React.useState([1, 2, 3, 4, 5, 6])
     const [open, setOpen] = React.useState(false);
@@ -51,7 +44,9 @@ export default function BasicModal() {
 
 
     const handleChange = (event) => {
-        setEvalNumber(event.target.value);
+        let number = event.target.value
+        setEvalNumber(number);
+
     };
 
     //cambia el lapso
@@ -85,20 +80,12 @@ export default function BasicModal() {
         }
     }, [evalNumber]);
 
-    // obtien el porcentaje total de notas
 
-    React.useEffect(()=>{
-        const initialValue = 0;
-        setEvalPercent(evalData[lapse].reduce(
-            (accumulator, currentValue) => accumulator + currentValue,
-            initialValue
-          ))
-    })
-    
+
 
     return (
         <div>
-            <Button variant="outlined" startIcon={<DateRangeIcon />} onClick={handleOpen}> Plan de evaluación</Button>
+            <Button variant="outlined" onClick={handleOpen}><DateRangeIcon /></Button>
             <Modal
                 open={open}
                 aria-labelledby="modal-modal-title"
@@ -142,16 +129,17 @@ export default function BasicModal() {
                         </div>
                     </div>
                     <div id="evalChangeTableContainer">
-                        <Table evalData={evalData} setEvalData={setEvalData} evalCount={evalCount} lapse={lapse} />
+                        <Table evalData={evalData} setEvalData={setEvalData} evalCount={evalCount} lapse={lapse} setEvalPercent={setEvalPercent} />
                     </div>
-                    <div id="evalChangeContentMessage">
-                        <div className="evalChangeContentMessage">Total evaluaciones: {evalNumber}</div>
-                        <div className="evalChangeContentMessage">Porcentaje Evaluado: {evalPercent}%</div>
-                    </div>
+                    <div id="evalChangeAuxButonContainer">
+                        <div id="evalChangeContentMessage">
+                            <div className="evalChangeContentMessage">Total evaluaciones: {evalNumber}</div>
+                            <div className="evalChangeContentMessage">Porcentaje Evaluado: {evalPercent}%</div>
+                        </div>
 
-                    <div id="evalChangeButtonContainer">
-                        <Button variant="outlined" onClick={handleClose} color="error">Cancelar</Button>
-                        <Button variant="outlined">Aceptar</Button>
+                        <div id="evalChangeButtonContainer">
+                            <Button variant="outlined" onClick={handleClose} >Cerrar</Button>
+                        </div>
                     </div>
                 </Box>
             </Modal>

@@ -32,6 +32,7 @@ export function DataName() {
         edit: false,
     })
 
+    const [evalPlan, setEvalPlan] = useState(false);
     function handleNameChange(event) {
         setStudentName(event.target.value);
     };
@@ -311,7 +312,7 @@ export function DataName() {
             try {
                 let pull = await fetch("/config");
                 let config = await pull.json();
-                //console.log(config);
+               // console.log(config);
 
                 setDisabled({
                     lap1: !config.lap1,
@@ -321,6 +322,7 @@ export function DataName() {
                 })
                 setGradeCap(config.maxGradeCap)
                 setAllowEdit(config.edit);
+                setEvalPlan(!config.evalPlan)
             } catch (error) {
 
                 setModal({
@@ -357,12 +359,14 @@ export function DataName() {
         }
     }, [disabled])
 
-    //<div id="dataName"> Debe seleccionar una sección para iniciar</div>
+
     if ((activeSeccion === undefined)) {
-        return<div id="dataName"><EvaluationPlan/></div> 
+        return<div id="dataName"> Debe seleccionar una sección para iniciar</div>
     } else if (studentList.length <= 0) {
         return <div id="dataName">{`No se han encontado estudiantes inscritos en la seccion ${activeSeccion}`}</div>
-    } else {
+    } else if(evalPlan){
+        return<div id="dataName"><EvaluationPlan studentName ={studentName} studentCI={studentCI}/></div> 
+    }else {
         return <>
             <OpenModal modal={modal} setModal={setModal} />
            

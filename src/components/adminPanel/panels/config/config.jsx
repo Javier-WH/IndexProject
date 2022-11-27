@@ -21,6 +21,7 @@ export default function Config() {
     const [l2, setL2] = useState(true);
     const [l3, setL3] = useState(true);
     const [edit, setEdit] = useState(false);
+    const [evalPlan, setEvalplan] = useState(true)
     const [period, setPeriod] = useState(2022);
     const [studentCap, setStudentCap] = useState(30);
     const [maxGrade, setMaxGrade] = useState(20);
@@ -41,6 +42,9 @@ export default function Config() {
     }
     function handleEdit(e) {
         setEdit(e.target.checked)
+    }
+    function handleEvalPlan(e){
+        setEvalplan(e.target.checked)
     }
     function handlePeriod(e) {
         let value = e.target.value;
@@ -80,6 +84,7 @@ export default function Config() {
             lap1:l1,
             lap2:l2,
             lap3:l3,
+            evalPlan,
             edit,
             period,
             maxGradeCap: maxGrade,
@@ -170,6 +175,9 @@ export default function Config() {
         </div>
         <div className="optConfigContainer">
             <FormControlLabel control={<Switch checked={edit} onChange={handleEdit} />} label="Habilitar edición de notas despues de haber sido guardadas" />
+        </div>
+        <div className="optConfigContainer">
+            <FormControlLabel control={<Switch checked={evalPlan} onChange={handleEvalPlan} />} label="Solo notas final por cada lapso" />
         </div>
         <div className="optConfigContainer" id='periodContainer'>
             <TextField id="outlined-basic" label="Inicio del periodo escolar" variant="outlined" type="number" value={period} onChange={handlePeriod} />

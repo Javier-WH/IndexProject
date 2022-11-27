@@ -61,3 +61,89 @@
     margin: 10px 0;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
+#btnSaveEvalPlan{
+    position: absolute;
+    top: -40px;
+    right: 20px;
+}
+#evalChangeAuxButonContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    justify-content: baseline;
+}
+
+#evalPlanContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: flex-start;
+    width: 100%;
+    margin-left: 100px;
+    margin-top: 30px;
+}
+
+.lapsePlanContainer{
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 5px;
+    width: 400px;
+/*border: 1px solid green;*/
+}
+.evalGradeContainer{
+    border: 1px solid var(--secondaryColor);
+    text-align: center;
+    font-size: 18px;
+}
+.evalGradePercent{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--secondaryColor);
+    padding: 10px;
+    color: var(--secondaryColor);
+}
+.evalGradeGrade{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--secondaryColor);
+    padding: 10px;
+    color: var(--mainColor);
+}
+.evalPlanLapseTitle{
+    color: var(--secondaryColor);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.evalPalLapseTotal{
+    position: absolute;
+    top: 0;
+    right: -80px;
+}
+.evalGradetotal{
+    height: 40px;
+}
+.evalGradeinput{
+    width: 35px;
+    height: 35px;
+    text-align: center;
+    font-size: 18px;
+    border: 1px solid transparent;
+}
+
+#dataEvalPlanNameContainer{
+   display: flex;
+   flex-direction: column;
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+   color: var(--secondaryColor);
+   font-weight: 600;
+}
+#evalPlanTitleAuxContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    width: 400px;
+    margin: 10px 0;
+}
