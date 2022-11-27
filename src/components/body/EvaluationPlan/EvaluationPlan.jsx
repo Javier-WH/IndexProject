@@ -5,53 +5,66 @@ import EvaluationPlanConfig from "./evaluationPllanConfig/EvaluationPlanConfig"
 
 
 
-export default function EvaluationPlan({ studentName, studentCI }) {
+export default function EvaluationPlan({ studentName, studentCI, lap1, lap2, lap3 }) {
     const { dataToSave, selectedStudent, activeSeccion, getSchoolPeriod, pushNewData, studentList } = useContext(MainContext)
 
 
 
     //el del profesor
     const [evalData, setEvalData] = useState({
-        lap1: [25, 14, 10, 0, 0, 0],
-        lap2: [21, 25, 25, 25, 0, 0],
-        lap3: [10, 10, 10, 10, 10, 10],
-        count: [4, 6, 5]
+        lap1: [0, 0, 0, 0, 0, 0],
+        lap2: [0, 0, 0, 0, 0, 0],
+        lap3: [0, 0, 0, 0, 0, 0],
+        count: [0, 0, 0]
     })
     //el estudiante
     const [stdGrades, setStdGrades] = useState({
-        lap1: [12, 14, 10, 0, 0, 0],
-        lap2: [13, 9, 11, 20, 0, 0],
-        lap3: [10, 10, 10, 10, 10, 10]
+        lap1: [0, 0, 0, 0, 0, 0],
+        lap2: [0, 0, 0, 0, 0, 0],
+        lap3: [0, 0, 0, 0, 0, 0]
 
     })
 
-//////
+    //////
 
-useEffect(()=>{
-    async function getTeacher() {
-        let pullTeacherData = await fetch("/getUserName");
-        let teacherData = await pullTeacherData.json()
-        let teacherId = teacherData.id;
-     
-        let grade = getSchoolYear(activeSeccion);
-        let subjecName = getSubjectName(activeSeccion);
-        let seccionName = getSeccionName(activeSeccion);
-       
+    useEffect(() => {
+        setL1def(lap1);
+        setL2def(lap2);
+        setL3def(lap3);
 
-        let pullEvalData = await fetch("/getEvalPlan", {
-            method:"POST",
-            headers:{
-                "Content-Type": "application/json",
-                "Accept": "*/*"
-            },
-            body: JSON.stringify({teacherId, grade, subjecName, seccionName})
-        });
-        let _evalData = await pullEvalData.json();
-        setEvalData(_evalData)
 
-    }
-    getTeacher();
-},[])
+    }, [lap1, lap2, lap3])
+
+
+
+    ////
+
+
+    useEffect(() => {
+        async function getTeacher() {
+            let pullTeacherData = await fetch("/getUserName");
+            let teacherData = await pullTeacherData.json()
+            let teacherId = teacherData.id;
+
+            let grade = getSchoolYear(activeSeccion);
+            let subjecName = getSubjectName(activeSeccion);
+            let seccionName = getSeccionName(activeSeccion);
+
+
+            let pullEvalData = await fetch("/getEvalPlan", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "*/*"
+                },
+                body: JSON.stringify({ teacherId, grade, subjecName, seccionName })
+            });
+            let _evalData = await pullEvalData.json();
+            setEvalData(_evalData)
+
+        }
+        getTeacher();
+    }, [activeSeccion])
 
 
     /////////
@@ -82,6 +95,78 @@ useEffect(()=>{
     const [l3def, setL3def] = useState(0)
 
 
+    useEffect(() => {
+        
+        if(selectedStudent === undefined){
+            return
+        }
+        try {
+
+            async function getEval() {
+                let pull = await fetch("/getStdEval", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "*/*"
+                    },
+                    body: JSON.stringify({
+                        section: getSeccionName(activeSeccion),
+                        schoolYear: getSchoolYear(activeSeccion),
+                        stdid: selectedStudent.id
+                    })
+                });
+                let evalPlanData = await pull.json();
+                
+                let evalLap1;
+                let evalLap2;
+                let evalLap3;
+                
+                if(evalPlanData.length > 0){
+                    evalLap1 = evalPlanData[0].stdGrades.lap1;
+                    evalLap2 = evalPlanData[0].stdGrades.lap2;
+                    evalLap3 = evalPlanData[0].stdGrades.lap3;
+                }else{
+                  evalLap1 = [0,0,0,0,0,0]  
+                  evalLap2 = [0,0,0,0,0,0]  
+                  evalLap3 = [0,0,0,0,0,0]  
+                }
+
+                setStdGrades({
+                    lap1: evalLap1,
+                    lap2: evalLap2,
+                    lap3: evalLap3
+            
+                })
+
+                setL1G1(evalLap1[0]);
+                setL1G2(evalLap1[1]);
+                setL1G3(evalLap1[2]);
+                setL1G4(evalLap1[3]);
+                setL1G5(evalLap1[4]);
+                setL1G6(evalLap1[5]);
+
+                setL2G1(evalLap2[0]);
+                setL2G2(evalLap2[1]);
+                setL2G3(evalLap2[2]);
+                setL2G4(evalLap2[3]);
+                setL2G5(evalLap2[4]);
+                setL2G6(evalLap2[5]);
+
+                setL3G1(evalLap3[0]);
+                setL3G2(evalLap3[1]);
+                setL3G3(evalLap3[2]);
+                setL3G4(evalLap3[3]);
+                setL3G5(evalLap3[4]);
+                setL3G6(evalLap3[5]);
+
+            }
+            getEval();
+        } catch (error) {
+
+        }
+    }, [selectedStudent])
+
+
     function handleChangeGrade(value, lap, index) {
 
         eval(`setL${lap}G${index}`)(value)
@@ -91,9 +176,10 @@ useEffect(()=>{
         _stdGrades[`lap${lap}`][index - 1] = value;
         setStdGrades(_stdGrades);
 
-        calculateDef()
-    }
+        calculateDef();
 
+    }
+    /////////////////////////
     function calculateDef() {
 
         let l1n1 = (Number.parseFloat(evalData.lap1[0]) * Number.parseFloat(stdGrades.lap1[0])) / 100
@@ -183,7 +269,36 @@ useEffect(()=>{
         }
         setL3def(l3total)
 
+        prepareDataToSave(l1total, l2total, l3total);
     }
+
+    function prepareDataToSave(l1, l2, l3) {
+        let objectName = `id-${selectedStudent.id}`
+
+        let dataToSave1 = {
+            name: objectName,
+            [objectName]: {
+                id: selectedStudent.id,
+                session: activeSeccion,
+                l1,
+                l2,
+                l3
+            }
+        }
+
+        dataToSave1.evalPlan = {
+            stdid: selectedStudent.id,
+            stdGrades,
+            section: getSeccionName(activeSeccion),
+            schoolYear: getSchoolYear(activeSeccion),
+            failded: 0,
+            status: 0
+        }
+
+        pushNewData(dataToSave1);
+
+    }
+
 
 
 

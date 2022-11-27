@@ -21,15 +21,15 @@ export function MainContextProvider({ children }) {
     const [message, setMessage] = useState({ state: false, type: "success", message: "" });
 
     // 
-    
+    const [evalToSave, setEvalToSave] = useState({});
+
 
 
 
     function pushNewData(changes) {
         try {
-
-
             let name = changes.name;
+
             //
             let id = changes[name].id - 1;
             let sec = changes[name].session.split(" ")[0];
@@ -47,40 +47,47 @@ export function MainContextProvider({ children }) {
             if (changes[name].l1) {
                 newData[name].l1 = changes[name].l1;
                 //esto corrige la lista de estudiantes para que las notas se puedan mostrar correctamente
-                newStudentList[id].subjects[sec].lap1 = changes[name].l1;
+                //newStudentList[id].subjects[sec].lap1 = changes[name].l1;
                 setStudentList(newStudentList)
 
             }
             if (changes[name].l2) {
                 newData[name].l2 = changes[name].l2
                 //esto corrige la lista de estudiantes para que las notas se puedan mostrar correctamente
-                newStudentList[id].subjects[sec].lap2 = changes[name].l2;
+                //newStudentList[id].subjects[sec].lap2 = changes[name].l2;
                 setStudentList(newStudentList)
             }
 
             if (changes[name].l3) {
                 newData[name].l3 = changes[name].l3
                 //esto corrige la lista de estudiantes para que las notas se puedan mostrar correctamente
-                newStudentList[id].subjects[sec].lap3 = changes[name].l3;
+                //newStudentList[id].subjects[sec].lap3 = changes[name].l3;
                 setStudentList(newStudentList)
             }
 
             if (changes[name].def) {
                 newData[name].def = changes[name].def
                 //esto corrige la lista de estudiantes para que las notas se puedan mostrar correctamente
-                newStudentList[id].subjects[sec].def = changes[name].def;
+                //newStudentList[id].subjects[sec].def = changes[name].def;
                 setStudentList(newStudentList)
             }
 
+
             setDataToSave(newData)
             //
-        } catch (error) {
 
+            let evalPlan = changes.evalPlan;
+            if (evalPlan !== undefined) {
+                setEvalToSave(evalPlan)
+            }
+
+        } catch (error) {
+            console.log(error)
         }
     }
 
     function SaveData() {
-      
+
         fetch("/saveGrades", {
             method: "POST",
             headers: {
@@ -101,6 +108,25 @@ export function MainContextProvider({ children }) {
                 }
             })
             .catch(error => console.log(error))
+
+
+        async function sendEvalPlan() {
+
+            let pushPlan = await fetch("/stdEval", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "*/*"
+                },
+                body: JSON.stringify(evalToSave)
+            });
+
+            console.log(pushPlan.status)
+
+        }
+
+        sendEvalPlan();
+
     }
 
 

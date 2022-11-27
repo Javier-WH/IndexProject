@@ -365,7 +365,7 @@ export function DataName() {
     } else if (studentList.length <= 0) {
         return <div id="dataName">{`No se han encontado estudiantes inscritos en la seccion ${activeSeccion}`}</div>
     } else if(evalPlan){
-        return<div id="dataName"><EvaluationPlan studentName ={studentName} studentCI={studentCI}/></div> 
+        return<div id="dataName"><EvaluationPlan studentName ={studentName} studentCI={studentCI} lap1 = {lap1} lap2 ={lap2} lap3={lap3}/></div> 
     }else {
         return <>
             <OpenModal modal={modal} setModal={setModal} />
