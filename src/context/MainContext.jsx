@@ -121,7 +121,7 @@ export function MainContextProvider({ children }) {
                 body: JSON.stringify(evalToSave)
             });
 
-            console.log(pushPlan.status)
+            
 
         }
 

@@ -72,6 +72,8 @@ export default function Config() {
                 setStudentCap(config.maxSeccionCap);
                 setInstitution(config.institutionName);
                 setFailedNumber(config.failedNumber);
+                setEvalplan(config.evalPlan)
+            
             } catch (error) {
                 console.log(error)
             }
