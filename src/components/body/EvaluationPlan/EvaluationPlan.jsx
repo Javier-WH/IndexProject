@@ -12,10 +12,10 @@ export default function EvaluationPlan({ studentName, studentCI, lap1, lap2, lap
 
     //el del profesor
     const [evalData, setEvalData] = useState({
-        lap1: [0, 0, 0, 0, 0, 0],
-        lap2: [0, 0, 0, 0, 0, 0],
-        lap3: [0, 0, 0, 0, 0, 0],
-        count: [0, 0, 0]
+        lap1: [25, 25, 25, 25, 0, 0],
+        lap2: [25, 25, 25, 25, 0, 0],
+        lap3: [25, 25, 25, 25, 0, 0],
+        count: [4, 4, 4]
     })
     //el estudiante
     const [stdGrades, setStdGrades] = useState({
@@ -60,7 +60,10 @@ export default function EvaluationPlan({ studentName, studentCI, lap1, lap2, lap
                 body: JSON.stringify({ teacherId, grade, subjecName, seccionName })
             });
             let _evalData = await pullEvalData.json();
-            setEvalData(_evalData)
+            if(pullEvalData.status === 200){
+                setEvalData(_evalData)
+
+            }
 
         }
         getTeacher();
